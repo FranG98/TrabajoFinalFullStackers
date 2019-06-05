@@ -41,7 +41,7 @@ public class Usuario implements Serializable {
     private String estadoCuenta;
     /**
      * agregado fuera de los requerimientos del proyecto:
-     * considero algo logico posee esta caracteristica, y no unicamente la eliminacion de una cuenta de forma permanente.
+     * considero algo logico poseer esta caracteristica, y no unicamente la eliminacion de una cuenta de forma permanente.
      * estadoCuenta: permite establecer el estado de una cuenta de un usuario.
      * Se aplica a usuarios administrativos.
      * Las cuentas de clientes siempre tendra el estado "normal". 
