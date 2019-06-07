@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+    <!--Página de prueba para las implementaciones DAO-->
+        <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
+
+            <ui:define name="top">
+                Selección de clase para la prueba
+            </ui:define>
+
+            <ui:define name="content">
+               <!--Seleccion de clase a probar-->
+                <h:panelGrid id="formMenuPrincipal" columns="2" cellpadding="5"> 
+                    <p:outputLabel id="lblSeleccion" value="Seleccione una clase: "/>
+                    <!--Se utiliza selectOneRadio para seleccionar entre las 3 clases principales del proyecto-->
+                    <p:selectOneRadio id="console" value="#{radioView.console}" unselectable="true">
+                         <f:selectItem itemLabel="Producto" itemValue="Producto" />
+                         <f:selectItem itemLabel="Usuario" itemValue="Usuario" />
+                         <f:selectItem itemLabel="Venta" itemValue="Venta" />
+                    </p:selectOneRadio>
+                    <!--Este boton redireccionara a la pagina correspondiente dependiendo de nuestra elección-->
+                    <h:button id="btnSeleccionClase" value="Hecho" outcome="#"/>
+                </h:panelGrid>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
