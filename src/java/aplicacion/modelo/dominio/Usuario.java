@@ -17,15 +17,6 @@ import java.io.Serializable;
  */
 public class Usuario implements Serializable {
 
-    private String idUsuario;
-    //idUsuario: representa el id de la cuenta de usuario
-
-    private String passUsuario;
-    //passUsuario: representa la contraseña de la cuenta del usuario
-
-    private String emailUsuario;
-    //emailUsuario: representa el correo electronico del usuario
-
     private String nombreUsuario;
     //nombreUsuario: representa el nombre del usuario
 
@@ -38,55 +29,66 @@ public class Usuario implements Serializable {
     private Byte edadUsuario;
     //edadUsuario: representa la edad del usuario
 
-    private String estadoCuenta;
+    private String emailUsuario;
+    //emailUsuario: representa el correo electronico del usuario, con el cual
+    //funcionara como id de la cuenta. Clave primaria en la base de datos.
+
+    private String passUsuario;
+    //passUsuario: representa la contraseña de la cuenta del usuario
+
+    private String estadoCuenta = "Habilitada";
     /**
-     * agregado fuera de los requerimientos del proyecto:
-     * considero algo logico poseer esta caracteristica, y no unicamente la eliminacion de una cuenta de forma permanente.
-     * estadoCuenta: permite establecer el estado de una cuenta de un usuario.
-     * Se aplica a usuarios administrativos.
-     * Las cuentas de clientes siempre tendra el estado "normal". 
-     * Las cuentas de empleados pueden tener el estado "normal" o "bloqueado"
-     * El estado "bloqueado" puede darse por "x" suceso como por ejemplo, suspencion del mismo.
+     * Agregado fuera de los requerimientos del proyecto: considero algo logico
+     * posee esta caracteristica, y no unicamente la eliminacion de una cuenta
+     * de forma permanente. estadoCuenta: permite establecer el estado de una
+     * cuenta de un usuario. Se aplica a usuarios administrativos. Las cuentas
+     * de clientes siempre tendra el estado "Habilitada". Las cuentas de
+     * empleados pueden tener el estado "Habilitada" o "Inhabilitada" El estado
+     * "Inhabilitada" puede darse por "x" suceso como por ejemplo, suspencion
+     * del mismo, lo cual da la posibilidad de que se requiera la activacion de
+     * la cuenta mas adelante. Por defecto establezco que las cuentas tendran el
+     * estado "Habilitada". Tendran otro valor distinto solamente si se la
+     * bloquea la cuenta desde el menu del administrador.
      */
 
-    private String tipoCuenta;
-    //tipoCuenta: permite establecer si es una cuenta consumidor, administrativo o administrador.
+    private Rol tipoCuenta;
+    //tipoCuenta: permite establecer si es una cuenta consumidor, administrativo o admin.
 
     //CONSTRUCTORES
     /**
      * Constructor por defecto
      */
     public Usuario() {
-    }
-    /**
-     * @param idUsuario permite almacenar el ID de la cuenta del usuario
-     * @param passUsuario permite almacenar la contraseña de la cuenta del
-     * usuario
-     * @param emailUsuario permite almacenar el correo electronico del usuario
-     * @param nombreUsuario permite almacenar el nombre del usuario
-     * @param apellidoUsuario permite almacenar el apellido del usuario
-     * @param dniUsuario permite almacenar el numero de documento nacional de
-     * identidad del usuario
-     * @param edadUsuario permite almacenar la edad del usuario
-     * @param estadoCuenta permite definir el estado de la cuenta; "normal" o
-     * bloqueada
-     * @param tipoCuenta permite definir que tipo de cuenta es; cliente,
-     * empleado o administrador
-     */
-    public Usuario(String idUsuario, String passUsuario, String emailUsuario, String nombreUsuario, String apellidoUsuario, Integer dniUsuario, Byte edadUsuario, String estadoCuenta, String tipoCuenta) {   
-        this.idUsuario = idUsuario;
-        this.passUsuario = passUsuario;
-        this.emailUsuario = emailUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.apellidoUsuario = apellidoUsuario;
-        this.dniUsuario = dniUsuario;
-        this.edadUsuario = edadUsuario;
-        this.estadoCuenta = estadoCuenta;
-        this.tipoCuenta = tipoCuenta;
-        
+        tipoCuenta = new Rol();
     }
 
-    //METODOS GETTERS & SETTERS
+    /**
+     * @param nombreUsuario permite almacenar el nombre del usuario
+     * @param apellidoUsuario permite almacenar el apellido del usuario
+     * @param edadUsuario permite almacenar la edad del usuario
+     * @param dniUsuario permite almacenar el numero de documento nacional de
+     * identidad del usuario
+     * @param emailUsuario permite almacenar el correo electronico del usuario
+     * @param passUsuario permite almacenar la contraseña de la cuenta del
+     * usuario
+     * @param estadoCuenta permite establecer si la cuenta está activa o no.
+     * @param tipoCuenta permite establecer que tipo de cuenta es.
+     *
+     */
+    public Usuario(String nombreUsuario, String apellidoUsuario, Byte edadUsuario, Integer dniUsuario, String emailUsuario, String passUsuario, String estadoCuenta, Rol tipoCuenta) {
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
+        this.edadUsuario = edadUsuario;
+        this.dniUsuario = dniUsuario;
+        this.emailUsuario = emailUsuario;
+        this.passUsuario = passUsuario;
+        this.estadoCuenta = estadoCuenta;
+        this.tipoCuenta = tipoCuenta;
+    }
+
+    /**
+     * METODOS GETTERS & SETTERS
+     */
     /**
      * @return the apellidoUsuario
      */
@@ -123,13 +125,6 @@ public class Usuario implements Serializable {
     }
 
     /**
-     * @return the idUsuario
-     */
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    /**
      * @return the nombreUsuario
      */
     public String getNombreUsuario() {
@@ -146,7 +141,7 @@ public class Usuario implements Serializable {
     /**
      * @return the tipoCuenta
      */
-    public String getTipoCuenta() {
+    public Rol getTipoCuenta() {
         return tipoCuenta;
     }
 
@@ -186,13 +181,6 @@ public class Usuario implements Serializable {
     }
 
     /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    /**
      * @param nombreUsuario the nombreUsuario to set
      */
     public void setNombreUsuario(String nombreUsuario) {
@@ -209,7 +197,7 @@ public class Usuario implements Serializable {
     /**
      * @param tipoCuenta the tipoCuenta to set
      */
-    public void setTipoCuenta(String tipoCuenta) {
+    public void setTipoCuenta(Rol tipoCuenta) {
         this.tipoCuenta = tipoCuenta;
     }
 
@@ -218,7 +206,7 @@ public class Usuario implements Serializable {
      */
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", passUsuario=" + passUsuario + ", emailUsuario=" + emailUsuario + ", nombreUsuario=" + nombreUsuario + ", apellidoUsuario=" + apellidoUsuario + ", dniUsuario=" + dniUsuario + ", edadUsuario=" + edadUsuario + ", estadoCuenta=" + estadoCuenta + ", tipoCuenta=" + tipoCuenta + '}';
+        return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", apellidoUsuario=" + apellidoUsuario + ", edadUsuario=" + edadUsuario + ", dniUsuario=" + dniUsuario + ", emailUsuario=" + emailUsuario + ", passUsuario=" + passUsuario + ", estadoCuenta=" + estadoCuenta + ", tipoCuenta=" + tipoCuenta + '}';
     }
-   
+
 }
