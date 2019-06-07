@@ -17,7 +17,7 @@ public class Producto implements Serializable{
     //codigo: representa el codigo unico de cada producto
     private String nombreProducto;
     //nombreProducto: representa el producto
-    private String Sector;
+    private String sector;
     //sector: nombre que representa un conjunto de productos que comparten las mismas caracteristicas
     private Float precio;
     //precio: representa el precio de venta del producto al publico
@@ -47,7 +47,7 @@ public class Producto implements Serializable{
      * constructor parametrizado
      * @param codigo almacena el código del Producto
      * @param nombreProducto almacena el nombre del Producto
-     * @param Sector almacena el sector del Producto
+     * @param sector almacena el sector del Producto
      * @param precio almacena el precio del Producto
      * @param stock almacena el stock del Producto
      * @param material almacena el material del Producto
@@ -58,10 +58,10 @@ public class Producto implements Serializable{
      * @param imagen almacena nombre de la imagen del Producto 
      */
     
-    public Producto(String codigo, String nombreProducto, String Sector, Float precio, Short stock, String material, String marca, String origen, Boolean prodOferta, String dimension, String imagen) {
+    public Producto(String codigo, String nombreProducto, String sector, Float precio, Short stock, String material, String marca, String origen, Boolean prodOferta, String dimension, String imagen) {
         this.codigo = codigo;
         this.nombreProducto = nombreProducto;
-        this.Sector = Sector;
+        this.sector = sector;
         this.precio = precio;
         this.stock = stock;
         this.material = material;
@@ -103,17 +103,17 @@ public class Producto implements Serializable{
     }
 
     /**
-     * @return the Sector
+     * @return the sector
      */
     public String getSector() {
-        return Sector;
+        return sector;
     }
 
     /**
-     * @param Sector the Sector to set
+     * @param sector the sector to set
      */
-    public void setSector(String Sector) {
-        this.Sector = Sector;
+    public void setSector(String sector) {
+        this.sector = sector;
     }
 
     /**
