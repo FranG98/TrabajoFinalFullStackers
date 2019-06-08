@@ -6,8 +6,9 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -29,8 +30,8 @@ public class Rol implements Serializable{
     
      */
 
-    private List<Permiso> listaPermisos;
-    //listaPermisos representa la lista de los permisos asociados a cada usuario.
+    private Set<Permiso> permisos;
+    //permisos representa la lista de los permisos asociados a cada usuario.
 
     private String comentario;
     //comentario podremos representa un string el cual nos permitara describir o informar sobre algo 
@@ -45,7 +46,8 @@ public class Rol implements Serializable{
      *
      */
     public Rol() {
-        listaPermisos = new ArrayList<>();
+        permisos=new HashSet<>();
+        
     }
 
     /**
@@ -54,42 +56,25 @@ public class Rol implements Serializable{
      * @param codigoRol permite guardar el codigo de rol.
      * @param tipoRol permite guardar el tipo de rol, pudiendo ser consumidor,
      * administrativo o admin.
-     * @param listaPermisos permite agregar distintos permisos a las cuentas.
+     * @param permisos permite agregar distintos permisos a cada cuentas.
      * @param comentario permite guardar un comentario con alguna informacion
      * relevante sobre la cuenta.
      */
-    public Rol(Integer codigoRol, String tipoRol, List<Permiso> listaPermisos, String comentario) {
+    public Rol(Integer codigoRol, String tipoRol, Set<Permiso> permisos, String comentario) {   
         this.codigoRol = codigoRol;
         this.tipoRol = tipoRol;
-        this.listaPermisos = listaPermisos;
+        this.permisos = permisos;
         this.comentario = comentario;
     }
 
-    /**
-     * METODOS
-     */
-    /**
-     * otorgarPermiso permite agregar un permiso a la cuenta.
-     *
-     * @param permiso string que indica que permiso tendra la cuenta.
-     * @return la lista de permisos
-     */
-    public List<Permiso> otorgarPermiso(Permiso permiso) {
-        getListaPermisos().add(permiso);
-        return getListaPermisos();
+    public Rol(String tipoRol, Set<Permiso> permisos, String comentario) {
+        this.tipoRol = tipoRol;
+        this.permisos = permisos;
+        this.comentario = comentario;
     }
-
-    /**
-     * revocarPermiso permite quitar un permiso a la cuenta.
-     *
-     * @param permiso string que indica que permiso qie perdera la cuenta.
-     * @return la lista de permisos
-     */
-    public List<Permiso> revocarPermiso(Permiso permiso) {
-        getListaPermisos().remove(permiso);
-        return getListaPermisos();
-    }
-
+    
+    
+    
     /**
      * METODOS GETTERS & SETTERS
      */
@@ -110,8 +95,8 @@ public class Rol implements Serializable{
     /**
      * @return the listaPermisos
      */
-    public List<Permiso> getListaPermisos() {
-        return listaPermisos;
+    public Set<Permiso> getPermisos() {
+        return permisos;
     }
 
     /**
@@ -136,10 +121,10 @@ public class Rol implements Serializable{
     }
 
     /**
-     * @param listaPermisos the listaPermisos to set
+     * @param permisos the permisos to set
      */
-    public void setListaPermisos(List<Permiso> listaPermisos) {
-        this.listaPermisos = listaPermisos;
+    public void setPermisos(Set<Permiso> permisos) {
+        this.permisos = permisos;
     }
 
     /**
@@ -150,13 +135,46 @@ public class Rol implements Serializable{
     }
 
     /**
+     * METODOS hashCode & equals
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.codigoRol);
+        hash = 67 * hash + Objects.hashCode(this.tipoRol);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Rol other = (Rol) obj;
+        if (!Objects.equals(this.tipoRol, other.tipoRol)) {
+            return false;
+        }
+        if (!Objects.equals(this.codigoRol, other.codigoRol)) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Metodo ToString
      *
      * @return
-     */
+     */    
     @Override
     public String toString() {
-        return "Rol{" + "codigoRol=" + getCodigoRol() + ", tipoRol=" + getTipoRol() + ", listaPermisos=" + getListaPermisos() + ", comentario=" + getComentario() + '}';
+        return "codigoRol=" + codigoRol + ", tipoRol=" + tipoRol + ", permisos=" + permisos + ", comentario=" + comentario;
     }
-
+    
+    
 }

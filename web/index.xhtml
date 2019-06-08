@@ -12,29 +12,30 @@
             <ui:define name="top">
                 Bienvenido a la pagina de prueba
             </ui:define>
-                
+
             <ui:define name="content">
                 <!--Formulario para loguearse en la pagina-->
-                <h:form id="formulariologin">    
-                    <p:growl id="mensajes" life="10000"/>
-                    <p:panel header="Login"  style="width:500px;">
+                <h:form id="frmLogin">    
+                    <p:growl id="msjLogin" showDetail="true" severity="info"/>
+                    <p:growl id="msjValidaciones" showDetail="false" severity="error"/>
+                    <p:panel header="Login"  style="width:400px;">
                         <h:panelGrid columns="2" cellpadding="5" cellspacing="5" >
                             <p:outputLabel for="username" value="Usuario" />
-                            <p:inputText id="username" value="#{gestorUsuariosFormBean.usuario.idUsuario}" 
+                            <p:inputText id="username" value="#{gestorUsuariosFormBean.emailLogin}" 
                                          required="true" requiredMessage="Debe ingresar su ID" label="username" />
-                            <p:outputLabel for="password" value="Clave" />
-                            <p:password value="#{gestorUsuariosFormBean.usuario.contraseña}" id="password" required="true"
+                            <p:outputLabel for="password" value="Contraseña" />
+                            <p:password value="#{gestorUsuariosFormBean.passLogin}" id="password" required="true"
                                         requiredMessage="Debe ingresar su contraseña" label="password" />
                             <p:spacer/>
-                            <p:commandButton id="loginButton" value="Iniciar Sesion"
-                                             update="formulariologin" 
-                                             action="#{gestorUsuariosFormBean.login()}" />
+                            <p:commandButton id="btnLogin" value="Iniciar Sesion"
+                                             update="frmLogin" resetValues="true"
+                                             action="#{gestorUsuariosFormBean.iniciarSesion()}"
+                                             icon="ui-icon-home"/>
+                            <p:link value="Registrarse" outcome="crearcuenta"/>
                         </h:panelGrid>
-                        <p:separator/>
-                        <!--Boton que redireccionara a la pagina "crearcuenta", donde el usuario podra
-                            crear una cuenta para la página-->
-                        <h:button value="Crear Cuenta" outcome="crearcuenta" style="width:120px;"/><br />                
+                        <p:separator/>              
                     </p:panel>
+                    
                 </h:form>
             </ui:define>
 

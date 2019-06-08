@@ -42,6 +42,11 @@ public class Permiso implements Serializable{
         this.nombrePermiso = nombrePermiso;
     }
 
+    public Permiso(String nombrePermiso) {
+        this.nombrePermiso = nombrePermiso;
+    }
+    
+
     /**
      * METODOS GETTERS AND SETTERS
      *
