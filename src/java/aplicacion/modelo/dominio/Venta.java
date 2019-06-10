@@ -6,7 +6,7 @@
 package aplicacion.modelo.dominio;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public class Venta {
     //Atributos de la clase Venta
     private String estadoVenta;
     //Estado de la venta. Tomará 3 valores "Pendiente", "Realizada" o "Cancelada"
-    private Calendar fechaHoraVenta;
+    private Date fechaHoraVenta;
     //La fecha y hora de la venta realizada
     private Set<Producto> productos;
     //Lista de productos que forman parte de una venta
@@ -45,7 +45,7 @@ public class Venta {
      * @param codigoVenta define el codigo identificador de la venta; Más adelante se utilizará numeros aleatorios para esto
      * @param usuarioComprador define el usuario que esta realizando una com
      */
-    public Venta(String estadoVenta, Calendar fechaHoraVenta, Short ganancia, Short codigoVenta, Usuario usuarioComprador) {
+    public Venta(String estadoVenta, Date fechaHoraVenta, Short ganancia, Short codigoVenta, Usuario usuarioComprador) {
         this.estadoVenta = estadoVenta;
         this.fechaHoraVenta = fechaHoraVenta;
         productos = new HashSet<>();
@@ -72,14 +72,14 @@ public class Venta {
     /**
      * @return the fechaHoraVenta
      */
-    public Calendar getFechaHoraVenta() {
+    public Date getFechaHoraVenta() {
         return fechaHoraVenta;
     }
 
     /**
      * @param fechaHoraVenta the fechaHoraVenta to set
      */
-    public void setFechaHoraVenta(Calendar fechaHoraVenta) {
+    public void setFechaHoraVenta(Date fechaHoraVenta) {
         this.fechaHoraVenta = fechaHoraVenta;
     }
 

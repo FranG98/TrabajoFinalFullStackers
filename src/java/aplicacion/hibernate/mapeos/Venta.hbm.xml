@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class  name="aplicacion.modelo.dominio.Venta" catalog="jugueteria" table="Ventas"
+          optimistic-lock="version">
+      <id name="codigoVenta" type="integer">
+          <column name="ven_codigo_venta" length="4"/>
+          <generator class="assigned"/>
+      </id>
+      <property name="estadoVenta" type="string">
+          <column name="ven_estado_venta" not-null="true"/>
+      </property>
+      <property name="fechaHoraVenta" type="date">
+          <column name="ven_fecha_hora_venta" not-null="true"/>
+      </property>
+      <property name="ganancia" type="integer">
+          <column name="ven_ganancia" not-null="true"/>
+      </property>
+      
+     
+      <!--<set name="productos" table="ven_productos" fetch="join" cascade="all"/>-->
+  </class>
+</hibernate-mapping>
