@@ -23,12 +23,8 @@ public class Producto implements Serializable{
     //precio: representa el precio de venta del producto al publico
     private Short stock;
     //stock: representa la cantidad dispronible del producto 
-    private String material;
-    //material: representa material del producto
     private String marca;
     //marca: representa la marca del producto
-    private String origen;
-    //origen: representa el lugar de origen del producto
     private Boolean prodOferta;
     //prodOferta: representa si un producto esta en oferta o no 
     private String dimension;
@@ -50,23 +46,19 @@ public class Producto implements Serializable{
      * @param sector almacena el sector del Producto
      * @param precio almacena el precio del Producto
      * @param stock almacena el stock del Producto
-     * @param material almacena el material del Producto
      * @param marca almacena la marca del Producto
-     * @param origen almacena el origen del Producto
      * @param prodOferta almacena si el producto esta en oferta, prodOferta inicializa en falso 
      * @param dimension almacena la dimencion del Producto
      * @param imagen almacena nombre de la imagen del Producto 
      */
     
-    public Producto(String codigo, String nombreProducto, String sector, Float precio, Short stock, String material, String marca, String origen, Boolean prodOferta, String dimension, String imagen) {
+    public Producto(String codigo, String nombreProducto, String sector, Float precio, Short stock, String marca, Boolean prodOferta, String dimension, String imagen) {
         this.codigo = codigo;
         this.nombreProducto = nombreProducto;
         this.sector = sector;
         this.precio = precio;
         this.stock = stock;
-        this.material = material;
         this.marca = marca;
-        this.origen = origen;
         prodOferta = false;
         this.dimension = dimension;
         this.imagen = imagen;
@@ -143,21 +135,6 @@ public class Producto implements Serializable{
     public void setStock(Short stock) {
         this.stock = stock;
     }
-
-    /**
-     * @return the material
-     */
-    public String getMaterial() {
-        return material;
-    }
-
-    /**
-     * @param material the material to set
-     */
-    public void setMaterial(String material) {
-        this.material = material;
-    }
-
     /**
      * @return the marca
      */
@@ -171,21 +148,6 @@ public class Producto implements Serializable{
     public void setMarca(String marca) {
         this.marca = marca;
     }
-
-    /**
-     * @return the origen
-     */
-    public String getOrigen() {
-        return origen;
-    }
-
-    /**
-     * @param origen the origen to set
-     */
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
-
     /**
      * @return the prodOferta
      */
@@ -231,9 +193,8 @@ public class Producto implements Serializable{
     @Override
     public String toString() {
         return "Codigo del Producto: "+getCodigo()+"Nombre del producto: "+getNombreProducto()+"Precio del Producto: "+getPrecio()+
-               "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Material del Producto "+getMaterial()+
-               "Origen del Producto: "+getOrigen()+"Dimension del Producto: "+getDimension()+"Marca del Producto: "+getMarca()+
-               "Producto en Oferta: "+getProdOferta()+"Direccion de Imagen: "+getImagen();
+               "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Dimension del Producto: "+getDimension()+
+               "Marca del Producto: "+getMarca()+"Producto en Oferta: "+getProdOferta()+"Direccion de Imagen: "+getImagen();
     }
 
 }

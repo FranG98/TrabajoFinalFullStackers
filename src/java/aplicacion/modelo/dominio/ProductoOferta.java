@@ -6,6 +6,7 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,12 +15,18 @@ import java.util.Set;
  * @author Full Stackers
  */
 public class ProductoOferta implements Serializable{
+    private String codigoOferta;
+    private Byte descuento;
     private Set<Producto> listaProdOferta;
-
+    private Date fechaInicio;
+    private Date fechaFinal;
+    
     public ProductoOferta() {
         listaProdOferta = new HashSet<>();
     }
-
+    
+    //GETTER AND SETTER
+    
     /**
      * @return the listaProdOferta
      */
@@ -32,6 +39,62 @@ public class ProductoOferta implements Serializable{
      */
     public void setListaProdOferta(Set<Producto> listaProdOferta) {
         this.listaProdOferta = listaProdOferta;
+    }
+
+    /**
+     * @return the codigoOferta
+     */
+    public String getCodigoOferta() {
+        return codigoOferta;
+    }
+
+    /**
+     * @param codigoOferta the codigoOferta to set
+     */
+    public void setCodigoOferta(String codigoOferta) {
+        this.codigoOferta = codigoOferta;
+    }
+
+    /**
+     * @return the descuento
+     */
+    public Byte getDescuento() {
+        return descuento;
+    }
+
+    /**
+     * @param descuento the descuento to set
+     */
+    public void setDescuento(Byte descuento) {
+        this.descuento = descuento;
+    }
+
+    /**
+     * @return the fechaInicio
+     */
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    /**
+     * @return the fechaFinal
+     */
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
+
+    /**
+     * @param fechaFinal the fechaFinal to set
+     */
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
     
     
