@@ -22,14 +22,10 @@ public class Venta {
     //Estado de la venta. Tomará 3 valores "Pendiente", "Realizada" o "Cancelada"
     private Date fechaHoraVenta;
     //La fecha y hora de la venta realizada
-    private Set<Producto> productos;
+    private Set<DetalleProducto> productos;
     //Lista de productos que forman parte de una venta
-    private Short ganancia;
-    //Dinero que se recibe de la venta
-    private Short codigoVenta;
+    private Integer codigoVenta;
     //Codigo que identifica a cada venta
-    private Usuario usuarioComprador;
-    //Usuario que solicito la compra de Productos
     
     /**
      * Constructor sin parametros
@@ -41,17 +37,13 @@ public class Venta {
      * Constructor parametrizado de la clase Venta
      * @param estadoVenta define el estado actual de la venta: "Pendiente", "Realizada" o "Cancelada"
      * @param fechaHoraVenta define la fecha y hora en la cual se realizo la venta; Se utiliza el tipo Calendar ya que trabaja con ambas
-     * @param ganancia define el dinero que se recibe por la venta
      * @param codigoVenta define el codigo identificador de la venta; Más adelante se utilizará numeros aleatorios para esto
-     * @param usuarioComprador define el usuario que esta realizando una com
      */
-    public Venta(String estadoVenta, Date fechaHoraVenta, Short ganancia, Short codigoVenta, Usuario usuarioComprador) {
+    public Venta(String estadoVenta, Date fechaHoraVenta, Integer codigoVenta) {
         this.estadoVenta = estadoVenta;
-        this.fechaHoraVenta = fechaHoraVenta;
+        fechaHoraVenta = new Date();
         productos = new HashSet<>();
-        this.ganancia = ganancia;
         this.codigoVenta = codigoVenta;
-        this.usuarioComprador = usuarioComprador;
     }
 
     //METODOS GETTER & SETTER
@@ -84,67 +76,39 @@ public class Venta {
     }
 
     /**
-     * @return the ganancia
-     */
-    public Short getGanancia() {
-        return ganancia;
-    }
-
-    /**
-     * @param ganancia the ganancia to set
-     */
-    public void setGanancia(Short ganancia) {
-        this.ganancia = ganancia;
-    }
-
-    /**
      * @return the codigoVenta
      */
-    public Short getCodigoVenta() {
+    public Integer getCodigoVenta() {
         return codigoVenta;
     }
 
     /**
      * @param codigoVenta the codigoVenta to set
      */
-    public void setCodigoVenta(Short codigoVenta) {
+    public void setCodigoVenta(Integer codigoVenta) {
         this.codigoVenta = codigoVenta;
     }
     
         /**
      * @return the productos
      */
-    public Set<Producto> getProductos() {
+    public Set<DetalleProducto> getProductos() {
         return productos;
     }
 
     /**
      * @param productos the productos to set
      */
-    public void setProductos(Set<Producto> productos) {
+    public void setProductos(Set<DetalleProducto> productos) {
         this.productos = productos;
     }
-    
-    /**
-     * @return the usuarioComprador
-     */
-    public Usuario getUsuarioComprador() {
-        return usuarioComprador;
-    }
-
-    /**
-     * @param usuarioComprador the usuarioComprador to set
-     */
-    public void setUsuarioComprador(Usuario usuarioComprador) {
-        this.usuarioComprador = usuarioComprador;
-    }
-    
+     
     //Metodo toString
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         //Se utiliza el SimpleDateFormat para mostrar la fecha formalmente
-        return "Codigo de Venta: "+codigoVenta+" // Estado de Venta: "+estadoVenta+" // Ganancia de Venta: "+ganancia+" // Fecha y Hora de la Venta: "+sdf.format(fechaHoraVenta.getTime());
+        return "Codigo de Venta: "+codigoVenta+" // Estado de Venta: "+estadoVenta+" // Fecha y Hora de la Venta: "+sdf.format(fechaHoraVenta.getTime());
     }
 
 }

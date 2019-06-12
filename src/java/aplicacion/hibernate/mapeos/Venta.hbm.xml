@@ -14,11 +14,10 @@
       <property name="fechaHoraVenta" type="date">
           <column name="ven_fecha_hora_venta" not-null="true"/>
       </property>
-      <property name="ganancia" type="integer">
-          <column name="ven_ganancia" not-null="true"/>
-      </property>
       
-     
-      <!--<set name="productos" table="ven_productos" fetch="join" cascade="all"/>-->
+      <!--<set name="productos" table="ven_productos" fetch="join" cascade="all">
+        <key column="ven_codigo_venta"/>
+        <many-to-many class="aplicacion.modelo.dominio.DetalleProducto" column="detprod_producto_vendido"/>
+      </set>-->
   </class>
 </hibernate-mapping>
