@@ -8,7 +8,7 @@ package aplicacion.controlador.beans.forms;
 import aplicacion.controlador.beans.ProductoBean;
 import aplicacion.modelo.dominio.Producto;
 import java.io.Serializable;
-import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -26,24 +26,15 @@ public class ABMProductoFormBean implements Serializable{
     private Producto producto;
     
     public ABMProductoFormBean() {
-        producto = new Producto();
     }
+    @PostConstruct
+    public void init(){
+         producto = new Producto();
+    }
+    
     public void agregarProducto(){
-        getProductoBean().agregarProducto(getProducto());
+        productoBean.agregarProducto(producto);
     }
-    
-    public void modificarProducto(){
-        getProductoBean().modificarProducto(getProducto());
-    }
-    
-    public void eliminarProducto(){
-        getProductoBean().eliminarProducto(getProducto());
-    }
-    public List<Producto> obtenerProductos(){
-        return getProductoBean().obtenerProductos();
-    }
-    
-    // GETTER AND SETTER
 
     /**
      * @return the productoBean
@@ -72,9 +63,15 @@ public class ABMProductoFormBean implements Serializable{
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+    /**
+    public void modificarProducto(){
+        productoBean.modificarProducto(producto);
+    }
+    public void eliminarProducto(){
+        productoBean.eliminarProducto(producto);
+    }*/
     
-
-    
+   
     
     
 }

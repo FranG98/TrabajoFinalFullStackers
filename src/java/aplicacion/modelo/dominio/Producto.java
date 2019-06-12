@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 
 public class Producto implements Serializable{
-    private String codigo;
+    private Integer codigo;
     //codigo: representa el codigo unico de cada producto
     private String nombreProducto;
     //nombreProducto: representa el producto
@@ -25,7 +25,7 @@ public class Producto implements Serializable{
     //stock: representa la cantidad dispronible del producto 
     private String marca;
     //marca: representa la marca del producto
-    private Boolean prodOferta;
+    private Boolean prodOferta = false;
     //prodOferta: representa si un producto esta en oferta o no 
     private String dimension;
     //dimencion: representa las medidas del producto 
@@ -46,20 +46,22 @@ public class Producto implements Serializable{
      * @param sector almacena el sector del Producto
      * @param precio almacena el precio del Producto
      * @param stock almacena el stock del Producto
+     * @param material almacena el material del Producto
      * @param marca almacena la marca del Producto
+     * @param origen almacena el origen del Producto
      * @param prodOferta almacena si el producto esta en oferta, prodOferta inicializa en falso 
      * @param dimension almacena la dimencion del Producto
      * @param imagen almacena nombre de la imagen del Producto 
      */
     
-    public Producto(String codigo, String nombreProducto, String sector, Float precio, Short stock, String marca, Boolean prodOferta, String dimension, String imagen) {
+    public Producto(Integer codigo, String nombreProducto, String sector, Float precio, Short stock, String marca, Boolean prodOferta, String dimension, String imagen) {
         this.codigo = codigo;
         this.nombreProducto = nombreProducto;
         this.sector = sector;
         this.precio = precio;
         this.stock = stock;
         this.marca = marca;
-        prodOferta = false;
+        this.prodOferta = prodOferta;
         this.dimension = dimension;
         this.imagen = imagen;
     }
@@ -69,14 +71,14 @@ public class Producto implements Serializable{
     /**
      * @return the codigo
      */
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
     /**
      * @param codigo the codigo to set
      */
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -102,7 +104,7 @@ public class Producto implements Serializable{
     }
 
     /**
-     * @param sector the sector to set
+     * @param sector the Sector to set
      */
     public void setSector(String sector) {
         this.sector = sector;
@@ -135,6 +137,8 @@ public class Producto implements Serializable{
     public void setStock(Short stock) {
         this.stock = stock;
     }
+
+
     /**
      * @return the marca
      */
@@ -148,6 +152,8 @@ public class Producto implements Serializable{
     public void setMarca(String marca) {
         this.marca = marca;
     }
+
+
     /**
      * @return the prodOferta
      */
@@ -193,8 +199,7 @@ public class Producto implements Serializable{
     @Override
     public String toString() {
         return "Codigo del Producto: "+getCodigo()+"Nombre del producto: "+getNombreProducto()+"Precio del Producto: "+getPrecio()+
-               "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Dimension del Producto: "+getDimension()+
-               "Marca del Producto: "+getMarca()+"Producto en Oferta: "+getProdOferta()+"Direccion de Imagen: "+getImagen();
+               "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Dimension del Producto: "+getDimension()+"Marca del Producto: "+getMarca()+
+               "Producto en Oferta: "+getProdOferta()+"Direccion de Imagen: "+getImagen();
     }
-
 }

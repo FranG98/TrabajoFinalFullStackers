@@ -15,10 +15,7 @@ import java.util.List;
 public interface IProductoDAO {
     
     public void agregarProducto(Producto producto);
-    
     public void modificarProducto(Producto producto);
-    
     public void eliminarProducto(Producto producto);
-    
-    public List<Producto>obtenerProductos(); 
+    public List<Producto>obtenerProductos();  
 }

@@ -2,17 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="aplicacion.modelo.dominio.Producto" catalog="jugueteria" table="producto"
+    <class name="aplicacion.modelo.dominio.Producto" catalog="jugueteria" table="producto"
          optimistic-lock="version">
-        <id name="codigo" type="string">
+        <id name="codigo" type="integer">
             <column name="prod_codigo" length="12"/>
-            <generator class="assigned"/>   
+            <generator class="identity"/>   
         </id>
             
         <property name="nombreProducto" type="string">
             <column name="prod_nombre_producto" length="18" not-null="true"/>
-        </property>
-           
+        </property> 
+         
         <property name="sector" type="string">
             <column name="prod_sector" length="35" not-null="true"/>
         </property>
@@ -24,7 +24,7 @@
         <property name="stock" type="short">
             <column name="prod_stock" not-null="true"/>
         </property>
-            
+        
         <property name="marca" type="string">
             <column name="prod_marca" length="15" not-null="true"/>
         </property>

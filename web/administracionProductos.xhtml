@@ -15,15 +15,12 @@
 
             <ui:define name="content">
                 <h:form id="frmProducto">
-                    <p:panel id="pnlbotones" header="Administracion de Productos">
-                        <h:panelGrid id="pnlgBotones" columns="2" cellpadding="3" cellspacing="10"> 
+            <p:panel id="pnlbotones" header="Administracion de Productos">
+                <h:panelGrid id="pnlgBotones" columns="2" cellpadding="3" cellspacing="10"> 
+                  
+                    <p:outputLabel for="txtNombreProducto" value="Nombre: "/>
+                    <p:inputText id="txtNombreProducto" value="#{aBMProductoFormBean.producto.nombreProducto}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
                    
-                            <p:outputLabel value="Codigo" id="lblCodigo"/>
-                            <p:inputText id="txtCodigo" value="#{aBMProductoFormBean.producto.codigo}" required="true" requiredMessage="Debe ingresar Código del producto"/>
-
-                            <p:outputLabel value="Nombre: " id="lblNombreProducto"/>
-                            <p:inputText id="txtNombreProducto" value="#{aBMProductoFormBean.producto.nombreProducto}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
-                            
                             <p:outputLabel value="Marca: " id="lblMarca"/>
                             <p:inputText id="txtMarca" value="#{aBMProductoFormBean.producto.marca}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
                             
@@ -40,13 +37,12 @@
                             <p:inputNumber id="nbrPrecio" value="#{aBMProductoFormBean.producto.precio}" required="true" requiredMessage=" Debe ingresar el Precio del producto"/>
                             
                             <p:outputLabel value="Stock: " id="lblStock"/>
-                            <p:inputNumber id="stock" value="#{aBMProductoFormBean.producto.stock}" required="true" requiredMessage=" Debe ingresar el stock del producto"/>
+                            <p:inputNumber id="stock" value="#{aBMProductoFormBean.producto.stock}"  required="true" requiredMessage=" Debe ingresar el stock del producto"/>
                             
-                            <p:commandButton id="btnAgregarProducto" value="Agregar" actionListener="#{aBMProductoFormBean.agregarProducto()}" />
-                            
+                            <p:commandButton id="btnAgregarProducto" value="Agregar" actionListener="#{aBMProductoFormBean.agregarProducto()}" update="frmProducto"/>
                 </h:panelGrid>
             </p:panel> 
-                </h:form>
+         </h:form>
             </ui:define>
 
             <ui:define name="bottom">

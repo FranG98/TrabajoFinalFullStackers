@@ -9,12 +9,15 @@ import aplicacion.hibernate.dao.IProductoDAO;
 import aplicacion.hibernate.dao.imp.ProductoDAOImp;
 import aplicacion.modelo.dominio.Producto;
 import java.io.Serializable;
-import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
  * 
  * @author FullStackers
  */
+@ManagedBean
+@ViewScoped
 public class ProductoBean implements Serializable{
      private IProductoDAO productoDAO;
 
@@ -23,18 +26,7 @@ public class ProductoBean implements Serializable{
     }
     
     public void agregarProducto(Producto nuevo){
-        getProductoDAO().agregarProducto(nuevo);
-    }
-    
-    public void modificarProducto(Producto borrado){
-        getProductoDAO().modificarProducto(borrado);
-    }
-    
-    public void eliminarProducto(Producto modificado){
-        getProductoDAO().eliminarProducto(modificado);
-    }
-    public List<Producto> obtenerProductos(){
-        return getProductoDAO().obtenerProductos();
+        productoDAO.agregarProducto(nuevo);
     }
 
     /**
@@ -50,5 +42,14 @@ public class ProductoBean implements Serializable{
     public void setProductoDAO(IProductoDAO productoDAO) {
         this.productoDAO = productoDAO;
     }
+    /**
+    public void modificarProducto(Producto borrado){
+        productoDAO.modificarProducto(borrado);
+    }
+    
+    public void eliminarProducto(Producto modificado){
+       productoDAO.eliminarProducto(modificado);
+    }
+    */
     
 }

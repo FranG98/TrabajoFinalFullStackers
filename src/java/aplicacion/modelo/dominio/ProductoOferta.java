@@ -23,7 +23,10 @@ public class ProductoOferta implements Serializable{
     
     public ProductoOferta() {
         listaProdOferta = new HashSet<>();
+        fechaFinal = new Date();
+        fechaInicio = new Date();
     }
+    
     
     //GETTER AND SETTER
     
