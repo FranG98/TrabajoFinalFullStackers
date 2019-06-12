@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-    <!--Página de prueba para las implementaciones DAO-->
+        <!--Página de prueba para las implementaciones DAO-->
         <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
 
             <ui:define name="top">
@@ -15,19 +15,45 @@
             </ui:define>
 
             <ui:define name="content">
-               <!--Seleccion de clase a probar-->
+                <!--Seleccion de clase a probar-->
                 <h:panelGrid id="formMenuPrincipal" columns="2" cellpadding="5"> 
-                    <p:outputLabel id="lblSeleccion" value="Seleccione una clase: "/>
-                    <!--Se utiliza selectOneRadio para seleccionar entre las 3 clases principales del proyecto-->
-                    <p:selectOneRadio id="console" value="#{radioView.console}" unselectable="true">
-                         <f:selectItem itemLabel="Producto" itemValue="Producto" />
-                         <f:selectItem itemLabel="Usuario" itemValue="Usuario" />
-                         <f:selectItem itemLabel="Venta" itemValue="Venta" />
-                    </p:selectOneRadio>
-                    <!--Este boton redireccionara a la pagina correspondiente dependiendo de nuestra elección-->
-                    <h:button id="btnSeleccionClase" value="Hecho" outcome="#"/>
+                    <h:form>
+                        <p:outputLabel id="lblSeleccion" value="Seleccione una clase: "/>
+                        <!--Se utiliza selectOneRadio para seleccionar entre las 3 clases principales del proyecto-->
+                        <p:selectOneRadio id="console" value="#{radioView.console}" unselectable="true">
+                            <f:selectItem itemLabel="Producto" itemValue="Producto" />
+                            <f:selectItem itemLabel="Usuario" itemValue="Usuario" />
+                            <f:selectItem itemLabel="Venta" itemValue="Venta" />
+                        </p:selectOneRadio>
+                        <!--Este boton redireccionara a la pagina correspondiente dependiendo de nuestra elección-->
+                        <h:button id="btnSeleccionClase" value="Hecho"/>
+                        <h/>
+                        <p:commandButton id="btnAgregarRol" value="Agregar Rol"
+                                         oncomplete="PF('AgregarRol').show();"/>
+                    </h:form>
                 </h:panelGrid>
-                
+
+                <!--Prueba para la clase Rol-->
+                <p:dialog id="dlgAgregarRol" widgetVar="AgregarRol" header="Agregar nuevo rol"
+                          modal="true">
+                    <h:form id="frmAgregar">
+                        <p:growl id="mensajes" showDetail="true"/>
+                        <p:panelGrid id="panelFormulario" columns="2">
+                            <p:outputLabel value="Codigo de rol: "/>
+                            <p:inputNumber value="#{rolFormBean.unRol.codigoRol}"/>
+                            <p:outputLabel value="Tipo de rol: "/>
+                            <p:inputText value="#{rolFormBean.unRol.tipoRol}"/>
+                            <p:outputLabel value="Permisos: "/>
+                            <p:inputText value="#{rolFormBean.unRol.permisos}"/>
+                            <p:outputLabel value="Comentario: "/>
+                            <p:inputText value="#{rolFormBean.unRol.comentario}"/>
+                        </p:panelGrid>
+                        <p:commandButton id="btnGuardar" value="Guardar" 
+                                         actionListener="#{rolFormBean.agregarRol()}"
+                                         update="mensajes"/>
+                    </h:form>
+                </p:dialog>
+
             </ui:define>
 
         </ui:composition>
