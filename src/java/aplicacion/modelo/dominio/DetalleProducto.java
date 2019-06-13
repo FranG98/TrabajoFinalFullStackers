@@ -5,13 +5,15 @@
  */
 package aplicacion.modelo.dominio;
 
+import java.io.Serializable;
+
 
 
 /**
  *
  * @author Windows
  */
-public class DetalleProducto {
+public class DetalleProducto implements Serializable{
     private Producto productoVendido;
     private Integer cantidadVendida;
     private Double precioTotal;

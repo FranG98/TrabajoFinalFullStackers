@@ -6,11 +6,12 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jugueteria?serverTimezone=UTC</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">39200693</property>
+    <property name="hibernate.connection.username">pv</property>
+    <property name="hibernate.connection.password">pv2019</property>
     <mapping resource="aplicacion/hibernate/mapeos/Rol.hbm.xml"/>
     <mapping resource="aplicacion/hibernate/mapeos/Usuario.hbm.xml"/>
     <mapping resource="aplicacion/hibernate/mapeos/Permiso.hbm.xml"/>
-    <mapping resource="aplicacion/hibernate/mapeos/DetalleProducto.hbm.xml"/>
+    <mapping resource="aplicacion/hibernate/mapeos/Producto.hbm.xml"/>
+    <mapping resource="aplicacion/hibernate/mapeos/Venta.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

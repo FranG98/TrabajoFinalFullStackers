@@ -5,6 +5,7 @@
  */
 package aplicacion.modelo.dominio;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ import java.util.Set;
  * @author Full Stackers
  */
 
-public class Venta {
+public class Venta implements Serializable{
         
     //Atributos de la clase Venta
     private String estadoVenta;

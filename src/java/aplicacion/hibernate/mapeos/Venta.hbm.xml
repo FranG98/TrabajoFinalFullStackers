@@ -6,7 +6,7 @@
           optimistic-lock="version">
       <id name="codigoVenta" type="integer">
           <column name="ven_codigo_venta" length="4"/>
-          <generator class="assigned"/>
+          <generator class="identity"/>
       </id>
       <property name="estadoVenta" type="string">
           <column name="ven_estado_venta" not-null="true"/>

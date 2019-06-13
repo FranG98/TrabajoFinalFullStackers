@@ -8,6 +8,7 @@ package aplicacion.controlador.beans;
 import aplicacion.hibernate.dao.IVentaDAO;
 import aplicacion.hibernate.dao.imp.VentaDAOImp;
 import aplicacion.modelo.dominio.Venta;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -18,7 +19,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class VentaBean {
+public class VentaBean implements Serializable{
     
     private IVentaDAO ventaDAO;
     /**

@@ -7,6 +7,7 @@ package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.VentaBean;
 import aplicacion.modelo.dominio.Venta;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -18,7 +19,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ABMVentaFormBean {
+public class ABMVentaFormBean implements Serializable{
 
     @ManagedProperty(value = "#{ventaBean}")
     private VentaBean ventaBean;
