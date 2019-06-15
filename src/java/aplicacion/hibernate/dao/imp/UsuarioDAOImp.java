@@ -16,7 +16,11 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author FullStackers
+ * @author Fernando
+ */
+/**
+ * Clase IusuarioDAOImp
+ *
  */
 public class UsuarioDAOImp implements Serializable, IUsuarioDAO {
 
@@ -24,6 +28,11 @@ public class UsuarioDAOImp implements Serializable, IUsuarioDAO {
 
     }
 
+    /**
+     * crearUsuario permite crear una nueva cuenta en el sistema
+     *
+     * @param usuario contiene los datos de la nueva cuenta a ser creada
+     */
     @Override
     public void crearUsuario(Usuario usuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -33,6 +42,25 @@ public class UsuarioDAOImp implements Serializable, IUsuarioDAO {
         session.close();
     }
 
+    /**
+     * eliminarUsuario permite eliminar el usuario que es elegido desde la vista
+     *
+     * @param usuario contiene los datos del usuario a ser borrado
+     */
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(usuario);
+        session.getTransaction().commit();
+        session.close();
+    }
+    /**
+     * iniciarSesion permite ingresar al usuario al sistema, mostrando las respectivas parte de la web respecto su  rol
+     * @param emailLogin es el string donde se almaceno el email con el que inicia sesion
+     * @param passLogin es el string en donde se almacena la contraseña con la cual inicia sesion
+     * @return un objeto tipo usuario, con datos o nulo, segun se encuentre o no la cuenta en la base de datos
+     */
     @Override
     public Usuario iniciarSesion(String emailLogin, String passLogin) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -46,8 +74,24 @@ public class UsuarioDAOImp implements Serializable, IUsuarioDAO {
         session.close();
         return usuario;
     }
-    
-
+    /**
+     * modificarCuenta
+     * permite modificar una cuenta elegida desde la vista
+     * @param usuario es el objeto a modificar
+     */
+    @Override
+    public void modificarCuenta(Usuario usuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(usuario);
+        session.getTransaction().commit();
+        session.close();
+    }
+    /**
+     * obtenerUsuarios
+     * permite obtener la lista de usuarios registrados
+     * @return una lista de usuarios
+     */
     @Override
     public List<Usuario> obtenerUsuarios() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -55,15 +99,6 @@ public class UsuarioDAOImp implements Serializable, IUsuarioDAO {
         List<Usuario> usuarios = criteria.list();
         session.close();
         return usuarios;
-    }
-
-    @Override
-    public void eliminarUsuario(Usuario usuario) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.delete(usuario);
-        session.getTransaction().commit();
-        session.close();
     }
 
 }

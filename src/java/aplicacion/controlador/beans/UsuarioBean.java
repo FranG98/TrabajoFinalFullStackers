@@ -25,31 +25,49 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
-    //usuarioDAO atributo de tipo IUsuarioDAO que permite 
     private IUsuarioDAO usuarioDAO;
 
+    //usuarioDAO permite realizar la conexion con la implementacion
     /**
-     * Creates a new instance of LoginBean
+     * Constructor por defecto
      */
     public UsuarioBean() {
         usuarioDAO = new UsuarioDAOImp();
     }
 
-    public void crearUsuario(Usuario nuevo) {
-        getUsuarioDAO().crearUsuario(nuevo);
+    /**
+     * modificarCuenta permite cambiar el estado de un usuario. 2 posibles
+     * estados; cuenta habilitada e inhabilitada
+     *
+     * @param usuario contiene los datos de la cuenta a modificar su estuado
+     */
+    public void modificarCuenta(Usuario usuario) {
+        usuarioDAO.modificarCuenta(usuario);
     }
 
-    public void eliminarUsuario(Usuario borrado) {
-        getUsuarioDAO().eliminarUsuario(borrado);
+    /**
+     * crearUsuario permite crear un nuevo usuario si el email ingresado no se
+     * encuentra ya registrado
+     * @param usuario contiene los datos del usuario que desea registrarse
+     */
+    public void crearUsuario(Usuario usuario) {
+        getUsuarioDAO().crearUsuario(usuario);
     }
-
+    /**
+     * eliminarUsuario permite eliminar un usuario definitivamente
+     *
+     * @param usuario contiene los datos del usuario a eliminar
+     */
+    public void eliminarUsuario(Usuario usuario) {
+        getUsuarioDAO().eliminarUsuario(usuario);
+    }
+     /**
+     * obtenerUsuarios
+     * permite obtener una lista de usuarios registrados
+     * @return la lista de usuarios registrados
+     */
     public List<Usuario> obtenerUsuarios() {
         return usuarioDAO.obtenerUsuarios();
-    }
-
-    public Usuario iniciarSesion(String emailLogin, String passLogin) {
-
-        return usuarioDAO.iniciarSesion(emailLogin, passLogin);
     }
 
     /**
@@ -58,13 +76,13 @@ public class UsuarioBean implements Serializable {
     public IUsuarioDAO getUsuarioDAO() {
         return usuarioDAO;
     }
-
+    /**
+     * Metodos getters & setters
+     */
     /**
      * @param usuarioDAO the usuarioDAO to set
      */
     public void setUsuarioDAO(IUsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
     }
-
-    
 }

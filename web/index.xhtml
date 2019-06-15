@@ -21,22 +21,19 @@
                     <p:panel header="Login"  style="width:400px;">
                         <h:panelGrid columns="2" cellpadding="5" cellspacing="5" >
                             <p:outputLabel for="username" value="Usuario" />
-                            <p:inputText id="username" value="#{gestorUsuariosFormBean.emailLogin}" 
+                            <p:inputText id="username" value="#{loginFormBean.emailLogin}" 
                                          required="true" requiredMessage="Debe ingresar su ID" label="username" />
                             <p:outputLabel for="password" value="Contraseña" />
-                            <p:password value="#{gestorUsuariosFormBean.passLogin}" id="password" required="true"
+                            <p:password value="#{loginFormBean.passLogin}" id="password" required="true"
                                         requiredMessage="Debe ingresar su contraseña" label="password" />
                             <p:spacer/>
                             <p:commandButton id="btnLogin" value="Iniciar Sesion"
                                              update="frmLogin" resetValues="true"
-                                             action="#{gestorUsuariosFormBean.iniciarSesion()}"
+                                             action="#{loginFormBean.iniciarSesion()}"
                                              icon="ui-icon-home"/>
-                            <!--Link que redireccionara al cliente a la pagina para crear una Cuenta-->
-                            <p:link value="Registrarse" outcome="crearcuenta"/>
                         </h:panelGrid>
                         <p:separator/>              
                     </p:panel>
-                    
                 </h:form>
             </ui:define>
 

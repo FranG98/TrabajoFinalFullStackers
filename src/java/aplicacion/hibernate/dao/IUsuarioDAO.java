@@ -13,16 +13,16 @@ import java.util.List;
  * @author FERNANDO
  */
 public interface IUsuarioDAO {
-    
-    public Usuario iniciarSesion(String emailLogin, String passLogin);
-    
+
     public void crearUsuario(Usuario usuario);
-    
+
     public void eliminarUsuario(Usuario usuario);
-    
+
+    public Usuario iniciarSesion(String emailLogin, String passLogin);
+
+    public void modificarCuenta(Usuario usuario);
+
     public List<Usuario> obtenerUsuarios();
 
-    
+}
 
-    
- }
