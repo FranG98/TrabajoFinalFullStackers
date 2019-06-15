@@ -50,6 +50,8 @@ public class ABMUsuarioFormBean implements Serializable {
     public ABMUsuarioFormBean() {
         listaUsuarios = new ArrayList<>();
         resultadoBusqueda = new ArrayList<>();
+        emailBuscado = "";
+
     }
 
     /**
@@ -58,40 +60,21 @@ public class ABMUsuarioFormBean implements Serializable {
     @PostConstruct
     public void init() {
         setUsuario(new Usuario());
-//       obtenerUsuarios(); ESTO DA ERROR SI LA BD ESTA VACIA
+        obtenerUsuarios();// ESTO DA ERROR SI LA BD ESTA VACIA
+
     }
 
     /**
      * buscarUsuarios permite buscar usuarios segun los caracteres ingresados
      */
     public void buscarUsuarios() {
-        obtenerUsuarios();
-        for (int i = 0; i < getListaUsuarios().size(); i++) {
-            if (getListaUsuarios().get(i).getEmailUsuario().startsWith(getEmailBuscado())) {
-                resultadoBusqueda.add(getListaUsuarios().get(i));
-            }
-        }
 
+//        for (int i = 0; i < getListaUsuarios().size(); i++) {
+//            if (getListaUsuarios().get(i).getEmailUsuario().startsWith(getEmailBuscado())) {
+//                resultadoBusqueda.add(getListaUsuarios().get(i));
+//            }
+//        }
     }
-
-    /* PREGUNTAR PORQUE NO FUNCIONA SIENDO QUE SI USO AJAX EN TEORIA NO RECARGA LA PAGINA POR ENDE
-    NO SE INICIALIZAN LAS LISTAS
-        public void buscarUsuarios() {
-
-        if (listaUsuarios.isEmpty()) {
-            obtenerUsuarios();
-            System.out.println("la lista esta vacia");
-
-        } else {
-            for (int i = 0; i < getListaUsuarios().size(); i++) {
-                if (getListaUsuarios().get(i).getEmailUsuario().startsWith(getEmailBuscado())) {
-                    resultadoBusqueda.add(getListaUsuarios().get(i));
-                }
-            }
-        }
-    }
-
-     */
 
     /**
      * crearUsuario permite crear un nuevo usuario si el email ingresado no se
@@ -101,7 +84,7 @@ public class ABMUsuarioFormBean implements Serializable {
         getUsuarioBean().crearUsuario(getUsuario());
         addMessageInfo("Operacion Realizada", "Usuario creado con exito");
     }
-    
+
     /**
      * eliminarUsuario permite eliminar un usuario definitivamente
      *
@@ -112,7 +95,7 @@ public class ABMUsuarioFormBean implements Serializable {
 //        Usuario usu=(Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
 //        System.out.println("usuario logueado" +usu.getEmailUsuario());
         getUsuarioBean().eliminarUsuario(usuario);
-        init();
+        obtenerUsuarios();
         addMessageInfo("Operacion Realizada", "Usuario " + usuario.getEmailUsuario() + " eliminado con exito");
     }
 
@@ -124,17 +107,17 @@ public class ABMUsuarioFormBean implements Serializable {
      */
     public void modificarCuenta(Usuario usuario) {
         getUsuarioBean().modificarCuenta(usuario);
-        buscarUsuarios();
-        
-    }
+        obtenerUsuarios();
+//        
 
-    
+    }
 
     /**
      * obtenerUsuarios permite obtener una lista de usuarios registrados
      */
     public void obtenerUsuarios() {
         listaUsuarios = getUsuarioBean().obtenerUsuarios();
+
     }
 
     //Mensajes
