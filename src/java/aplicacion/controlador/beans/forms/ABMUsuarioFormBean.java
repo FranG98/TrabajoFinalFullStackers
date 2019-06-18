@@ -42,7 +42,7 @@ public class ABMUsuarioFormBean implements Serializable {
     //listaUsuarios permite almacenar la lista de usuarios registrados
     private List<Usuario> resultadoBusqueda;
     //listaResultado permite almacenar una lista con usuarios segun la busqeuda de caracteres ingresados en la seccion busqueda
-
+    private List<String> listaEmails;
     //listaUsuarios permite almacenar una lista de usuarios
     /**
      * Constructor por Defecto
@@ -61,7 +61,10 @@ public class ABMUsuarioFormBean implements Serializable {
     public void init() {
         setUsuario(new Usuario());
         obtenerUsuarios();// ESTO DA ERROR SI LA BD ESTA VACIA
-
+        setListaEmails(new ArrayList<>());
+        for(int i = 0; i < getUsuarioBean().obtenerUsuarios().size(); i++) {
+            getListaEmails().add(i, getUsuarioBean().obtenerUsuarios().get(i).getEmailUsuario());
+        }
     }
 
     /**
@@ -212,5 +215,19 @@ public class ABMUsuarioFormBean implements Serializable {
      */
     public void setUsuarioBean(UsuarioBean usuarioBean) {
         this.usuarioBean = usuarioBean;
+    }
+
+    /**
+     * @return the listaEmails
+     */
+    public List<String> getListaEmails() {
+        return listaEmails;
+    }
+
+    /**
+     * @param listaEmails the listaEmails to set
+     */
+    public void setListaEmails(List<String> listaEmails) {
+        this.listaEmails = listaEmails;
     }
 }

@@ -14,31 +14,36 @@ import java.io.Serializable;
  * @author Windows
  */
 public class DetalleProducto implements Serializable{
-    private Producto productoVendido;
+    private Integer codigoDetalle;
+    private String productoVendido;
     private Integer cantidadVendida;
     private Double precioTotal;
-    private Usuario usuarioComprador;
-    //Usuario que solicito la compra de Productos
+    private String usuarioComprador;
+    //Email del usuario que solicito la compra de Productos
 
-    public DetalleProducto(Integer cantidadVendida, Double precioTotal) {
-        productoVendido = new Producto();
+    public DetalleProducto() {
+    }
+
+    public DetalleProducto(Integer cantidadVendida, Double precioTotal, String productoVendido, String usuarioComprador, Integer codigoDetalle) {
+        this.productoVendido = productoVendido;
         this.cantidadVendida = cantidadVendida;
         this.precioTotal = precioTotal;
-        usuarioComprador = new Usuario();
+        this.usuarioComprador = usuarioComprador;
+        this.codigoDetalle = codigoDetalle;
     }
     
     //GETTERS Y SETTERS
     /**
      * @return the productoVendido
      */
-    public Producto getProductoVendido() {
+    public String getProductoVendido() {
         return productoVendido;
     }
 
     /**
      * @param productoVendido the productoVendido to set
      */
-    public void setProductoVendido(Producto productoVendido) {
+    public void setProductoVendido(String productoVendido) {
         this.productoVendido = productoVendido;
     }
 
@@ -73,15 +78,29 @@ public class DetalleProducto implements Serializable{
     /**
      * @return the usuarioComprador
      */
-    public Usuario getUsuarioComprador() {
+    public String getUsuarioComprador() {
         return usuarioComprador;
     }
 
     /**
      * @param usuarioComprador the usuarioComprador to set
      */
-    public void setUsuarioComprador(Usuario usuarioComprador) {
+    public void setUsuarioComprador(String usuarioComprador) {
         this.usuarioComprador = usuarioComprador;
+    }
+
+    /**
+     * @return the codigoDetalle
+     */
+    public Integer getCodigoDetalle() {
+        return codigoDetalle;
+    }
+
+    /**
+     * @param codigoDetalle the codigoDetalle to set
+     */
+    public void setCodigoDetalle(Integer codigoDetalle) {
+        this.codigoDetalle = codigoDetalle;
     }
     
     

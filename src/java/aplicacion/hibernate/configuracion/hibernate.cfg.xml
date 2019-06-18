@@ -13,5 +13,6 @@
     <mapping resource="aplicacion/hibernate/mapeos/Permiso.hbm.xml"/>
     <mapping resource="aplicacion/hibernate/mapeos/Producto.hbm.xml"/>
     <mapping resource="aplicacion/hibernate/mapeos/Venta.hbm.xml"/>
+    <mapping resource="aplicacion/hibernate/mapeos/DetalleProducto.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

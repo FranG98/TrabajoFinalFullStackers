@@ -10,6 +10,7 @@ import aplicacion.hibernate.dao.IProductoDAO;
 import aplicacion.modelo.dominio.Producto;
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 /**
@@ -47,7 +48,11 @@ public class ProductoDAOImp implements Serializable, IProductoDAO{
 
     @Override
     public List<Producto> obtenerProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Producto.class);
+        List<Producto> detalles = criteria.list();
+        session.close();
+        return detalles;
     }
     
     

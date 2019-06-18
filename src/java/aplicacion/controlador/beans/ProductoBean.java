@@ -9,6 +9,7 @@ import aplicacion.hibernate.dao.IProductoDAO;
 import aplicacion.hibernate.dao.imp.ProductoDAOImp;
 import aplicacion.modelo.dominio.Producto;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -27,6 +28,10 @@ public class ProductoBean implements Serializable{
     
     public void agregarProducto(Producto nuevo){
         productoDAO.agregarProducto(nuevo);
+    }
+    
+    public List<Producto> obtenerProductos(){
+        return productoDAO.obtenerProductos();
     }
 
     /**

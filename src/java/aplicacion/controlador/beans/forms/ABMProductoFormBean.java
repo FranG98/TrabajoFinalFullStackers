@@ -8,6 +8,8 @@ package aplicacion.controlador.beans.forms;
 import aplicacion.controlador.beans.ProductoBean;
 import aplicacion.modelo.dominio.Producto;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -24,12 +26,17 @@ public class ABMProductoFormBean implements Serializable{
     @ManagedProperty(value = "#{productoBean}")
     private ProductoBean productoBean;
     private Producto producto;
+    private List<String> productos;
     
     public ABMProductoFormBean() {
     }
     @PostConstruct
     public void init(){
          producto = new Producto();
+         setProductos(new ArrayList<>());
+         for(int i = 0; i < getProductoBean().obtenerProductos().size(); i++) {
+            getProductos().add(i, getProductoBean().obtenerProductos().get(i).getNombreProducto());
+        }
     }
     
     public void agregarProducto(){
@@ -62,6 +69,20 @@ public class ABMProductoFormBean implements Serializable{
      */
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    /**
+     * @return the productos
+     */
+    public List<String> getProductos() {
+        return productos;
+    }
+
+    /**
+     * @param productos the productos to set
+     */
+    public void setProductos(List<String> productos) {
+        this.productos = productos;
     }
     /**
     public void modificarProducto(){
