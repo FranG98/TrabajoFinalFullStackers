@@ -13,22 +13,22 @@ import java.io.Serializable;
  *
  * @author Windows
  */
-public class DetalleProducto implements Serializable{
+public class DetalleCarrito implements Serializable{
     private Integer codigoDetalle;
-    private String productoVendido;
+    private Producto productoVendido;
     private Integer cantidadVendida;
     private Double precioTotal;
-    private String usuarioComprador;
-    //Email del usuario que solicito la compra de Productos
+    private Double subtotal;
+    
 
-    public DetalleProducto() {
+    public DetalleCarrito() {
     }
 
-    public DetalleProducto(Integer cantidadVendida, Double precioTotal, String productoVendido, String usuarioComprador, Integer codigoDetalle) {
-        this.productoVendido = productoVendido;
+    public DetalleCarrito(Integer cantidadVendida, Double precioTotal, Double subtotal , Integer codigoDetalle) {
+        productoVendido = new Producto();
         this.cantidadVendida = cantidadVendida;
         this.precioTotal = precioTotal;
-        this.usuarioComprador = usuarioComprador;
+        this.subtotal = subtotal;
         this.codigoDetalle = codigoDetalle;
     }
     
@@ -36,14 +36,14 @@ public class DetalleProducto implements Serializable{
     /**
      * @return the productoVendido
      */
-    public String getProductoVendido() {
+    public Producto getProductoVendido() {
         return productoVendido;
     }
 
     /**
      * @param productoVendido the productoVendido to set
      */
-    public void setProductoVendido(String productoVendido) {
+    public void setProductoVendido(Producto productoVendido) {
         this.productoVendido = productoVendido;
     }
 
@@ -76,20 +76,6 @@ public class DetalleProducto implements Serializable{
     }
 
     /**
-     * @return the usuarioComprador
-     */
-    public String getUsuarioComprador() {
-        return usuarioComprador;
-    }
-
-    /**
-     * @param usuarioComprador the usuarioComprador to set
-     */
-    public void setUsuarioComprador(String usuarioComprador) {
-        this.usuarioComprador = usuarioComprador;
-    }
-
-    /**
      * @return the codigoDetalle
      */
     public Integer getCodigoDetalle() {
@@ -101,6 +87,20 @@ public class DetalleProducto implements Serializable{
      */
     public void setCodigoDetalle(Integer codigoDetalle) {
         this.codigoDetalle = codigoDetalle;
+    }
+
+    /**
+     * @return the subtotal
+     */
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    /**
+     * @param subtotal the subtotal to set
+     */
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
     
     

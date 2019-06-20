@@ -6,21 +6,21 @@
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.hibernate.configuracion.HibernateUtil;
-import aplicacion.hibernate.dao.IDetalleProductoDAO;
-import aplicacion.modelo.dominio.DetalleProducto;
+import aplicacion.modelo.dominio.DetalleCarrito;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import aplicacion.hibernate.dao.IDetalleCarritoDAO;
 
 /**
  *
  * @author Windows
  */
-public class DetalleProductoDAOImp implements Serializable, IDetalleProductoDAO{
+public class DetalleCarritoDAOImp implements Serializable, IDetalleCarritoDAO{
 
     @Override
-    public void agregarDetalleProducto(DetalleProducto detalleProducto) {
+    public void agregarDetalleCarrito(DetalleCarrito detalleProducto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(detalleProducto);
@@ -29,12 +29,23 @@ public class DetalleProductoDAOImp implements Serializable, IDetalleProductoDAO{
     }
 
     @Override
-    public List<DetalleProducto> obtenerDetalleProducto() {
+    public void eliminarDetalleCarrito(DetalleCarrito detalleCarrito) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(detalleCarrito);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    @Override
+    public List<DetalleCarrito> obtenerDetalleCarrito() {
        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(DetalleProducto.class);
-        List<DetalleProducto> detalles = criteria.list();
+        Criteria criteria = session.createCriteria(DetalleCarrito.class);
+        List<DetalleCarrito> detalles = criteria.list();
         session.close();
         return detalles;
     }
+
+    
     
 }

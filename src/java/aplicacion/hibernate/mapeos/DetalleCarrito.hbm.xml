@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="aplicacion.modelo.dominio.DetalleCarrito" catalog="jugueteria" table="detalle_carrito"
+         optimistic-lock="version">
+      <id name="codigoDetalle" type="integer">
+          <column name="detcar_codigo" length="10"/>
+          <generator class="identity"/>
+      </id>
+      
+      <property name="cantidadVendida" type="integer">
+          <column name="detcar_cantidad_vendida" not-null="true"/>
+      </property>
+      
+      <property name="precioTotal" type="double">
+          <column name="detcar_precio_total" not-null="true"/>
+      </property>
+      
+      <property name="subtotal" type="double">
+          <column name="detcar_subtotal" not-null="true"/>
+      </property>
+      
+      <many-to-one name="productoVendido" class="aplicacion.modelo.dominio.Producto" fetch="join">
+            <column name="detcar_producto_vendido" not-null="true"/>
+      </many-to-one>
+      
+  </class>
+</hibernate-mapping>

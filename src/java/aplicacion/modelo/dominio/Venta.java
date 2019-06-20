@@ -23,7 +23,7 @@ public class Venta implements Serializable{
     //Estado de la venta. Tomará 3 valores "Pendiente", "Realizada" o "Cancelada"
     private Date fechaHoraVenta;
     //La fecha y hora de la venta realizada
-    private Set<DetalleProducto> productos;
+    private Set<DetalleCarrito> productos;
     //Lista de productos que forman parte de una venta
     private Integer codigoVenta;
     //Codigo que identifica a cada venta
@@ -93,14 +93,14 @@ public class Venta implements Serializable{
         /**
      * @return the productos
      */
-    public Set<DetalleProducto> getProductos() {
+    public Set<DetalleCarrito> getProductos() {
         return productos;
     }
 
     /**
      * @param productos the productos to set
      */
-    public void setProductos(Set<DetalleProducto> productos) {
+    public void setProductos(Set<DetalleCarrito> productos) {
         this.productos = productos;
     }
      

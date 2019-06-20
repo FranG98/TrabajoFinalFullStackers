@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
+
+            <ui:define name="top">
+                Detalle del Carrito
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="frmDetalleCarrito">
+                        <p:growl id="mensajes" showDetail="true"/>
+                        <p:panel id="pnlDetalle">   
+                        <h:panelGrid id="panelDetalleProducto" columns="2">
+                            
+                            <p:outputLabel for="producto" value="Producto vendido:" />
+                            <p:selectOneMenu id="producto" value="#{detalleCarritoFormBean.nombreProducto}" dynamic="true" style="width:125px">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItems value="#{aBMProductoFormBean.productos}" />
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Subtotal:"/>
+                            <p:inputNumber value="#{detalleCarritoFormBean.detalleCarrito.subtotal}" required="true" decimalPlaces="2">
+                                <f:validateDoubleRange minimum="0.00"/>
+                                <f:converter converterId="javax.faces.Double"/>
+                            </p:inputNumber>
+                            
+
+                            <p:outputLabel value="Cantidad vendida: "/>
+                            <p:inputNumber value="#{detalleCarritoFormBean.detalleCarrito.cantidadVendida}" required="true" decimalPlaces="0">
+                                <f:validateLongRange minimum="1" maximum="50"/>
+                                <f:converter converterId="javax.faces.Integer"/>
+                            </p:inputNumber>
+                            
+                            <p:outputLabel value="Precio total de la compra: "/>
+                            <p:inputNumber value="#{detalleCarritoFormBean.detalleCarrito.precioTotal}" required="true" decimalPlaces="2">
+                                <f:validateDoubleRange minimum="0.00"/>
+                                <f:converter converterId="javax.faces.Double"/>
+                            </p:inputNumber>    
+                            <p:spacer/>
+                        <p:commandButton id="btnGuardar" value="Guardar" 
+                                         actionListener="#{detalleCarritoFormBean.agregarDetalleCarrito()}"
+                                         update="mensajes, frmDetalleCarrito"/>
+                        </h:panelGrid>
+                        </p:panel>
+                        
+                        <!--<p:panel id="pnlListaDetalle">
+                            <p:dataTable id="tblDetalles" var="detallecarrito" value="#{detalleCarritoFormBean.obtenerDetallesCarrito}">
+                                
+                                <p:column headerText="Codigo del detalle">
+                                    <h:outputText value="#{detallecarrito.codigoDetalle}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Cantidad vendida">
+                                    <h:outputText value="#{detallecarrito.cantidadVendida}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Precio total">
+                                    <h:outputText value="#{detallecarrito.precioTotal}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Subtotal">
+                                    <h:outputText value="#{detallecarrito.subtotal}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Producto vendido">
+                                    <h:outputText value="#{detallecarrito.productoVendido}"/>
+                                </p:column>
+                                
+                                <p:column>
+                                    <p:commandButton value="Eliminar" icon="ui-icon-trash"
+                                                     actionListener="#{detalleCarritoFormBean.eliminarDetallesCarrito(detallecarrito)}"
+                                         update="frmDetalleCarrito" />
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>--> 
+                    </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

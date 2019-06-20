@@ -5,15 +5,16 @@
  */
 package aplicacion.hibernate.dao;
 
-import aplicacion.modelo.dominio.DetalleProducto;
+import aplicacion.modelo.dominio.DetalleCarrito;
 import java.util.List;
 
 /**
  *
  * @author Windows
  */
-public interface IDetalleProductoDAO {
+public interface IDetalleCarritoDAO {
     
-    public void agregarDetalleProducto(DetalleProducto detalleProducto);
-    public List<DetalleProducto>obtenerDetalleProducto();
+    public void agregarDetalleCarrito(DetalleCarrito detalleProducto);
+    public void eliminarDetalleCarrito(DetalleCarrito detalleCarrito);
+    public List<DetalleCarrito>obtenerDetalleCarrito();
 }
