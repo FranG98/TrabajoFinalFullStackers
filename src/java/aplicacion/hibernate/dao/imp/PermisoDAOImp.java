@@ -1,53 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.hibernate.configuracion.HibernateUtil;
-import aplicacion.hibernate.dao.IRolDAO;
-import aplicacion.modelo.dominio.Rol;
+import aplicacion.modelo.dominio.Permiso;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import aplicacion.hibernate.dao.IPermisoDAO;
 
 /**
- * Representa la impliementacion de la interface IRolDAO.
- * @author Elias Acosta
- */
-public class RolDAOImp implements Serializable, IRolDAO{
-//Implementacion de metodos abstractos.
+ *
+ * @author Usuario
+ */ 
+public class PermisoDAOImp implements IPermisoDAO, Serializable{
+
     @Override
-    public void agregarRol(Rol rol) {
+    public void agregarPermiso(Permiso permiso) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(rol);
+        session.save(permiso);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void modificarRol(Rol rol) {
+    public void eliminarPermiso(Permiso permiso) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(rol);
+        session.delete(permiso);
+        session.beginTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void modificarPermiso(Permiso permiso) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(permiso);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void eliminarRol(Rol rol) {
+    public List<Permiso> obtenerPermisos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.delete(rol);
-        session.getTransaction().commit();
+        Criteria criteria = session.createCriteria(Permiso.class);
+        List<Permiso> permisos = criteria.list();
         session.close();
-    }
-
-    @Override
-    public List<Rol> obtenerRoles() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Rol.class);
-        List<Rol> roles = criteria.list();
-        session.close();
-        return roles;
+        return permisos;
     }
     
 }

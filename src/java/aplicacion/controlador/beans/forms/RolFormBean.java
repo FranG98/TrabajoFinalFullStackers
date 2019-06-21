@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.RolBean;
 import aplicacion.modelo.dominio.Rol;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -14,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -22,42 +18,45 @@ import org.primefaces.PrimeFaces;
  */
 @ManagedBean
 @ViewScoped
-public class RolFormBean {
+public class RolFormBean implements Serializable {
     private Rol unRol;
-    @ManagedProperty(value="#{rolBean}")
+    @ManagedProperty(value = "#{rolBean}")
     private RolBean rolBean;
     private List<Rol> listaRoles;
+
     /**
      * Creates a new instance of RolFormBean
      */
     public RolFormBean() {
+        listaRoles = new ArrayList<>();
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         unRol = new Rol();
+        obtenerRoles();
     }
-    
+
     //Metodos CRUD de rol
-    public void agregarRol(){
+    public void agregarRol() {
         rolBean.agregarRol(unRol);
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se agrego un nuevo rol."));
-       PrimeFaces.current().executeScript("PF('AgregarRol').hide();");
+        obtenerRoles();
     }
-    
-    public void eliminarRol(){
+
+    public void eliminarRol() {
         rolBean.eliminarRol(unRol);
     }
-    
-    public void modificarRol(){
+
+    public void modificarRol() {
         rolBean.modificarRol(unRol);
     }
-    
-    public void obtenerRoles(){
+
+    public void obtenerRoles() {
         listaRoles = rolBean.obtenerRol();
     }
-    
+
     //Getters y Setters
     public Rol getUnRol() {
         return unRol;
@@ -82,5 +81,5 @@ public class RolFormBean {
     public void setListaRoles(List<Rol> listaRoles) {
         this.listaRoles = listaRoles;
     }
-    
+
 }

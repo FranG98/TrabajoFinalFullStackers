@@ -6,16 +6,16 @@
 package aplicacion.hibernate.dao;
 
 import aplicacion.modelo.dominio.Permiso;
-import aplicacion.modelo.dominio.Rol;
 import java.util.List;
 
 /**
  *
  * @author Elias Acosta
  */
-public interface IRolDAO {
-    public void agregarRol(Rol rol);
-    public void modificarRol(Rol rol);
-    public void eliminarRol(Rol rol);
-    public List<Rol>obtenerRoles();
+public interface IPermisoDAO {
+    public void agregarPermiso(Permiso permiso);
+    public void eliminarPermiso(Permiso permiso);
+    public void modificarPermiso(Permiso permiso);
+    public List<Permiso>obtenerPermisos();
+    
 }

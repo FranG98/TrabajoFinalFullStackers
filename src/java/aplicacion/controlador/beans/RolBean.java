@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplicacion.controlador.beans;
 
 import aplicacion.hibernate.dao.IRolDAO;
@@ -14,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 /**
- * Representa un managedbean que solo interactua con la logica de negocio.
+ * Representa un managedbean que solo interactua con la logica de negocio de la clase ROL.
  * @author Elias Acosta
  */
 @ManagedBean

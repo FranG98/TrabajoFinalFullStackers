@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frmAgregarRol">
+                    <p:growl id="mensajes" showDetail="true" life="3000"/>
+                    <p:panel header="Agregar nuevo rol">
+                        <p:panelGrid columns="2" columnClasses="label, value">
+                            <p:outputLabel for="tipoRol" value="Tipo de rol: "/>
+                            <p:inputText value="#{rolFormBean.unRol.tipoRol}" id="tipoRol" requiredMessage="Ingrese el nombre del rol."
+                                         required="true" label="tipoRol"/>
+                            
+                            <p:outputLabel for="selectPermiso" value="Permisos: "/>
+                            <p:selectManyMenu id="selectPermiso" value="#{rolFormBean.unRol.permisos}" showCheckbox="true"><!--SELECTMANYMENU-->
+                                <f:selectItems value="#{permisoFormBean.permisos}" var="per"
+                                               itemValue="#{per}" itemLabel="#{per.nombrePermiso}">
+                                </f:selectItems>
+                            </p:selectManyMenu>
+
+                            <p:outputLabel for="comentario" value="Comentario: "/>
+                            <p:inputText value="#{rolFormBean.unRol.comentario}" id="comentario" requiredMessage="Ingrese un comentario."
+                                         required="true" label="comentario"/>
+                            <p:commandButton id="btnAgregarRol" value="Agregar rol"
+                                             actionListener="#{rolFormBean.agregarRol()}" 
+                                             update="frmAgregarRol" />
+                            <p:commandButton id="btnRegistrarPermiso" value="Registrar permiso"
+                                             oncomplete="PF('registrarPermiso').show();"/>
+                        </p:panelGrid>
+                    </p:panel>
+
+                </h:form>
+                <p:dialog id="dlgRegistrarPermiso" widgetVar="registrarPermiso" header="Registrar nuevo permiso"
+                          modal="true">
+                    <h:form id="frmRegistrarPermiso">
+                        <p:growl id="mensajesPermiso" showDetail="true" life="3000"/>
+                        <p:panelGrid id="panelFormulario" columns="2">
+                            <p:outputLabel value="Nombre del permiso: "/>
+                            <p:inputText value="#{permisoFormBean.unPermiso.nombrePermiso}" id="nombrePermiso"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Guardar" id="btmAgregarPermiso"
+                                         actionListener="#{permisoFormBean.agregarPermiso()}"
+                                         update="mensajesPermiso, dlgRegistrarPermiso"/>
+                    </h:form>
+                </p:dialog>
+
+                <h:form id="frmActu">
+                    <p:panelGrid columns="2" id="panelMostrar" columnClasses="label,output">
+                        <h:outputText value="Lista de permisos: " />
+                        <p:dataList value="#{rolFormBean.unRol.permisos}" var="t">
+                            <h:outputText value="#{t}" />
+                        </p:dataList>
+                        <p:commandButton value="Actualizar" id="actualizar"
+                                         update="panelMostrar"/>
+                    </p:panelGrid>
+                </h:form>
+
+                <p:dataTable id="tblRoles" value="#{rolFormBean.listaRoles}" var="rol" emptyMessage="No hay roles registrados.">
+                    <f:facet name="header">
+                        Listado de Roles
+                    </f:facet>
+                    <p:column headerText="Codigo del rol: ">
+                        <h:outputText value="#{rol.codigoRol}"/>
+                    </p:column>
+                    <p:column headerText="Nombre del rol: ">
+                        <h:outputText value="#{rol.tipoRol}"/>
+                    </p:column>
+                    <!--<p:column headerText="Permisos">
+                        <h:outputText value="#{rol.permisos}"/>
+                    </p:column>-->
+                    <p:column headerText="Comentario: ">
+                        <h:outputText value="#{rol.comentario}"/>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
