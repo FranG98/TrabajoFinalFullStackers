@@ -5,15 +5,15 @@
  */
 package aplicacion.test;
 
-import aplicacion.hibernate.dao.IImagenDAO;
 import aplicacion.hibernate.dao.IRolDAO;
 import aplicacion.hibernate.dao.IUsuarioDAO;
-import aplicacion.hibernate.dao.imp.ImagenDAOImp;
+import aplicacion.hibernate.dao.imp.UploadDAOImp;
 import aplicacion.hibernate.dao.imp.RolDAOImp;
 import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
 import aplicacion.modelo.dominio.Imagen;
 import aplicacion.modelo.dominio.Rol;
 import aplicacion.modelo.dominio.Usuario;
+import aplicacion.hibernate.dao.IUploadDAO;
 
 /**
  *
@@ -33,11 +33,11 @@ public class testRolyUsuario {
         Usuario usuario = new Usuario("admin", "fullstackers", Byte.parseByte("23"), 12123123, "fullstackers@gmail.com", "Full123", "Habilitada", rolAdmin);
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         usuarioDAO.crearUsuario(usuario);
-
+/*
         Imagen imagen = new Imagen("test");
-        IImagenDAO imagenDAO = new ImagenDAOImp();
+        IUploadDAO imagenDAO = new UploadDAOImp();
         imagenDAO.agregarImagen(imagen);
-
+*/
     }
 
 }
