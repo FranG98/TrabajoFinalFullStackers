@@ -42,7 +42,7 @@ public class ABMUsuarioFormBean implements Serializable {
     //listaUsuarios permite almacenar la lista de usuarios registrados
     private List<Usuario> resultadoBusqueda;
     //listaResultado permite almacenar una lista con usuarios segun la busqeuda de caracteres ingresados en la seccion busqueda
-    
+
     //listaUsuarios permite almacenar una lista de usuarios
     /**
      * Constructor por Defecto
@@ -50,8 +50,8 @@ public class ABMUsuarioFormBean implements Serializable {
     public ABMUsuarioFormBean() {
         listaUsuarios = new ArrayList<>();
         resultadoBusqueda = new ArrayList<>();
-        emailBuscado = "";
-
+        emailBuscado = null;
+        usuario = new Usuario();
     }
 
     /**
@@ -59,16 +59,13 @@ public class ABMUsuarioFormBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        setUsuario(new Usuario());
         obtenerUsuarios();// ESTO DA ERROR SI LA BD ESTA VACIA
-        
     }
 
     /**
      * buscarUsuarios permite buscar usuarios segun los caracteres ingresados
      */
     public void buscarUsuarios() {
-
 //        for (int i = 0; i < getListaUsuarios().size(); i++) {
 //            if (getListaUsuarios().get(i).getEmailUsuario().startsWith(getEmailBuscado())) {
 //                resultadoBusqueda.add(getListaUsuarios().get(i));
@@ -95,7 +92,6 @@ public class ABMUsuarioFormBean implements Serializable {
 //        Usuario usu=(Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
 //        System.out.println("usuario logueado" +usu.getEmailUsuario());
         getUsuarioBean().eliminarUsuario(usuario);
-        obtenerUsuarios();
         addMessageInfo("Operacion Realizada", "Usuario " + usuario.getEmailUsuario() + " eliminado con exito");
     }
 
@@ -107,9 +103,6 @@ public class ABMUsuarioFormBean implements Serializable {
      */
     public void modificarCuenta(Usuario usuario) {
         getUsuarioBean().modificarCuenta(usuario);
-        obtenerUsuarios();
-//        
-
     }
 
     /**
@@ -117,7 +110,6 @@ public class ABMUsuarioFormBean implements Serializable {
      */
     public void obtenerUsuarios() {
         listaUsuarios = getUsuarioBean().obtenerUsuarios();
-
     }
 
     //Mensajes
@@ -213,5 +205,4 @@ public class ABMUsuarioFormBean implements Serializable {
     public void setUsuarioBean(UsuarioBean usuarioBean) {
         this.usuarioBean = usuarioBean;
     }
-
 }

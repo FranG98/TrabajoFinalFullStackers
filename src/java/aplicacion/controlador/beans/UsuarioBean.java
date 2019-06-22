@@ -48,11 +48,13 @@ public class UsuarioBean implements Serializable {
     /**
      * crearUsuario permite crear un nuevo usuario si el email ingresado no se
      * encuentra ya registrado
+     *
      * @param usuario contiene los datos del usuario que desea registrarse
      */
     public void crearUsuario(Usuario usuario) {
         getUsuarioDAO().crearUsuario(usuario);
     }
+
     /**
      * eliminarUsuario permite eliminar un usuario definitivamente
      *
@@ -61,9 +63,10 @@ public class UsuarioBean implements Serializable {
     public void eliminarUsuario(Usuario usuario) {
         getUsuarioDAO().eliminarUsuario(usuario);
     }
-     /**
-     * obtenerUsuarios
-     * permite obtener una lista de usuarios registrados
+
+    /**
+     * obtenerUsuarios permite obtener una lista de usuarios registrados
+     *
      * @return la lista de usuarios registrados
      */
     public List<Usuario> obtenerUsuarios() {
@@ -76,6 +79,7 @@ public class UsuarioBean implements Serializable {
     public IUsuarioDAO getUsuarioDAO() {
         return usuarioDAO;
     }
+
     /**
      * Metodos getters & setters
      */

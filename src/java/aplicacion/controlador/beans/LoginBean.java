@@ -17,7 +17,8 @@ import javax.faces.bean.SessionScoped;
  * @author Fernando
  */
 /**
- * Clase LoginBean permite la conexion de usuarios y mantenerlos en sesion durante su recorrido por la aplicacion web
+ * Clase LoginBean permite la conexion de usuarios y mantenerlos en sesion
+ * durante su recorrido por la aplicacion web
  *
  */
 @ManagedBean
@@ -36,7 +37,8 @@ public class LoginBean implements Serializable {
 
     /**
      * iniciarSesion permite enviar parametros con los datos de la cuenta que
-     * intenta iniciar sesion en la web y asi poder verificar si la cuenta existe o no
+     * intenta iniciar sesion en la web y asi poder verificar si la cuenta
+     * existe o no
      *
      * @param emailLogin representa el email logueado
      * @param passLogin representa la contraseña logueada
@@ -63,5 +65,4 @@ public class LoginBean implements Serializable {
     public void setUsuarioDAO(IUsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
     }
-
 }

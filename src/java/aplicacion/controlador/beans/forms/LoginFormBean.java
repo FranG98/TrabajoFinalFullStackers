@@ -35,7 +35,10 @@ public class LoginFormBean implements Serializable {
     private String emailLogin;
     //emailLogin permite almacenar desde la vista el email del usuario que quiere loguearse
     private String passLogin;
+    //passLogin permite almacenar desde la vista el password del usuario que quiere logearse
+    private Usuario usuario;
 
+    //usuario permite almacenar los datos del usuario si es que se encontro en la base de datos
     /**
      * Constructor por defecto
      */
@@ -51,12 +54,16 @@ public class LoginFormBean implements Serializable {
      */
     public String iniciarSesion() {
         String redireccion = "";
-        Usuario usuario = getLoginBean().iniciarSesion(getEmailLogin(), getPassLogin());
-        if (usuario != null && usuario.getEstadoCuenta().equals("Habilitada")) {
+        usuario = getLoginBean().iniciarSesion(getEmailLogin(), getPassLogin());
+        //la siguiente linea es una validacion extra porque criteria funciona 
+        //actualmente funciona no case sensitive (bug?)
+        //&& usuario.getEmailUsuario().equals(emailLogin) && usuario.getPassUsuario().equals(passLogin)
+        if (usuario != null && usuario.getEstadoCuenta().equals("Habilitada") && usuario.getEmailUsuario().equals(emailLogin) && usuario.getPassUsuario().equals(passLogin)) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", usuario);
             redireccion = "principal?faces-redirect=true";
+            obtenerUsuarioLogueado();
         } else {
-            if (usuario != null && usuario.getEstadoCuenta().equals("Inhabilitada")) {
+            if (usuario != null && usuario.getEstadoCuenta().equals("Inhabilitada") && usuario.getEmailUsuario().equals(emailLogin) && usuario.getPassUsuario().equals(passLogin)) {
                 addMessageInfo("Cuenta Bloqueada", "Contacte con el Administrador");
             } else {
                 addMessageInfo("Operacion Fallida", "Datos incorrectos o la cuenta no existe");
@@ -74,6 +81,18 @@ public class LoginFormBean implements Serializable {
         Usuario userLogueado = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
         emailLogin = userLogueado.getEmailUsuario();
     }
+
+    /**
+     * logout permite cerrar la sesion del usuario y eliminarlo de sesion
+     *
+     * @return redireccion a pagina principal
+     */
+    public String logout() {
+        setUsuario(null);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuarioLogueado");
+        return "login?faces-redirect=true";
+    }
+
     //Mensajes
     /**
      * addMessageInfo
@@ -137,5 +156,19 @@ public class LoginFormBean implements Serializable {
      */
     public void setPassLogin(String passLogin) {
         this.passLogin = passLogin;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
