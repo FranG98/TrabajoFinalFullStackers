@@ -25,10 +25,10 @@
         </property>
         <property name="estadoCuenta" type="string">
             <column name="user_estado_cuenta" length="15" not-null="true"/>
-        </property>
+        </property>        
         <many-to-one name="tipoCuenta" class="aplicacion.modelo.dominio.Rol" fetch="join">
             <column name="user_tipo_cuenta" length="20" not-null="false"/>
-        </many-to-one> 
+        </many-to-one>
         <!--<one-to-one name="DetalleProducto" class="aplicacion.modelo.dominio.DetalleProducto"
             cascade="save-update"/>-->
         

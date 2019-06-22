@@ -5,8 +5,11 @@
  */
 package aplicacion.controlador.beans;
 
+import aplicacion.hibernate.dao.IRolDAO;
 import aplicacion.hibernate.dao.IUsuarioDAO;
+import aplicacion.hibernate.dao.imp.RolDAOImp;
 import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
+import aplicacion.modelo.dominio.Rol;
 import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
 import java.util.List;
@@ -52,6 +55,11 @@ public class UsuarioBean implements Serializable {
      * @param usuario contiene los datos del usuario que desea registrarse
      */
     public void crearUsuario(Usuario usuario) {
+        if (usuario.getTipoCuenta().equals(new Rol())) {
+            IRolDAO rolDAO = new RolDAOImp();
+            Rol rolConsumidor = rolDAO.obtenerRol("Consumidor");
+            usuario.setTipoCuenta(rolConsumidor);
+        }
         getUsuarioDAO().crearUsuario(usuario);
     }
 

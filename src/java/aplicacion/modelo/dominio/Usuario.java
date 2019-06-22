@@ -5,6 +5,7 @@
  */
 package aplicacion.modelo.dominio;
 
+
 import java.io.Serializable;
 
 /**
@@ -50,9 +51,12 @@ public class Usuario implements Serializable {
      * estado "Habilitada". Tendran otro valor distinto solamente si se la
      * bloquea la cuenta desde el menu del administrador.
      */
+//    Rol rolConsumidor = new Rol("Consumidor", "El usuario puede ver y comprar");
+        
+    private Rol tipoCuenta;           
 
-    private Rol tipoCuenta = new Rol();
     //tipoCuenta: permite establecer si es una cuenta consumidor, administrativo o admin.
+    //por defecto un usuario que se registra obtendra el rol de consumidor.
 
     //CONSTRUCTORES
     /**
@@ -86,6 +90,15 @@ public class Usuario implements Serializable {
         this.tipoCuenta = tipoCuenta;
     }
 
+    public Usuario(String nombreUsuario, String apellidoUsuario, Integer dniUsuario, Byte edadUsuario, String emailUsuario, String passUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
+        this.dniUsuario = dniUsuario;
+        this.edadUsuario = edadUsuario;
+        this.emailUsuario = emailUsuario;
+        this.passUsuario = passUsuario;
+    }
+    
     /**
      * METODOS GETTERS & SETTERS
      */

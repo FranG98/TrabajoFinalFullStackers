@@ -5,10 +5,13 @@
  */
 package aplicacion.test;
 
+import aplicacion.hibernate.dao.IImagenDAO;
 import aplicacion.hibernate.dao.IRolDAO;
 import aplicacion.hibernate.dao.IUsuarioDAO;
+import aplicacion.hibernate.dao.imp.ImagenDAOImp;
 import aplicacion.hibernate.dao.imp.RolDAOImp;
 import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
+import aplicacion.modelo.dominio.Imagen;
 import aplicacion.modelo.dominio.Rol;
 import aplicacion.modelo.dominio.Usuario;
 
@@ -17,17 +20,24 @@ import aplicacion.modelo.dominio.Usuario;
  * @author FERNANDO
  */
 public class testRolyUsuario {
+
     public static void main(String[] args) {
-        Rol rol = new Rol("Admin", "Rol Admin tiene todos los permisos");
-        IRolDAO rolDAO=new RolDAOImp();
-        rolDAO.agregarRol(rol);
+        Rol rolAdmin = new Rol("ADMIN", "El usuario puede realizar operaciones de gestion en la pagina");
+        Rol rolAdministrativo = new Rol("Administrativo", "El usuario puede administrar los catalogos");
+        Rol rolConsumidor = new Rol("Consumidor", "El usuario puede ver y comprar");
+        IRolDAO rolDAO = new RolDAOImp();
+        rolDAO.agregarRol(rolAdmin);
+        rolDAO.agregarRol(rolAdministrativo);
+        rolDAO.agregarRol(rolConsumidor);
         
-        Usuario usuario = new Usuario("admin", "fullstackers", Byte.parseByte("23"), 12123123, "fullstackers@gmail.com", "Full123", "Habilitada", rol);
-        
+        Usuario usuario = new Usuario("admin", "fullstackers", Byte.parseByte("23"), 12123123, "fullstackers@gmail.com", "Full123", "Habilitada", rolAdmin);
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         usuarioDAO.crearUsuario(usuario);
-        
-        
+
+        Imagen imagen = new Imagen("test");
+        IImagenDAO imagenDAO = new ImagenDAOImp();
+        imagenDAO.agregarImagen(imagen);
+
     }
-    
+
 }

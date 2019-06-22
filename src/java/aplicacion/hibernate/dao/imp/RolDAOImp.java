@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Representa la impliementacion de la interface IRolDAO.
@@ -40,7 +41,20 @@ public class RolDAOImp implements Serializable, IRolDAO{
         session.getTransaction().commit();
         session.close();
     }
-
+    
+    @Override
+    public Rol obtenerRol(String rol) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Rol.class);
+        criteria.add(Restrictions.like("tipoRol", rol));
+     
+        Rol rolBuscado = null;
+        if (!criteria.list().isEmpty()) {
+            rolBuscado = (Rol) criteria.list().get(0);
+        }
+        session.close();
+        return rolBuscado;
+    }
     @Override
     public List<Rol> obtenerRoles() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -49,5 +63,7 @@ public class RolDAOImp implements Serializable, IRolDAO{
         session.close();
         return roles;
     }
+
+    
     
 }

@@ -17,4 +17,5 @@ public interface IRolDAO {
     public void modificarRol(Rol rol);
     public void eliminarRol(Rol rol);
     public List<Rol>obtenerRoles();
+    public Rol obtenerRol(String rol);
 }

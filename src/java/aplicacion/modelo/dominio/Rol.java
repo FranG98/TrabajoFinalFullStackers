@@ -35,6 +35,14 @@ public class Rol implements Serializable{
         this.comentario = comentario;
     }    
 
+    public Rol(Integer codigoRol, String tipoRol, String comentario) {
+        this.codigoRol = codigoRol;
+        this.tipoRol = tipoRol;
+        this.comentario = comentario;
+    }
+
+   
+
     public Rol(String tipoRol, String comentario) {
         this.tipoRol = tipoRol;
         this.comentario = comentario;
