@@ -7,13 +7,10 @@ package aplicacion.test;
 
 import aplicacion.hibernate.dao.IRolDAO;
 import aplicacion.hibernate.dao.IUsuarioDAO;
-import aplicacion.hibernate.dao.imp.UploadDAOImp;
 import aplicacion.hibernate.dao.imp.RolDAOImp;
 import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
-import aplicacion.modelo.dominio.Imagen;
 import aplicacion.modelo.dominio.Rol;
 import aplicacion.modelo.dominio.Usuario;
-import aplicacion.hibernate.dao.IUploadDAO;
 
 /**
  *

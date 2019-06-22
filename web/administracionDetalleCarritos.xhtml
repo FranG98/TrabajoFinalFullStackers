@@ -51,8 +51,8 @@
                         </h:panelGrid>
                         </p:panel>
                         
-                        <!--<p:panel id="pnlListaDetalle">
-                            <p:dataTable id="tblDetalles" var="detallecarrito" value="#{detalleCarritoFormBean.obtenerDetallesCarrito}">
+                        <p:panel id="pnlListaDetalle">
+                            <p:dataTable id="tblDetalles" var="detallecarrito" value="#{detalleCarritoFormBean.obtenerDetallesCarrito()}">
                                 
                                 <p:column headerText="Codigo del detalle">
                                     <h:outputText value="#{detallecarrito.codigoDetalle}"/>
@@ -71,7 +71,7 @@
                                 </p:column>
                                 
                                 <p:column headerText="Producto vendido">
-                                    <h:outputText value="#{detallecarrito.productoVendido}"/>
+                                    <h:outputText value="#{detallecarrito.productoVendido.nombreProducto}"/>
                                 </p:column>
                                 
                                 <p:column>
@@ -80,7 +80,7 @@
                                          update="frmDetalleCarrito" />
                                 </p:column>
                             </p:dataTable>
-                        </p:panel>--> 
+                        </p:panel>
                     </h:form>
             </ui:define>
 

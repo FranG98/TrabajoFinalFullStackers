@@ -47,8 +47,8 @@ public class DetalleCarritoFormBean implements Serializable{
         getDetalleCarritoBean().agregarDetalleCarrito(getDetalleCarrito());
     }
     
-    public void eliminarDetallesCarrito(){
-        getDetalleCarritoBean().eliminarDetalleCarrito(detalleCarrito);
+    public void eliminarDetallesCarrito(DetalleCarrito detallecarrito){
+        getDetalleCarritoBean().eliminarDetalleCarrito(detallecarrito);
     }
     
     public List<DetalleCarrito> obtenerDetallesCarrito(){
