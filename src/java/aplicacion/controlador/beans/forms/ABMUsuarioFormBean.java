@@ -93,6 +93,7 @@ public class ABMUsuarioFormBean implements Serializable {
 //        System.out.println("usuario logueado" +usu.getEmailUsuario());
         getUsuarioBean().eliminarUsuario(usuario);
         addMessageInfo("Operacion Realizada", "Usuario " + usuario.getEmailUsuario() + " eliminado con exito");
+        obtenerUsuarios();
     }
 
     /**
