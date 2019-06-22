@@ -11,10 +11,12 @@
         <property name="tipoRol" type="string">
             <column name="rol_tipo" length="30" not-null="true"/>
         </property>
+        <!--
         <set name="permisos" table="rol_per" fetch="join" cascade="all">
             <key column="rol_id"/>
             <many-to-many class="aplicacion.modelo.dominio.Permiso" column="per_id"/>
         </set>
+        -->
         <property name="comentario" type="string">
             <column name="rol_comentario" length="200" not-null="true"/>
         </property>

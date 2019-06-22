@@ -51,7 +51,7 @@ public class Usuario implements Serializable {
      * bloquea la cuenta desde el menu del administrador.
      */
 
-    private Rol tipoCuenta;
+    private Rol tipoCuenta = new Rol();
     //tipoCuenta: permite establecer si es una cuenta consumidor, administrativo o admin.
 
     //CONSTRUCTORES

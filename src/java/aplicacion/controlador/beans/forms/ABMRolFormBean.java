@@ -18,7 +18,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class RolFormBean implements Serializable {
+public class ABMRolFormBean implements Serializable {
     private Rol unRol;
     @ManagedProperty(value = "#{rolBean}")
     private RolBean rolBean;
@@ -27,14 +27,16 @@ public class RolFormBean implements Serializable {
     /**
      * Creates a new instance of RolFormBean
      */
-    public RolFormBean() {
+    public ABMRolFormBean() {
         listaRoles = new ArrayList<>();
+        
     }
 
     @PostConstruct
     public void init() {
         unRol = new Rol();
         obtenerRoles();
+    
     }
 
     //Metodos CRUD de rol

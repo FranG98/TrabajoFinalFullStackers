@@ -5,7 +5,6 @@
  */
 package aplicacion.hibernate.dao;
 
-import aplicacion.modelo.dominio.Permiso;
 import aplicacion.modelo.dominio.Rol;
 import java.util.List;
 

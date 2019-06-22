@@ -34,11 +34,21 @@ public class Rol implements Serializable{
         this.permisos = permisos;
         this.comentario = comentario;
     }    
-    
+
+    public Rol(String tipoRol, String comentario) {
+        this.tipoRol = tipoRol;
+        this.comentario = comentario;
+    }
+
+    @Override
+    public String toString() {
+        return "Rol{" + "codigoRol=" + codigoRol + ", tipoRol=" + tipoRol + ", permisos=" + permisos + ", comentario=" + comentario + '}';
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.tipoRol);
+        hash = 59 * hash + Objects.hashCode(this.codigoRol);
         return hash;
     }
 
@@ -54,22 +64,17 @@ public class Rol implements Serializable{
             return false;
         }
         final Rol other = (Rol) obj;
-        if (!Objects.equals(this.tipoRol, other.tipoRol)) {
-            return false;
-        }
-        if (!Objects.equals(this.comentario, other.comentario)) {
-            return false;
-        }
         if (!Objects.equals(this.codigoRol, other.codigoRol)) {
             return false;
         }
-        return Objects.equals(this.permisos, other.permisos);
+        return true;
     }
+
+   
     
-    @Override
-    public String toString() {
-        return "tipoRol=" + tipoRol + ", permisos=" + permisos + ", comentario=" + comentario;
-    }
+    
+   
+   
 
     //GETTERS & SETTERS
 
