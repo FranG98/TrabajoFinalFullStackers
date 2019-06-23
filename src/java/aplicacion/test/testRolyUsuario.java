@@ -30,11 +30,7 @@ public class testRolyUsuario {
         Usuario usuario = new Usuario("admin", "fullstackers", Byte.parseByte("23"), 12123123, "fullstackers@gmail.com", "Full123", "Habilitada", rolAdmin);
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         usuarioDAO.crearUsuario(usuario);
-/*
-        Imagen imagen = new Imagen("test");
-        IUploadDAO imagenDAO = new UploadDAOImp();
-        imagenDAO.agregarImagen(imagen);
-*/
+
     }
 
 }
