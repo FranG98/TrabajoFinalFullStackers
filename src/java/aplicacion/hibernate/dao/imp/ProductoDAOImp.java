@@ -50,9 +50,9 @@ public class ProductoDAOImp implements Serializable, IProductoDAO{
     public List<Producto> obtenerProductos() {
        Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Producto.class);
-        List<Producto> detalles = criteria.list();
+        List<Producto> productos = criteria.list();
         session.close();
-        return detalles;
+        return productos;
     }
     
     

@@ -31,6 +31,7 @@ public class Producto implements Serializable{
     //dimencion: representa las medidas del producto 
     private String imagen;
     //imagen: representa el nombre de la imagen
+    private Float precioOferta;
     
     //CONSTRUCTORES
     /**
@@ -40,132 +41,35 @@ public class Producto implements Serializable{
         
     }
     /**
-     * constructor parametrizado
-     * @param codigo almacena el código del Producto
-     * @param nombreProducto almacena el nombre del Producto
-     * @param sector almacena el sector del Producto
-     * @param precio almacena el precio del Producto
-     * @param stock almacena el stock del Producto
-     * @param material almacena el material del Producto
-     * @param marca almacena la marca del Producto
-     * @param origen almacena el origen del Producto
-     * @param prodOferta almacena si el producto esta en oferta, prodOferta inicializa en falso 
-     * @param dimension almacena la dimencion del Producto
-     * @param imagen almacena nombre de la imagen del Producto 
+     * 
+     * @param codigo
+     * @param nombreProducto
+     * @param sector
+     * @param precio
+     * @param stock
+     * @param marca
+     * @param dimension
+     * @param imagen
+     * @param precioOferta 
      */
-    
-    public Producto(Integer codigo, String nombreProducto, String sector, Float precio, Short stock, String marca, Boolean prodOferta, String dimension, String imagen) {
+    public Producto(Integer codigo, String nombreProducto, String sector, Float precio, Short stock, String marca, String dimension, String imagen, Float precioOferta) {
         this.codigo = codigo;
         this.nombreProducto = nombreProducto;
         this.sector = sector;
         this.precio = precio;
         this.stock = stock;
         this.marca = marca;
-        this.prodOferta = prodOferta;
         this.dimension = dimension;
         this.imagen = imagen;
+        this.precioOferta = precioOferta;
     }
     
-    //GETTER AND SETTER
-     
+    
     /**
      * @return the codigo
      */
     public Integer getCodigo() {
         return codigo;
-    }
-
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    /**
-     * @return the nombreProducto
-     */
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    /**
-     * @param nombreProducto the nombreProducto to set
-     */
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
-    }
-
-    /**
-     * @return the sector
-     */
-    public String getSector() {
-        return sector;
-    }
-
-    /**
-     * @param sector the Sector to set
-     */
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
-    /**
-     * @return the precio
-     */
-    public Float getPrecio() {
-        return precio;
-    }
-
-    /**
-     * @param precio the precio to set
-     */
-    public void setPrecio(Float precio) {
-        this.precio = precio;
-    }
-
-    /**
-     * @return the stock
-     */
-    public Short getStock() {
-        return stock;
-    }
-
-    /**
-     * @param stock the stock to set
-     */
-    public void setStock(Short stock) {
-        this.stock = stock;
-    }
-
-
-    /**
-     * @return the marca
-     */
-    public String getMarca() {
-        return marca;
-    }
-
-    /**
-     * @param marca the marca to set
-     */
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-
-    /**
-     * @return the prodOferta
-     */
-    public Boolean getProdOferta() {
-        return prodOferta;
-    }
-
-    /**
-     * @param prodOferta the prodOferta to set
-     */
-    public void setProdOferta(Boolean prodOferta) {
-        this.prodOferta = prodOferta;
     }
 
     /**
@@ -176,17 +80,73 @@ public class Producto implements Serializable{
     }
 
     /**
-     * @param dimension the dimencion to set
-     */
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
-    /**
      * @return the imagen
      */
     public String getImagen() {
         return imagen;
+    }
+
+    /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @return the nombreProducto
+     */
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    /**
+     * @return the precio
+     */
+    public Float getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @return the precioOferta
+     */
+    public Float getPrecioOferta() {
+        return precioOferta;
+    }
+
+    /**
+     * @return the prodOferta
+     */
+    public Boolean getProdOferta() {
+        return prodOferta;
+    }
+
+    /**
+     * @return the sector
+     */
+    public String getSector() {
+        return sector;
+    }
+
+    /**
+     * @return the stock
+     */
+    public Short getStock() {
+        return stock;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    /**
+     * @param dimension the dimension to set
+     */
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
     }
 
     /**
@@ -195,11 +155,60 @@ public class Producto implements Serializable{
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    /**
+     * @param nombreProducto the nombreProducto to set
+     */
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(Float precio) {
+        this.precio = precio;
+    }
+
+    /**
+     * @param precioOferta the precioOferta to set
+     */
+    public void setPrecioOferta(Float precioOferta) {
+        this.precioOferta = precioOferta;
+    }
+
+    /**
+     * @param prodOferta the prodOferta to set
+     */
+    public void setProdOferta(Boolean prodOferta) {
+        this.prodOferta = prodOferta;
+    }
+
+    /**
+     * @param sector the sector to set
+     */
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(Short stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
         return "Codigo del Producto: "+getCodigo()+"Nombre del producto: "+getNombreProducto()+"Precio del Producto: "+getPrecio()+
-               "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Dimension del Producto: "+getDimension()+"Marca del Producto: "+getMarca()+
-               "Producto en Oferta: "+getProdOferta()+"Direccion de Imagen: "+getImagen();
+                "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Dimension del Producto: "+getDimension()+"Marca del Producto: "+getMarca()+
+                "Producto en Oferta: "+getProdOferta()+"Direccion de Imagen: "+getImagen()+"Precio del producto en Oferta"+getPrecioOferta();
     }
 }

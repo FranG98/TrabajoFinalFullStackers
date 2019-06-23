@@ -30,6 +30,15 @@ public class ProductoBean implements Serializable{
         productoDAO.agregarProducto(nuevo);
     }
     
+    
+    public void modificarProducto(Producto borrado){
+        productoDAO.modificarProducto(borrado);
+    }
+    
+    public void eliminarProducto(Producto modificado){
+       productoDAO.eliminarProducto(modificado);
+    }
+    
     public List<Producto> obtenerProductos(){
         return productoDAO.obtenerProductos();
     }
@@ -47,14 +56,6 @@ public class ProductoBean implements Serializable{
     public void setProductoDAO(IProductoDAO productoDAO) {
         this.productoDAO = productoDAO;
     }
-    /**
-    public void modificarProducto(Producto borrado){
-        productoDAO.modificarProducto(borrado);
-    }
-    
-    public void eliminarProducto(Producto modificado){
-       productoDAO.eliminarProducto(modificado);
-    }
-    */
+       
     
 }

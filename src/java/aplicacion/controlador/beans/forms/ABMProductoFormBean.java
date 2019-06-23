@@ -26,35 +26,35 @@ public class ABMProductoFormBean implements Serializable{
     @ManagedProperty(value = "#{productoBean}")
     private ProductoBean productoBean;
     private Producto producto;
-    private List<String> productos;
+    private List<Producto> listaProductos;
     
     public ABMProductoFormBean() {
+        producto = new Producto();
+        listaProductos = new ArrayList<>();
     }
     @PostConstruct
     public void init(){
-         producto = new Producto();
-         setProductos(new ArrayList<>());
-         for(int i = 0; i < getProductoBean().obtenerProductos().size(); i++) {
-            getProductos().add(i, getProductoBean().obtenerProductos().get(i).getNombreProducto());
-        }
+       obtetenerProductos();  
     }
     
     public void agregarProducto(){
-        productoBean.agregarProducto(producto);
+        getProductoBean().agregarProducto(getProducto());
+    }
+    public void modificarProducto(){
+        getProductoBean().modificarProducto(getProducto());
+    }
+    public void eliminarProducto(Producto producto){
+        getProductoBean().eliminarProducto(getProducto());
+    }
+    public void obtetenerProductos(){
+        listaProductos = getProductoBean().obtenerProductos();
     }
 
     /**
-     * @return the productoBean
+     * @return the listaProductos
      */
-    public ProductoBean getProductoBean() {
-        return productoBean;
-    }
-
-    /**
-     * @param productoBean the productoBean to set
-     */
-    public void setProductoBean(ProductoBean productoBean) {
-        this.productoBean = productoBean;
+    public List<Producto> getListaProductos() {
+        return listaProductos;
     }
 
     /**
@@ -65,6 +65,20 @@ public class ABMProductoFormBean implements Serializable{
     }
 
     /**
+     * @return the productoBean
+     */
+    public ProductoBean getProductoBean() {
+        return productoBean;
+    }
+
+    /**
+     * @param listaProductos the listaProductos to set
+     */
+    public void setListaProductos(List<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    /**
      * @param producto the producto to set
      */
     public void setProducto(Producto producto) {
@@ -72,27 +86,9 @@ public class ABMProductoFormBean implements Serializable{
     }
 
     /**
-     * @return the productos
+     * @param productoBean the productoBean to set
      */
-    public List<String> getProductos() {
-        return productos;
+    public void setProductoBean(ProductoBean productoBean) {
+        this.productoBean = productoBean;
     }
-
-    /**
-     * @param productos the productos to set
-     */
-    public void setProductos(List<String> productos) {
-        this.productos = productos;
-    }
-    /**
-    public void modificarProducto(){
-        productoBean.modificarProducto(producto);
-    }
-    public void eliminarProducto(){
-        productoBean.eliminarProducto(producto);
-    }*/
-    
-   
-    
-    
 }

@@ -40,5 +40,9 @@
         <property name="imagen" type="string">
             <column name="prod_imagen" length="25" not-null="true"/>
         </property>  
+        
+        <property name="precioOferta" type="float">
+            <column name="prod_precio_Oferta" not-null="false"/>
+        </property>
   </class>
 </hibernate-mapping>

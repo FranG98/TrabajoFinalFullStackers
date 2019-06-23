@@ -15,34 +15,99 @@
 
             <ui:define name="content">
                 <h:form id="frmProducto">
-            <p:panel id="pnlbotones" header="Administracion de Productos">
-                <h:panelGrid id="pnlgBotones" columns="2" cellpadding="3" cellspacing="10"> 
-                  
-                    <p:outputLabel for="txtNombreProducto" value="Nombre: "/>
-                    <p:inputText id="txtNombreProducto" value="#{aBMProductoFormBean.producto.nombreProducto}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
-                   
+                    <p:panel id="pnlbotones" header="Administracion de Productos">
+                        <h:panelGrid id="pnlgBotones" columns="2" cellpadding="3" cellspacing="10"> 
+
+                            <p:outputLabel for="txtNombreProducto" value="Nombre: "/>
+                            <p:inputText id="txtNombreProducto" value="#{aBMProductoFormBean.producto.nombreProducto}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
+
                             <p:outputLabel value="Marca: " id="lblMarca"/>
                             <p:inputText id="txtMarca" value="#{aBMProductoFormBean.producto.marca}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
-                            
+
                             <p:outputLabel value="Dimencion: " id="lblDimencion"/>
                             <p:inputText id="txtDimencion" value="#{aBMProductoFormBean.producto.dimension}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
-                            
+
                             <p:outputLabel value="Imagen: " id="lblImagen"/>
                             <p:inputText id="txtImagen" value="#{aBMProductoFormBean.producto.imagen}" required="true" requiredMessage="Debe ingresar el nombre del producto"/>
-                            
+
                             <p:outputLabel value="Sector: " id="lblSector"/>
                             <p:inputText id="txtSector" value="#{aBMProductoFormBean.producto.sector}" required="true" requiredMessage="Debe ingresar el sector al cual pertenece el producto"/>
-                            
+
                             <p:outputLabel value="Precio: " id="lblPrecio"/>
                             <p:inputNumber id="nbrPrecio" value="#{aBMProductoFormBean.producto.precio}" required="true" requiredMessage=" Debe ingresar el Precio del producto"/>
-                            
+
                             <p:outputLabel value="Stock: " id="lblStock"/>
                             <p:inputNumber id="stock" value="#{aBMProductoFormBean.producto.stock}"  required="true" requiredMessage=" Debe ingresar el stock del producto"/>
-                            
+
+
                             <p:commandButton id="btnAgregarProducto" value="Agregar" actionListener="#{aBMProductoFormBean.agregarProducto()}" update="frmProducto"/>
-                </h:panelGrid>
-            </p:panel> 
-         </h:form>
+                        </h:panelGrid>
+
+
+                    </p:panel>
+                </h:form>
+                <h:form id="frmEliminar">
+                    <p:panel>
+
+
+                        <p:dataTable value="#{aBMProductoFormBean.listaProductos}" var="prod" >
+                            <p:column headerText="Codigo" >
+                                <p:outputLabel value="#{prod.codigo}"/>                                    
+                            </p:column>
+                            <p:column headerText="Nombre Producto" >
+                                <p:inplace id="inplNombre" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputText value="#{prod.nombreProducto}"/>
+                                </p:inplace>                        
+                            </p:column>
+                            <p:column headerText="Dimension">
+                                <p:inplace  id="inplDimension" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputText value="#{prod.dimension}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Imagen">
+                                <p:inplace  id="inplImagen" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputText value="#{prod.imagen}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Marca">
+                                <p:inplace  id="inplMarca" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputText value="#{prod.marca}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Sector">
+                                <p:inplace  id="inplSector" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputText value="#{prod.sector}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Precio">
+                                <p:inplace id="inplPrecio" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputNumber value="#{prod.precio}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Precio Oferta">
+                                <p:inplace  id="inplPrecioOfert" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputNumber value="#{prod.precioOferta}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Stock">
+                                <p:inplace  id="inplStock" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputNumber value="#{prod.stock}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column headerText="Estado Oferta">
+                                <p:inplace  id="inplProdOferB" effectSpeed="fast" event="click" editor="true">
+                                    <p:inputText value="#{prod.prodOferta}"/>
+                                </p:inplace>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Eliminar" actionListener="#{aBMProductoFormBean.eliminarProducto(prod)}" update="frmEliminar" /> 
+                            </p:column>
+                        </p:dataTable>
+
+
+
+                    </p:panel>
+                </h:form>
             </ui:define>
 
             <ui:define name="bottom">
