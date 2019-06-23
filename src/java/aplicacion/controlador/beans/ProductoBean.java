@@ -31,12 +31,12 @@ public class ProductoBean implements Serializable{
     }
     
     
-    public void modificarProducto(Producto borrado){
-        productoDAO.modificarProducto(borrado);
+    public void modificarProducto(Producto modificado){
+        productoDAO.modificarProducto(modificado);
     }
     
-    public void eliminarProducto(Producto modificado){
-       productoDAO.eliminarProducto(modificado);
+    public void eliminarProducto(Producto borrado){
+       productoDAO.eliminarProducto(borrado);
     }
     
     public List<Producto> obtenerProductos(){

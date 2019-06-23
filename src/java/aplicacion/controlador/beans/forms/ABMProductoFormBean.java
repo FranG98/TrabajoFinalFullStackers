@@ -39,6 +39,7 @@ public class ABMProductoFormBean implements Serializable{
     
     public void agregarProducto(){
         getProductoBean().agregarProducto(getProducto());
+        obtetenerProductos();
     }
     public void modificarProducto(){
         getProductoBean().modificarProducto(getProducto());
