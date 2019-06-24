@@ -26,24 +26,12 @@
                                 <f:selectItems value="#{aBMProductoFormBean.productos}" />
                             </p:selectOneMenu>
                             
-                            <p:outputLabel value="Subtotal:"/>
-                            <p:inputNumber value="#{detalleCarritoFormBean.detalleCarrito.subtotal}" required="true" decimalPlaces="2">
-                                <f:validateDoubleRange minimum="0.00"/>
-                                <f:converter converterId="javax.faces.Double"/>
-                            </p:inputNumber>
-                            
-
                             <p:outputLabel value="Cantidad vendida: "/>
-                            <p:inputNumber value="#{detalleCarritoFormBean.detalleCarrito.cantidadVendida}" required="true" decimalPlaces="0">
+                            <p:inputNumber value="#{detalleCarritoFormBean.cantidad}" required="true" decimalPlaces="0">
                                 <f:validateLongRange minimum="1" maximum="50"/>
-                                <f:converter converterId="javax.faces.Integer"/>
+                                <f:converter converterId="javax.faces.Short"/>
                             </p:inputNumber>
-                            
-                            <p:outputLabel value="Precio total de la compra: "/>
-                            <p:inputNumber value="#{detalleCarritoFormBean.detalleCarrito.precioTotal}" required="true" decimalPlaces="2">
-                                <f:validateDoubleRange minimum="0.00"/>
-                                <f:converter converterId="javax.faces.Double"/>
-                            </p:inputNumber>    
+                              
                             <p:spacer/>
                         <p:commandButton id="btnGuardar" value="Guardar" 
                                          actionListener="#{detalleCarritoFormBean.agregarDetalleCarrito()}"

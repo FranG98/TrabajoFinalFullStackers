@@ -10,9 +10,11 @@ import aplicacion.controlador.beans.ProductoBean;
 import aplicacion.modelo.dominio.DetalleCarrito;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,7 +30,7 @@ public class DetalleCarritoFormBean implements Serializable{
     private ProductoBean productoBean;
     private DetalleCarrito detalleCarrito;
     private String nombreProducto;
-    
+    private Short cantidad;
     /**
      * Creates a new instance of DetalleProductoFormBean
      */
@@ -37,14 +39,28 @@ public class DetalleCarritoFormBean implements Serializable{
     }
     
     public void agregarDetalleCarrito(){
+        FacesContext context = FacesContext.getCurrentInstance();
         for (int i = 0; i < getProductoBean().obtenerProductos().size();i++)
-        {
-            if (getProductoBean().obtenerProductos().get(i).getNombreProducto().equals(nombreProducto))
+            {
+                if (getProductoBean().obtenerProductos().get(i).getNombreProducto().equals(nombreProducto))
             {
                 detalleCarrito.setProductoVendido(getProductoBean().obtenerProductos().get(i));
+                if (detalleCarrito.getProductoVendido().getStock()<= cantidad){
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR"
+                            ,"La cantidad especificada debe ser menor al stock disponible"));
+                }else{
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Exito"
+                            ,"Producto añadido correctamente al carrito"));
+                    detalleCarrito.setCantidadVendida((int)cantidad);
+//                    detalleCarrito.getProductoVendido().setStock((short)detalleCarrito.getProductoVendido().getStock()-(short)cantidad); //Tira un error de compatibilidad de tipos cuando ambos valores son short, alegando que uno de ellos es int(?)
+                    productoBean.modificarProducto(detalleCarrito.getProductoVendido());
+                    detalleCarrito.setPrecioTotal((double)detalleCarrito.getProductoVendido().getPrecio()*cantidad);
+                    detalleCarrito.setSubtotal((double)detalleCarrito.getProductoVendido().getPrecio()*cantidad);
+                    getDetalleCarritoBean().agregarDetalleCarrito(getDetalleCarrito());
+                }
             }
         }
-        getDetalleCarritoBean().agregarDetalleCarrito(getDetalleCarrito());
+        
     }
     
     public void eliminarDetallesCarrito(DetalleCarrito detallecarrito){
@@ -110,6 +126,20 @@ public class DetalleCarritoFormBean implements Serializable{
      */
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
+    }
+
+    /**
+     * @return the cantidad
+     */
+    public Short getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * @param cantidad the cantidad to set
+     */
+    public void setCantidad(Short cantidad) {
+        this.cantidad = cantidad;
     }
    
 }

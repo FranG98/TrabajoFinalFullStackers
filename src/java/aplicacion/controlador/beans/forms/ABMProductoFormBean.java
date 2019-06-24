@@ -27,14 +27,20 @@ public class ABMProductoFormBean implements Serializable{
     private ProductoBean productoBean;
     private Producto producto;
     private List<Producto> listaProductos;
+    private List<String> productos;
     
     public ABMProductoFormBean() {
         producto = new Producto();
         listaProductos = new ArrayList<>();
+        productos = new ArrayList<>();
     }
     @PostConstruct
     public void init(){
        obtetenerProductos();  
+       for(int i=0; i < listaProductos.size();i++)
+       {
+            getProductos().add(listaProductos.get(i).getNombreProducto());
+       }
     }
     
     public void agregarProducto(){
@@ -91,5 +97,19 @@ public class ABMProductoFormBean implements Serializable{
      */
     public void setProductoBean(ProductoBean productoBean) {
         this.productoBean = productoBean;
+    }
+
+    /**
+     * @return the productos
+     */
+    public List<String> getProductos() {
+        return productos;
+    }
+
+    /**
+     * @param productos the productos to set
+     */
+    public void setProductos(List<String> productos) {
+        this.productos = productos;
     }
 }
