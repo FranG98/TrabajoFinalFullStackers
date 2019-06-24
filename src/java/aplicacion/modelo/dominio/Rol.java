@@ -1,9 +1,7 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Representa el tipo de rol de un usuario, por defecto tendremos los roles "Consumidor","Administrativo" o "Admin"
@@ -14,24 +12,20 @@ import java.util.Set;
 public class Rol implements Serializable{
     private Integer codigoRol;
     private String tipoRol;
-    private Set<Permiso> permisos;//permisos representa la lista de los permisos asociados a cada usuario.
     private String comentario;//comentario podremos representa un string el cual nos permitara describir o informar sobre algo 
     //de interes sobre la cuenta en cuestion.
     
     public Rol() {
-        permisos = new HashSet<>();
     }
 
     /**
      * @param tipoRol permite guardar el tipo de rol, pudiendo ser consumidor,
      * administrativo o admin.
-     * @param permisos permite agregar distintos permisos a cada cuentas.
      * @param comentario permite guardar un comentario con alguna informacion
      * relevante sobre la cuenta.
      */
-    public Rol(String tipoRol, Set<Permiso> permisos, String comentario) {
+    public Rol(String tipoRol, String comentario) {
         this.tipoRol = tipoRol;
-        this.permisos = permisos;
         this.comentario = comentario;
     }    
 
@@ -41,16 +35,10 @@ public class Rol implements Serializable{
         this.comentario = comentario;
     }
 
-   
-
-    public Rol(String tipoRol, String comentario) {
-        this.tipoRol = tipoRol;
-        this.comentario = comentario;
-    }
 
     @Override
     public String toString() {
-        return "Rol{" + "codigoRol=" + codigoRol + ", tipoRol=" + tipoRol + ", permisos=" + permisos + ", comentario=" + comentario + '}';
+        return "Rol{" + "codigoRol=" + codigoRol + ", tipoRol=" + tipoRol + " comentario=" + comentario + '}';
     }
 
     @Override
@@ -100,14 +88,6 @@ public class Rol implements Serializable{
 
     public void setTipoRol(String tipoRol) {
         this.tipoRol = tipoRol;
-    }
-
-    public Set<Permiso> getPermisos() {
-        return permisos;
-    }
-
-    public void setPermisos(Set<Permiso> permisos) {
-        this.permisos = permisos;
     }
 
     public String getComentario() {

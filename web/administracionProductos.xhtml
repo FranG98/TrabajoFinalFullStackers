@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -34,13 +35,16 @@
                             <p:inputText id="txtSector" value="#{aBMProductoFormBean.producto.sector}" required="true" requiredMessage="Debe ingresar el sector al cual pertenece el producto"/>
 
                             <p:outputLabel value="Precio: " id="lblPrecio"/>
-                            <p:inputNumber id="nbrPrecio" value="#{aBMProductoFormBean.producto.precio}" required="true" requiredMessage=" Debe ingresar el Precio del producto"/>
+                            <p:inputNumber id="nbrPrecio" value="#{aBMProductoFormBean.producto.precio}" required="true" decimalPlaces="2" minValue="1" requiredMessage=" Debe ingresar el Precio del producto"/>
+
+                            <p:outputLabel value="Precio Oferta: " id="lblPrecioOferta"/>
+                            <p:inputNumber id="nbrPrecioOferta" value="#{aBMProductoFormBean.producto.precioOferta}" minValue="1" decimalPlaces="2" required="true" requiredMessage=" Debe ingresar el Precio en Oferta del producto"/>
 
                             <p:outputLabel value="Stock: " id="lblStock"/>
-                            <p:inputNumber id="stock" value="#{aBMProductoFormBean.producto.stock}"  required="true" requiredMessage=" Debe ingresar el stock del producto"/>
+                            <p:inputNumber id="stock" value="#{aBMProductoFormBean.producto.stock}" minValue="1" decimalPlaces="0" required="true" requiredMessage=" Debe ingresar el stock del producto"/>
 
 
-                            <p:commandButton id="btnAgregarProducto" value="Agregar" actionListener="#{aBMProductoFormBean.agregarProducto()}" update="frmProducto"/>
+                            <p:commandButton id="btnAgregarProducto" value="Agregar" actionListener="#{aBMProductoFormBean.agregarProducto()}" update="frmEliminar"/>
                         </h:panelGrid>
 
 
@@ -50,7 +54,7 @@
                     <p:panel>
 
 
-                        <p:dataTable value="#{aBMProductoFormBean.listaProductos}" var="prod" >
+                        <p:dataTable id="dtbProducto" value="#{aBMProductoFormBean.listaProductos}" var="prod" >
                             <p:column headerText="Codigo" >
                                 <p:outputLabel value="#{prod.codigo}"/>                                    
                             </p:column>
@@ -95,12 +99,22 @@
                                 </p:inplace>
                             </p:column>
                             <p:column headerText="Estado Oferta">
-                                <p:inplace  id="inplProdOferB" effectSpeed="fast" event="click" editor="true">
-                                    <p:inputText value="#{prod.prodOferta}"/>
+                                <p:inplace  id="inplProdOferB" effectSpeed="fast" event="click" >
+                                    <p:outputLabel value="#{prod.prodOferta}"/>
+                                    <h:selectOneMenu value="#{prod.prodOferta}">
+                                            <f:selectItem itemLabel="false" itemValue="false" />
+                                            <f:selectItem itemLabel="true" itemValue="true" />
+                                            <f:ajax event="change" render="dtbProducto" execute="#{aBMProductoFormBean.modificarProducto(prod)}"/>
+                                        </h:selectOneMenu>
                                 </p:inplace>
+                                
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Eliminar" actionListener="#{aBMProductoFormBean.eliminarProducto(prod)}" update="frmEliminar" /> 
+                                <p:commandButton value="Eliminar" actionListener="#{aBMProductoFormBean.eliminarProducto(prod)}" update="frmEliminar" icon="ui-icon-trash"/> 
+                            </p:column>
+                            
+                            <p:column>
+                                <p:commandButton value="Modificar" actionListener="#{aBMProductoFormBean.modificarProducto(prod)}" update="frmEliminar"/>
                             </p:column>
                         </p:dataTable>
 

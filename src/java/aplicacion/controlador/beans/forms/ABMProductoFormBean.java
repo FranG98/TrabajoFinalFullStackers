@@ -36,7 +36,7 @@ public class ABMProductoFormBean implements Serializable{
     }
     @PostConstruct
     public void init(){
-       obtetenerProductos();  
+       obtenerProductos();  
        for(int i=0; i < listaProductos.size();i++)
        {
             getProductos().add(listaProductos.get(i).getNombreProducto());
@@ -45,15 +45,17 @@ public class ABMProductoFormBean implements Serializable{
     
     public void agregarProducto(){
         getProductoBean().agregarProducto(getProducto());
-        obtetenerProductos();
+        obtenerProductos();
     }
-    public void modificarProducto(){
-        getProductoBean().modificarProducto(getProducto());
+    public void modificarProducto(Producto producto){
+        getProductoBean().modificarProducto(producto);
+        obtenerProductos();
     }
     public void eliminarProducto(Producto producto){
-        getProductoBean().eliminarProducto(getProducto());
+        getProductoBean().eliminarProducto(producto);
+        obtenerProductos();
     }
-    public void obtetenerProductos(){
+    public void obtenerProductos(){
         listaProductos = getProductoBean().obtenerProductos();
     }
 

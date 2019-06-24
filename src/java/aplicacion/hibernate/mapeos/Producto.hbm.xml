@@ -10,7 +10,7 @@
         </id>
             
         <property name="nombreProducto" type="string">
-            <column name="prod_nombre_producto" length="18" not-null="true"/>
+            <column name="prod_nombre_producto" length="40" not-null="true"/>
         </property> 
          
         <property name="sector" type="string">
