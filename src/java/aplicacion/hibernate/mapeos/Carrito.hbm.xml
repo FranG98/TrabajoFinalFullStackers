@@ -9,15 +9,8 @@
             <column name="car_codigo" length="10"/>
             <generator class="identity"/>
         </id>
-    
-        <set name="detallesCarrito" table="detalle_carrito" fetch="join">
-            <key>
-                <column name="car_codigo" not-null="true"/>
-            </key>
-            <one-to-many class="aplicacion.modelo.dominio.DetalleCarrito"/>
-        </set>
 
-        <property name="fechaCarrito" type="string">
+        <property name="fechaCarrito" type="date">
             <column name="car_fecha_carrito" length="30" not-null="true"/>
         </property>
     

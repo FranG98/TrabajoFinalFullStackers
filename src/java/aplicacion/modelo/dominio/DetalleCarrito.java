@@ -19,28 +19,21 @@ public class DetalleCarrito implements Serializable{
     private Integer cantidadVendida;
     private Double precioTotal;
     private Double subtotal;
-    private Carrito carrito;
+    private Usuario usuarioComprador;
     
 
     public DetalleCarrito() {
     }
 
-    public DetalleCarrito(Integer cantidadVendida, Double precioTotal, Double subtotal , Integer codigoDetalle, Carrito carrito) {
+    public DetalleCarrito(Integer cantidadVendida, Double precioTotal, Double subtotal , Integer codigoDetalle) {
         productoVendido = new Producto();
         this.cantidadVendida = cantidadVendida;
         this.precioTotal = precioTotal;
         this.subtotal = subtotal;
         this.codigoDetalle = codigoDetalle;
-        this.carrito = carrito;
+        usuarioComprador = new Usuario();
     }
 
-    public DetalleCarrito(Producto productoVendido, Integer cantidadVendida, Double precioTotal, Double subtotal, Carrito carrito) {
-        this.productoVendido = productoVendido;
-        this.cantidadVendida = cantidadVendida;
-        this.precioTotal = precioTotal;
-        this.subtotal = subtotal;
-        this.carrito = carrito;
-    }    
     //GETTERS Y SETTERS
     /**
      * @return the productoVendido
@@ -112,12 +105,18 @@ public class DetalleCarrito implements Serializable{
         this.subtotal = subtotal;
     }
 
-    public Carrito getCarrito() {
-        return carrito;
+    /**
+     * @return the usuarioComprador
+     */
+    public Usuario getUsuarioComprador() {
+        return usuarioComprador;
     }
 
-    public void setCarrito(Carrito carrito) {
-        this.carrito = carrito;
+    /**
+     * @param usuarioComprador the usuarioComprador to set
+     */
+    public void setUsuarioComprador(Usuario usuarioComprador) {
+        this.usuarioComprador = usuarioComprador;
     }
     
     

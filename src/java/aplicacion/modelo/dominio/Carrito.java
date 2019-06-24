@@ -1,6 +1,7 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,28 +11,23 @@ import java.util.Set;
  */
 public class Carrito implements Serializable{
     private Integer codigoCarrito;
-    private Set<DetalleCarrito> detallesCarrito;
-    private String fechaCarrito;
+    private Date fechaCarrito;
     private Usuario usuarioCliente;
     private String estadoCarrito;
 
     public Carrito() {
-        detallesCarrito = new HashSet(0);
         usuarioCliente = new Usuario();
     }
 
     /**
      * Constructor parametrizado
      * @param codigoCarrito identificacion unica de un carrito.
-     * @param detallesCarrito especificaciones de los productos.
-     * @param fechaCarrito dia, mes y año en que se agrego el ultimo producto.
      * @param usuarioCliente el dueño del carrito.
      * @param estadoCarrito puede ser ...
      */
-    public Carrito(Integer codigoCarrito, Set<DetalleCarrito> detallesCarrito, String fechaCarrito, Usuario usuarioCliente, String estadoCarrito) {
+    public Carrito(Integer codigoCarrito, Usuario usuarioCliente, String estadoCarrito) {
         this.codigoCarrito = codigoCarrito;
-        this.detallesCarrito = detallesCarrito;
-        this.fechaCarrito = fechaCarrito;
+        fechaCarrito = new Date();
         this.usuarioCliente = usuarioCliente;
         this.estadoCarrito = estadoCarrito;
     }
@@ -45,19 +41,12 @@ public class Carrito implements Serializable{
         this.codigoCarrito = codigoCarrito;
     }
 
-    public Set<DetalleCarrito> getDetallesCarrito() {
-        return detallesCarrito;
-    }
 
-    public void setDetallesCarrito(Set<DetalleCarrito> detallesCarrito) {
-        this.detallesCarrito = detallesCarrito;
-    }
-
-    public String getFechaCarrito() {
+    public Date getFechaCarrito() {
         return fechaCarrito;
     }
 
-    public void setFechaCarrito(String fechaCarrito) {
+    public void setFechaCarrito(Date fechaCarrito) {
         this.fechaCarrito = fechaCarrito;
     }
 
@@ -79,7 +68,9 @@ public class Carrito implements Serializable{
 
     @Override
     public String toString() {
-        return "codigoCarrito=" + codigoCarrito + ", detalleCarrito=" + detallesCarrito + ", fechaCarrito=" + fechaCarrito + ", usuarioCliente=" + usuarioCliente + ", estadoCarrito=" + estadoCarrito;
+        return "codigoCarrito=" + codigoCarrito +", fechaCarrito=" + fechaCarrito + ", usuarioCliente=" + usuarioCliente + ", estadoCarrito=" + estadoCarrito;
     }
+
+    
     
 }

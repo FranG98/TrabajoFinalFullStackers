@@ -10,6 +10,7 @@ import aplicacion.hibernate.dao.imp.ProductoDAOImp;
 import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
 import aplicacion.modelo.dominio.Carrito;
 import aplicacion.modelo.dominio.DetalleCarrito;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,26 +21,26 @@ import java.util.Set;
 public class testCarrito {
 
     public static void main(String[] args) {
-
+        Date fechaDeHoy = new Date();
         Carrito unCarrito = new Carrito();
         unCarrito.setEstadoCarrito("Pendiente");
-        unCarrito.setFechaCarrito("Fecha");
+        unCarrito.setFechaCarrito(fechaDeHoy);
 
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         unCarrito.setUsuarioCliente(usuarioDAO.obtenerUsuarios().get(0));
 
         IProductoDAO productoDAO = new ProductoDAOImp();
-        DetalleCarrito unDetalleCarrito = new DetalleCarrito(productoDAO.obtenerProductos().get(0), 56, 76.6, 87.3, unCarrito);
+//        DetalleCarrito unDetalleCarrito = new DetalleCarrito(productoDAO.obtenerProductos().get(0), 56, 76.6, 87.3, usuarioDAO.obtenerUsuarios().get(0));
         //DetalleCarrito otroDetalleCarrito = new DetalleCarrito(productoDAO.obtenerProductos().get(0), 56, 76.6, 87.3, unCarrito);
-        Set<DetalleCarrito> listaDetalleCarrito = new HashSet(0);
-        listaDetalleCarrito.add(unDetalleCarrito);
-        //listaDetalleCarrito.add(otroDetalleCarrito);
-        unCarrito.setDetallesCarrito(listaDetalleCarrito);
+//        Set<DetalleCarrito> listaDetalleCarrito = new HashSet(0);
+//        listaDetalleCarrito.add(unDetalleCarrito);
+//        //listaDetalleCarrito.add(otroDetalleCarrito);
+//        unCarrito.setDetallesCarrito(listaDetalleCarrito);
 
         ICarrito carritoDAO = new CarritoDAOImp();
         carritoDAO.agregarCarrito(unCarrito);
-        IDetalleCarritoDAO detalleCarritoDAO = new DetalleCarritoDAOImp();
-        detalleCarritoDAO.agregarDetalleCarrito(unDetalleCarrito);
+//        IDetalleCarritoDAO detalleCarritoDAO = new DetalleCarritoDAOImp();
+//        detalleCarritoDAO.agregarDetalleCarrito(unDetalleCarrito);
         //detalleCarritoDAO.agregarDetalleCarrito(otroDetalleCarrito);
 
     }

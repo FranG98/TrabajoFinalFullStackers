@@ -8,6 +8,7 @@ package aplicacion.controlador.beans.forms;
 import aplicacion.controlador.beans.DetalleCarritoBean;
 import aplicacion.controlador.beans.ProductoBean;
 import aplicacion.modelo.dominio.DetalleCarrito;
+import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -31,31 +32,36 @@ public class DetalleCarritoFormBean implements Serializable{
     private DetalleCarrito detalleCarrito;
     private String nombreProducto;
     private Short cantidad;
+    private Usuario usuarioLogueado;
     /**
      * Creates a new instance of DetalleProductoFormBean
      */
     public DetalleCarritoFormBean() {
         detalleCarrito = new DetalleCarrito();
+        usuarioLogueado = new Usuario();
     }
     
     public void agregarDetalleCarrito(){
         FacesContext context = FacesContext.getCurrentInstance();
+        usuarioLogueado = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+        System.out.println(usuarioLogueado);
         for (int i = 0; i < getProductoBean().obtenerProductos().size();i++)
             {
                 if (getProductoBean().obtenerProductos().get(i).getNombreProducto().equals(nombreProducto))
             {
                 detalleCarrito.setProductoVendido(getProductoBean().obtenerProductos().get(i));
-                if (detalleCarrito.getProductoVendido().getStock()<= cantidad){
+                if (detalleCarrito.getProductoVendido().getStock()< cantidad){
                     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"ERROR"
                             ,"La cantidad especificada debe ser menor al stock disponible"));
                 }else{
                     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Exito"
                             ,"Producto añadido correctamente al carrito"));
                     detalleCarrito.setCantidadVendida((int)cantidad);
-//                    detalleCarrito.getProductoVendido().setStock((short)detalleCarrito.getProductoVendido().getStock()-(short)cantidad); //Tira un error de compatibilidad de tipos cuando ambos valores son short, alegando que uno de ellos es int(?)
+                    //detalleCarrito.getProductoVendido().setStock(detalleCarrito.getProductoVendido().getStock()-cantidad); //Tira un error de compatibilidad de tipos cuando ambos valores son short, alegando que uno de ellos es int(?)
                     productoBean.modificarProducto(detalleCarrito.getProductoVendido());
                     detalleCarrito.setPrecioTotal((double)detalleCarrito.getProductoVendido().getPrecio()*cantidad);
                     detalleCarrito.setSubtotal((double)detalleCarrito.getProductoVendido().getPrecio()*cantidad);
+                    detalleCarrito.setUsuarioComprador(usuarioLogueado);
                     getDetalleCarritoBean().agregarDetalleCarrito(getDetalleCarrito());
                 }
             }
@@ -140,6 +146,13 @@ public class DetalleCarritoFormBean implements Serializable{
      */
     public void setCantidad(Short cantidad) {
         this.cantidad = cantidad;
+    }
+
+    /**
+     * @return the usuarioLogueado
+     */
+    public Usuario getUsuarioLogueado() {
+        return usuarioLogueado;
     }
    
 }
