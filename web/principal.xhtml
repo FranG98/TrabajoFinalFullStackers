@@ -3,29 +3,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
 
             <ui:define name="top">
-                top
+                <div align="right">
+                    <h:form>
+                        <p:outputLabel value="Bienvenido #{loginFormBean.usuario.emailUsuario}"/>
+                    </h:form>
+                </div>
+
+
             </ui:define>
 
             <ui:define name="content">
-                <h:form>
-                    <p:panel>
-                        <p:panelGrid columns="1">
-                            <p:outputLabel value="Bienvenido #{loginFormBean.usuario.emailUsuario}"/>
-                            <p:outputLabel value="Apellido: #{loginFormBean.usuario.apellidoUsuario}"/>
-                            <p:outputLabel value="Nombre #{loginFormBean.usuario.nombreUsuario}"/>                   
+                <h:form> 
+                    <p:carousel value="#{aBMProductoFormBean.listaProductos}" headerText="Listado de Peliculas disponibles" var="prod" 
+                                itemStyle="text-align:center" responsive="true">
+                        <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <f:facet name="header">
+                                <p:graphicImage value="/resources/images/#{prod.imagen}" styleClass="content" width="250" height="300"/> 
+                            </f:facet>
+
+                            <h:outputText value="Nombre" />
+                            <h:outputText value="#{prod.nombreProducto}" />
+                            <h:outputText value="Precio " />
+                            <h:outputText value="#{prod.precio}" />
+                            <h:outputText value="Stock " />
+                            <h:outputText value="#{prod.stock}" />
+
+                            <p:commandButton value="RESERVAR" oncomplete="PF('dlgComprar').show()" icon="ui-icon-cart"  style="ma"/> 
+                            <p:dialog header="Reserva completada" minWidth="100" widgetVar="dlgComprar" draggable="false" modal="true" hideEffect="explode">
+                                <p:outputLabel value="Ingrese Cantidad" id="txtCom"/>
+                                <p:inputText value="#{detalleCarritoFormBean.cantidad}" />
+                            </p:dialog>                 
+
+
                         </p:panelGrid>
-                        <p:button value="Administrador de Cuentas"  outcome="panelAdministrador"/>
-                        <p:graphicImage value="../resources/images/construccion.jpg"/>
-                    </p:panel>
+                    </p:carousel>
+
                 </h:form>
-                
             </ui:define>
 
             <ui:define name="bottom">
