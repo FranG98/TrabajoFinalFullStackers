@@ -21,9 +21,12 @@
           <column name="detcar_subtotal" not-null="true"/>
       </property>
       
-      <many-to-one name="productoVendido" class="aplicacion.modelo.dominio.Producto" fetch="join">
+      <many-to-one name="productoVendido" class="aplicacion.modelo.dominio.Producto" fetch="join" cascade="all">
             <column name="detcar_producto_vendido" not-null="true"/>
       </many-to-one>
       
+      <many-to-one name="carrito" class="aplicacion.modelo.dominio.Carrito" fetch="join" cascade="all">
+          <column name="car_codigo" not-null="true"/>
+      </many-to-one>
   </class>
 </hibernate-mapping>

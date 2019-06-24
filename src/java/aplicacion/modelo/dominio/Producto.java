@@ -64,6 +64,16 @@ public class Producto implements Serializable{
         this.precioOferta = precioOferta;
     }
     
+    public Producto(String nombreProducto, String sector, Float precio, Short stock, String marca, String dimension, String imagen, Float precioOferta) {
+        this.nombreProducto = nombreProducto;
+        this.sector = sector;
+        this.precio = precio;
+        this.stock = stock;
+        this.marca = marca;
+        this.dimension = dimension;
+        this.imagen = imagen;
+        this.precioOferta = precioOferta;
+    }
     
     /**
      * @return the codigo

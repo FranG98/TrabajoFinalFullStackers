@@ -16,11 +16,11 @@ import aplicacion.modelo.dominio.Producto;
 public class TestProducto {
     public static void main(String[] args) {
         IProductoDAO productoDAO = new ProductoDAOImp();
-        Producto nuevo = new Producto();
+        //Producto nuevo = new Producto();
         Producto nuevo1 = new Producto();
         Producto nuevo2 = new Producto();
         
-        nuevo.setDimension("25x35");
+        /*nuevo.setDimension("25x35");
         nuevo.setImagen("test");
         nuevo.setMarca("lego");
         nuevo.setNombreProducto("lego");
@@ -28,26 +28,26 @@ public class TestProducto {
         nuevo.setPrecio(Float.parseFloat("344"));
         nuevo.setStock(Short.parseShort("344"));
         nuevo.setPrecioOferta(Float.parseFloat("45"));
-        nuevo.setProdOferta(Boolean.TRUE);
-        nuevo1.setNombreProducto("nop");
+        nuevo.setProdOferta(Boolean.TRUE);*/
+        nuevo1.setNombreProducto("auto");
         nuevo1.setDimension("25x35");
         nuevo1.setImagen("test");
-        nuevo1.setMarca("lego");
-        nuevo1.setNombreProducto("lego");
+        nuevo1.setMarca("toys");
         nuevo1.setSector("5-10");
         nuevo1.setPrecio(Float.parseFloat("344"));
         nuevo1.setStock(Short.parseShort("344"));
         nuevo1.setPrecioOferta(Float.parseFloat("45"));
-        nuevo2.setNombreProducto("nop");
         nuevo2.setDimension("25x35");
         nuevo2.setImagen("test");
         nuevo2.setMarca("lego");
-        nuevo2.setNombreProducto("lego");
+        nuevo2.setNombreProducto("muñeco");
         nuevo2.setSector("5-10");
         nuevo2.setPrecio(Float.parseFloat("344"));
         nuevo2.setStock(Short.parseShort("344"));
         nuevo2.setPrecioOferta(Float.parseFloat("45"));
+        productoDAO.agregarProducto(nuevo1);
         productoDAO.agregarProducto(nuevo2);
+        
         
         //productoDAO.eliminarProducto(nuevo);
     }
