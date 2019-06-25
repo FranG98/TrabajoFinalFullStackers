@@ -7,13 +7,18 @@ package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.ProductoBean;
 import aplicacion.modelo.dominio.Producto;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  *
@@ -21,42 +26,101 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ABMProductoFormBean implements Serializable{
+public class ABMProductoFormBean implements Serializable {
 
     @ManagedProperty(value = "#{productoBean}")
     private ProductoBean productoBean;
     private Producto producto;
     private List<Producto> listaProductos;
     private List<String> productos;
-    
+    private Part image;
+    private static String imagenCadena;
+
     public ABMProductoFormBean() {
+
         producto = new Producto();
         listaProductos = new ArrayList<>();
         productos = new ArrayList<>();
+
     }
+
     @PostConstruct
-    public void init(){
-       obtenerProductos();  
-       for(int i=0; i < listaProductos.size();i++)
-       {
-            getProductos().add(listaProductos.get(i).getNombreProducto());
-       }
-    }
-    
-    public void agregarProducto(){
-        getProductoBean().agregarProducto(getProducto());
+    public void init() {
         obtenerProductos();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            getProductos().add(listaProductos.get(i).getNombreProducto());
+        }
     }
-    public void modificarProducto(Producto producto){
+
+    public void agregarProducto() {
+
+        producto.setImagen(imagenCadena);
+        imagenCadena = null;
+        if (producto.getImagen() != null) {
+
+            getProductoBean().agregarProducto(getProducto());
+            obtenerProductos();
+        } else {
+            addMessageError("Debe seleccionar una imagen de producto", "");
+        }
+
+    }
+
+    public void modificarProducto(Producto producto) {
         getProductoBean().modificarProducto(producto);
         obtenerProductos();
     }
-    public void eliminarProducto(Producto producto){
+
+    public void eliminarProducto(Producto producto) {
         getProductoBean().eliminarProducto(producto);
         obtenerProductos();
     }
-    public void obtenerProductos(){
+
+    public void obtenerProductos() {
         listaProductos = getProductoBean().obtenerProductos();
+    }
+    /**
+     * encode(): Permite codificar una imagen subida desde la vista y convertirla en base64
+     * lo que permite almacenarla facilmente como un simple string, en donde el tipo de dato de mysql
+     * corresponde con un text(un string largo); luego con un simple decodificador en la vista mostramos
+     * directamente las imagenes
+     */
+    public void encode() {
+
+        byte[] imageAsByte = new byte[(int) getImage().getSize()];
+        try {
+            if (image.getSize() > 0) {
+                getImage().getInputStream().read(imageAsByte);
+                imagenCadena = new String(Base64.encodeBase64(imageAsByte));
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
+
+        }
+    }
+
+    //Mensajes
+    /**
+     * addMessageInfo
+     *
+     * @param summary permite mostrar el resumen del mensaje informativo
+     * @param detail permite mostrar otro mensaje mas detallado
+     */
+    public void addMessageInfo(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    /**
+     * addMessageError
+     *
+     * @param summary permite mostrar el resumen del mensaje de error
+     * @param detail permite mostrar otro mensaje mas detallado
+     */
+    public void addMessageError(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     /**
@@ -114,4 +178,19 @@ public class ABMProductoFormBean implements Serializable{
     public void setProductos(List<String> productos) {
         this.productos = productos;
     }
+
+    /**
+     * @return the image
+     */
+    public Part getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Part image) {
+        this.image = image;
+    }
+
 }

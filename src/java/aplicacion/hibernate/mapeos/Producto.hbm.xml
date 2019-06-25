@@ -37,7 +37,7 @@
             <column name="prod_dimmension" length="12" not-null="true"/>
         </property>
             
-        <property name="imagen" type="string">
+        <property name="imagen" type="text">
             <column name="prod_imagen" length="25" not-null="true"/>
         </property>  
         
