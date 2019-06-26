@@ -6,7 +6,6 @@
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.modelo.dominio.Usuario;
-import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +15,10 @@ import javax.faces.context.FacesContext;
 /**
  *
  * @author Fernando
+ */
+/**
+ * ControlDeSesionFormBean permite detectar si un usuario está logueado y
+ * tambien de acuerdo a su rol, renderizar ciertas partes de la pagina
  */
 @ManagedBean
 @ViewScoped
@@ -28,48 +31,43 @@ public class ControlDeSesionFormBean implements Serializable {
 
     }
 
-    public void verificarSesionUserConsumidor() {
+    /**
+     * Permite verificar si un usuario es de tipo consumidor
+     *
+     * @return un valor true o false este logueado y sea de tipo consumidor
+     */
+    public boolean verificarSesionUserConsumidor() {
 
-        try {
-            FacesContext fc = FacesContext.getCurrentInstance();
+        FacesContext fc = FacesContext.getCurrentInstance();
 
-            Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
+        Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
 
-            if (user == null) {
-                fc.getExternalContext().redirect("principal.xhtml");
-            }
-        } catch (IOException e) {
-
-        }
+        return user != null && user.getTipoCuenta().getTipoRol().equals("Consumidor");
     }
 
-     public void verificarSesionUserAdministrativo() {
-        try {
-            FacesContext fc = FacesContext.getCurrentInstance();
+    /**
+     * Permite verificar si un usuario es de tipo administrativo
+     *
+     * @return un valor true o false este logueado y sea de tipo administrativo
+     */
+    public boolean verificarSesionUserAdministrativo() {
+        FacesContext fc = FacesContext.getCurrentInstance();
 
-            Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
-
-            if (user == null || user.getTipoCuenta().getTipoRol().equals("Consumidor")) {
-                fc.getExternalContext().redirect("principal.xhtml");
-                addMessageInfo("", "");
-            }
-        } catch (IOException e) {
-
-        }
+        Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
+        return user != null && user.getTipoCuenta().getTipoRol().equals("Administrativo");
     }
 
-    public void verificarSesionUserAdmin() {
-        try {
-            FacesContext fc = FacesContext.getCurrentInstance();
+    /**
+     * Permite verificar si un usuario es de tipo ADMIN
+     *
+     * @return un valor true o false este logueado y sea de tipo ADMIN
+     */
+    public boolean verificarSesionUserAdmin() {
+        FacesContext fc = FacesContext.getCurrentInstance();
 
-            Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
+        Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
 
-            if (user == null || !user.getTipoCuenta().getTipoRol().equals("ADMIN")) {
-                fc.getExternalContext().redirect("principal.xhtml");
-            }
-        } catch (IOException e) {
-
-        }
+        return user != null && user.getTipoCuenta().getTipoRol().equals("ADMIN");
     }
 
     //Mensajes
