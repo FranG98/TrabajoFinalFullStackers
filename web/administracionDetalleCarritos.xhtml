@@ -8,10 +8,15 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
+        <ui:composition template="./WEB-INF/templates/TemplateUsuarioConsumidor.xhtml">
 
             <ui:define name="top">
-                Detalle del Carrito
+                <h:form style="height: 15px ;margin-left: 75% " >
+                    <p:outputLabel value="Usuario #{loginFormBean.usuario.emailUsuario}"/>
+                    <p:separator/>
+                    <h:commandLink value="Logout" action="#{loginFormBean.logout()}"/>
+                </h:form>
+                <h2 align="center"> Detalle Carrito </h2>
             </ui:define>
 
             <ui:define name="content">

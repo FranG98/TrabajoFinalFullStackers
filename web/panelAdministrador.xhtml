@@ -8,12 +8,15 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplateSeguridad.xhtml">
-
+        <ui:composition template="./WEB-INF/templates/TemplateUsuarioAdmin.xhtml">
             <ui:define name="top">
-                top
+                <h:form style="height: 25px ;margin-left: 75% " >
+                    <p:outputLabel value="Usuario #{loginFormBean.usuario.tipoCuenta.tipoRol} #{loginFormBean.usuario.emailUsuario}"/>
+                    <p:separator/>
+                    <h:commandLink value="Logout" action="#{loginFormBean.logout()}"/>
+                </h:form>
+                <h1 align="center"> Administrador de Cuentas y Roles </h1>
             </ui:define>
-
             <ui:define name="content">
                 <h:form id="frmCuentas">
                     <p:panel header="Panel ADMIN Bloqueo y Eliminacion">
@@ -63,10 +66,10 @@
                     </p:panel>
                 </h:form>
                 <!-- FORMULARIO REGISTRO CUENTAS ESPECIALES-->
-                <h:form id="frmRegistro">
+                <h:form id="frmRegistro" >
                     <p:growl id="msjRegistro" showDetail="true" severity="info"/>
                     <p:growl id="msjValidacionesRegistro" showDetail="false" severity="error" life="10000"/>
-                    <p:panel header="Crear Cuenta Nueva" style="width:400px;">
+                    <p:panel header="Crear Cuenta Especial" style="width:600px;">
                         <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
                             <p:outputLabel for="nombre" value="Nombre" />
                             <p:inputText value="#{aBMUsuarioFormBean.usuario.nombreUsuario}" id="nombre" requiredMessage="Debe ingresar su nombre"
@@ -105,6 +108,7 @@
                             <p:outputLabel for="verificacionContraseña" value="Repetir Contraseña" />
                             <p:password id="verificacionContraseña" required="true" requiredMessage="Debe repetir la contraseña"/>
 
+                            <p:outputLabel value="Seleccionar Rol" />
                             <h:selectOneMenu value="#{aBMUsuarioFormBean.usuario.tipoCuenta}"
                                              converter="omnifaces.SelectItemsConverter">
                                 <f:selectItems value="#{aBMRolFormBean.listaRoles}"
@@ -114,7 +118,7 @@
                             </h:selectOneMenu>
 
 
-                            <p:button value="Volver al Inicio"  outcome="principal"/>
+                            <!-- <p:button value="Volver al Inicio"  outcome="principal"/>-->
                             <p:commandButton id="btnRegistro" value="Registrar"
                                              actionListener="#{aBMUsuarioFormBean.crearUsuario()}" 
                                              update="frmRegistro" />                 

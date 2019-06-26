@@ -90,7 +90,7 @@ public class LoginFormBean implements Serializable {
     public String logout() {
         setUsuario(null);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuarioLogueado");
-        return "login?faces-redirect=true";
+        return "principal?faces-redirect=true";
     }
 
     //Mensajes
