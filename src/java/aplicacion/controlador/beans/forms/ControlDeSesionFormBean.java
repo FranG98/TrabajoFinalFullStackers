@@ -69,6 +69,14 @@ public class ControlDeSesionFormBean implements Serializable {
 
         return user != null && user.getTipoCuenta().getTipoRol().equals("ADMIN");
     }
+    
+     public boolean verificarSesionUserNull() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+
+        Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
+
+        return user != null;
+    }
 
     //Mensajes
     /**

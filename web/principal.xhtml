@@ -8,21 +8,11 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplatePrincipal.xhtml">
-
-            <ui:define name="top">
-                <div align="right">
-                    <h:form>
-                        <p:outputLabel value="Bienvenido #{loginFormBean.usuario.emailUsuario}"/>
-                    </h:form>
-                </div>
-
-
-            </ui:define>
+        <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="content">
                 <h:form> 
-                    <p:carousel value="#{aBMProductoFormBean.listaProductos}" headerText="Listado de Peliculas disponibles" var="prod" 
+                    <p:carousel value="#{aBMProductoFormBean.listaProductos}" headerText="Listado de juguetes disponibles" var="prod" 
                                 itemStyle="text-align:center" responsive="true">
                         <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value"
                                      layout="grid" styleClass="ui-panelgrid-blank">
@@ -48,10 +38,6 @@
                     </p:carousel>
 
                 </h:form>
-            </ui:define>
-
-            <ui:define name="bottom">
-                bottom
             </ui:define>
 
         </ui:composition>

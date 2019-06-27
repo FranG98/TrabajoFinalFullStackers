@@ -8,16 +8,7 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplateUsuarioAdministrativo.xhtml">
-
-            <ui:define name="top">
-                <h:form style="height: 15px ;margin-left: 75% " >
-                    <p:outputLabel value="Usuario #{loginFormBean.usuario.tipoCuenta.tipoRol} #{loginFormBean.usuario.emailUsuario}"/>
-                    <p:separator/>
-                    <h:commandLink value="Logout" action="#{loginFormBean.logout()}"/>
-                </h:form>
-                <h1 align="center"> Administracion de Carritos </h1>
-            </ui:define>
+        <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="content">
                 <h:form id="frmCarrito">

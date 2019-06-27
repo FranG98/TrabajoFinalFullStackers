@@ -8,20 +8,12 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplateUsuarioAdministrativo.xhtml">
-
-            <ui:define name="top">
-                <h:form style="height: 15px ;margin-left: 75% " >
-                    <p:outputLabel value="Usuario #{loginFormBean.usuario.tipoCuenta.tipoRol} #{loginFormBean.usuario.emailUsuario}"/>
-                    <p:separator/>
-                    <h:commandLink value="Logout" action="#{loginFormBean.logout()}"/>
-                </h:form>
-                <h1 align="center"> Administrador de Productos </h1>
-            </ui:define>
+        <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="content">
                 <h:form id="frmProducto">
                     <p:growl showDetail="false"/>
+             
                     <p:panel id="pnlbotones" header="Administracion de Productos">
                         <h:panelGrid id="pnlgBotones" columns="2" cellpadding="3" cellspacing="10"> 
 
@@ -63,10 +55,9 @@
                     </p:dialog>
 
                 </h:form>  
+
                 <h:form id="frmEliminar">
                     <p:panel>
-
-
                         <p:dataTable id="dtbProducto" value="#{aBMProductoFormBean.listaProductos}" var="prod" >
                             <p:column headerText="Codigo" >
                                 <p:outputLabel value="#{prod.codigo}"/>                                    
@@ -128,15 +119,8 @@
                                 <p:commandButton value="Modificar" actionListener="#{aBMProductoFormBean.modificarProducto(prod)}" update="frmEliminar"/>
                             </p:column>
                         </p:dataTable>
-
-
-
                     </p:panel>
                 </h:form>  
-            </ui:define>
-
-            <ui:define name="bottom">
-                bottom
             </ui:define>
 
         </ui:composition>

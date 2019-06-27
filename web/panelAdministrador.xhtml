@@ -8,15 +8,8 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplateUsuarioAdmin.xhtml">
-            <ui:define name="top">
-                <h:form style="height: 25px ;margin-left: 75% " >
-                    <p:outputLabel value="Usuario #{loginFormBean.usuario.tipoCuenta.tipoRol} #{loginFormBean.usuario.emailUsuario}"/>
-                    <p:separator/>
-                    <h:commandLink value="Logout" action="#{loginFormBean.logout()}"/>
-                </h:form>
-                <h1 align="center"> Administrador de Cuentas y Roles </h1>
-            </ui:define>
+        <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
+           
             <ui:define name="content">
                 <h:form id="frmCuentas">
                     <p:panel header="Panel ADMIN Bloqueo y Eliminacion">
@@ -125,10 +118,6 @@
                         </h:panelGrid>
                     </p:panel>
                 </h:form>
-            </ui:define>
-
-            <ui:define name="bottom">
-                bottom
             </ui:define>
 
         </ui:composition>
