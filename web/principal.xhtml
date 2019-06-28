@@ -11,7 +11,14 @@
         <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="content">
-                <h:form> 
+                <h:form id="frmCatalogo"> 
+                    <p:outputLabel value="Seleccionar sector de productos a mostrar: "/>
+                    <p:selectOneMenu id="selectSector" value="#{aBMProductoFormBean.sector}">
+                        <f:selectItem itemLabel="Seleccione uno" itemValue=""/>
+                        <f:selectItems value="#{aBMProductoFormBean.sectores}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton id="btnBusqueda" value="Buscar" actionListener="#{aBMProductoFormBean.buscarPorSector()}" update="frmCatalogo"/>
+                    <p:commandButton id="btnRestablecer" value="Mostrar todos los productos" actionListener="#{aBMProductoFormBean.obtenerProductos()}" update="frmCatalogo"/>
                     <p:carousel value="#{aBMProductoFormBean.listaProductos}" headerText="Listado de juguetes disponibles" var="prod" 
                                 itemStyle="text-align:center" responsive="true">
                         <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value"

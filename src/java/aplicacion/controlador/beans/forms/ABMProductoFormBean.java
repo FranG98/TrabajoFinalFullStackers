@@ -35,13 +35,16 @@ public class ABMProductoFormBean implements Serializable {
     private List<String> productos;
     private Part image;
     private static String imagenCadena;
-
+    private String sector;
+    private List<String> sectores;
+    
     public ABMProductoFormBean() {
 
         producto = new Producto();
         listaProductos = new ArrayList<>();
         productos = new ArrayList<>();
-
+        sectores = new ArrayList<>();
+        
     }
 
     @PostConstruct
@@ -49,6 +52,9 @@ public class ABMProductoFormBean implements Serializable {
         obtenerProductos();
         for (int i = 0; i < listaProductos.size(); i++) {
             getProductos().add(listaProductos.get(i).getNombreProducto());
+        }
+        for (int j = 0; j < listaProductos.size(); j++){
+            getSectores().add(listaProductos.get(j).getSector());
         }
     }
 
@@ -65,7 +71,16 @@ public class ABMProductoFormBean implements Serializable {
         }
 
     }
-
+    
+    public void buscarPorSector(){
+        obtenerProductos();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            if(!listaProductos.get(i).getSector().equals(sector)){
+                listaProductos.remove(i);
+            }
+        }
+    }
+    
     public void modificarProducto(Producto producto) {
         getProductoBean().modificarProducto(producto);
         obtenerProductos();
@@ -193,4 +208,33 @@ public class ABMProductoFormBean implements Serializable {
         this.image = image;
     }
 
+    /**
+     * @return the sector
+     */
+    public String getSector() {
+        return sector;
+    }
+
+    /**
+     * @param sector the sector to set
+     */
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
+    /**
+     * @return the sectores
+     */
+    public List<String> getSectores() {
+        return sectores;
+    }
+
+    /**
+     * @param sectores the sectores to set
+     */
+    public void setSectores(List<String> sectores) {
+        this.sectores = sectores;
+    }
+    
+    
 }
