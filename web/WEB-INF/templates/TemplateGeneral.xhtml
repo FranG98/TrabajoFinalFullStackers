@@ -32,7 +32,7 @@
                                     <p:outputLabel for="username" value="Usuario"/>
                                     <p:inputText id="username" value="#{loginFormBean.emailLogin}" 
                                                  required="true" requiredMessage="Debe ingresar su ID" label="username" />
-                                    <p:outputLabel for="password" value="Clave" />
+                                    <p:outputLabel for="password" value="Contraseña" />
                                     <p:password value="#{loginFormBean.passLogin}" id="password" required="true"
                                                 requiredMessage="Debe ingresar su contraseña" label="password" />
                                     <p:commandButton id="btnLogin" value="Iniciar Sesion" update="frmLogin" resetValues="true"
@@ -88,7 +88,9 @@
         </div>
 
         <div id="bottom">
-            <ui:insert name="bottom">Telefono 123435533 email:aslkdkl@kjasd.com</ui:insert>
+            <ui:insert name="bottom">
+                <small>Programacion Visual 2019 - Full Stackers</small>
+            </ui:insert>
         </div>
 
     </h:body>

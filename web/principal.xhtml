@@ -11,38 +11,47 @@
         <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="content">
-                <h:form id="frmCatalogo"> 
-                    <p:outputLabel value="Seleccionar sector de productos a mostrar: "/>
-                    <p:selectOneMenu id="selectSector" value="#{aBMProductoFormBean.sector}">
-                        <f:selectItem itemLabel="Seleccione uno" itemValue=""/>
-                        <f:selectItems value="#{aBMProductoFormBean.sectores}"/>
-                    </p:selectOneMenu>
-                    <p:commandButton id="btnBusqueda" value="Buscar" actionListener="#{aBMProductoFormBean.buscarPorSector()}" update="frmCatalogo"/>
-                    <p:commandButton id="btnRestablecer" value="Mostrar todos los productos" actionListener="#{aBMProductoFormBean.obtenerProductos()}" update="frmCatalogo"/>
-                    <p:carousel value="#{aBMProductoFormBean.listaProductos}" headerText="Listado de juguetes disponibles" var="prod" 
-                                itemStyle="text-align:center" responsive="true">
-                        <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <f:facet name="header">
-                                <p:graphicImage value="/resources/images/#{prod.imagen}" styleClass="content" width="250" height="300"/> 
-                            </f:facet>
+                <h:form id="frmCatalogo">
+                    <div id="filtrarSector">
+                        <p:outputLabel value="Seleccionar sector de productos a mostrar: "/>
+                        <p:selectOneMenu id="selectSector" value="#{aBMProductoFormBean.sector}">
+                            <f:selectItem itemLabel="Seleccione uno" itemValue=""/>
+                            <f:selectItems value="#{aBMProductoFormBean.sectores}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton id="btnBusqueda" value="Buscar" actionListener="#{aBMProductoFormBean.buscarPorSector()}" update="GridCatalogo"/>
+                        <p:commandButton id="btnRestablecer" value="Mostrar todos los productos" actionListener="#{aBMProductoFormBean.obtenerProductos()}" update="frmCatalogo"/>
+                    </div>
 
-                            <h:outputText value="Nombre" />
-                            <h:outputText value="#{prod.nombreProducto}" />
-                            <h:outputText value="Precio " />
-                            <h:outputText value="#{prod.precio}" />
-                            <h:outputText value="Stock " />
-                            <h:outputText value="#{prod.stock}" />
+                    <p:dataGrid id="GridCatalogo" var="prod" value="#{aBMProductoFormBean.listaProductos}" columns="5" layout="grid"
+                                rows="10" paginator="true"
+                                paginatorTemplate="{CurrentPageReport} {PageLinks}"
+                                rowsPerPageTemplate="10">
 
-                            <p:commandButton value="RESERVAR" oncomplete="PF('dlgComprar').show()" icon="ui-icon-cart"  style="ma"/> 
-                            <p:dialog header="Reserva completada" minWidth="100" widgetVar="dlgComprar" draggable="false" modal="true" hideEffect="explode">
-                                <p:outputLabel value="Ingrese Cantidad" id="txtCom"/>
-                                <p:inputText value="#{detalleCarritoFormBean.cantidad}" />
-                            </p:dialog>                 
+                        <f:facet name="header">
+                            Juguetes a la venta
+                        </f:facet>
 
+                        <p:panel header="#{prod.nombreProducto}" style="text-align:center">
+                            <img src='data:image/png;base64,#{prod.imagen}' height="150" width="150"/>
+                            <p:panelGrid columns="2" columnClasses="label,value">
+                                <h:outputText value="Marca"/>                                
+                                <h:outputText value="#{prod.marca}"/>
+                                <h:outputText value="Precio"/>
+                                <h:outputText value="#{prod.precio}"/>
+                                <h:outputText value="Stock"/>
+                                <h:outputText value="#{prod.stock}"/>
+                            </p:panelGrid>
+                            <p:commandButton value="Reservar" update="GridCatalogo"  oncomplete="PF('dlgReservar').show()" title="View Detail">
+                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
+                            </p:commandButton>
+                        </p:panel>
 
-                        </p:panelGrid>
-                    </p:carousel>
+                    </p:dataGrid>
+
+                    <p:dialog header="Nueva reserva" minWidth="100" widgetVar="dlgReservar" draggable="false" modal="true" hideEffect="explode">
+                        <p:outputLabel value="Ingrese Cantidad: " id="txtCom"/>
+                        <p:inputText value="#{detalleCarritoFormBean.cantidad}" />
+                    </p:dialog>
 
                 </h:form>
             </ui:define>

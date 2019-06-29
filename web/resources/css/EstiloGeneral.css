@@ -8,21 +8,33 @@ and open the template in the editor.
     Author     : Elias Acosta
 */
 html {
-  min-height: 100%;
-  position: relative;
+    min-height: 100%;
+    position: relative;
 }
 
 #content{
-    margin-bottom: 15px;
+    margin-bottom: 45px;
 }
 
 #bottom{
+    background: rgb(51,225,227);
+    background: linear-gradient(90deg, rgba(51,225,227,1) 0%, rgba(51,53,163,1) 50%, rgba(252,57,236,1) 100%);color: white;
+    height: 30px;
     position: absolute;
     bottom: 0;
     width: 100%;
     text-align: center;
 }
 
-.ui-menubar {
-    background-color: #045491;
+#top{
+    margin-bottom: 15px;
+}
+
+#filtrarSector{
+    margin-bottom: 15px;text-align: center;
+}
+
+.ui-datagrid{
+    width: 85%;
+    margin: 0 auto;
 }
