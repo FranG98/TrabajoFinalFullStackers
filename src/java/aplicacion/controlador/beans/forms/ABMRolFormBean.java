@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class ABMRolFormBean implements Serializable {
+
     private Rol unRol;
     @ManagedProperty(value = "#{rolBean}")
     private RolBean rolBean;
@@ -29,14 +30,14 @@ public class ABMRolFormBean implements Serializable {
      */
     public ABMRolFormBean() {
         listaRoles = new ArrayList<>();
-        
+
     }
 
     @PostConstruct
     public void init() {
         unRol = new Rol();
         obtenerRoles();
-    
+
     }
 
     //Metodos CRUD de rol
@@ -47,12 +48,14 @@ public class ABMRolFormBean implements Serializable {
         obtenerRoles();
     }
 
-    public void eliminarRol() {
+    public void eliminarRol(Rol unRol) {
         rolBean.eliminarRol(unRol);
+        obtenerRoles();
     }
 
-    public void modificarRol() {
+    public void modificarRol(Rol unRol) {
         rolBean.modificarRol(unRol);
+        obtenerRoles();
     }
 
     public void obtenerRoles() {

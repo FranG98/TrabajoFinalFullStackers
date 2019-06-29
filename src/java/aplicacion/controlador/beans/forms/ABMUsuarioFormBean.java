@@ -38,6 +38,10 @@ public class ABMUsuarioFormBean implements Serializable {
     //usuario permite almacenar los datos de un nuevo usuario en el panel de registro
     private String emailBuscado;
     //emailBuscado permite almacenar un email que representara el id de una cuenta a buscarse en la base de datos
+    private Integer dniBuscado;
+    //dniBuscado permite almacenar un Integer para buscar coincidencia con el dni de los usuarios registrados
+    private String rolBuscado;
+    //rolBuscado permite almacenar un String para buscar coincidencia con el rol de los usuarios registrados
     private List<Usuario> listaUsuarios;
     //listaUsuarios permite almacenar la lista de usuarios registrados
     private List<Usuario> resultadoBusqueda;
@@ -50,7 +54,7 @@ public class ABMUsuarioFormBean implements Serializable {
     public ABMUsuarioFormBean() {
         listaUsuarios = new ArrayList<>();
         resultadoBusqueda = new ArrayList<>();
-        emailBuscado = null;
+        emailBuscado = "";
         usuario = new Usuario();
     }
 
@@ -64,13 +68,50 @@ public class ABMUsuarioFormBean implements Serializable {
 
     /**
      * buscarUsuarios permite buscar usuarios segun los caracteres ingresados
+     * coincidentes con los emails de los usuarios
      */
     public void buscarUsuarios() {
-//        for (int i = 0; i < getListaUsuarios().size(); i++) {
-//            if (getListaUsuarios().get(i).getEmailUsuario().startsWith(getEmailBuscado())) {
-//                resultadoBusqueda.add(getListaUsuarios().get(i));
-//            }
-//        }
+        obtenerUsuarios();
+        getResultadoBusqueda().clear();
+
+        for (int i = 0; i < getListaUsuarios().size(); i++) {
+            if (getListaUsuarios().get(i).getEmailUsuario().toLowerCase().startsWith(getEmailBuscado().toLowerCase())) {
+                getResultadoBusqueda().add(getListaUsuarios().get(i));
+            }
+        }
+        setEmailBuscado("");
+    }
+
+    /**
+     * buscarUsuariosPorDni permite buscar usuarios segun los caracteres
+     * ingresados coincidentes con el dni
+     */
+    public void buscarUsuariosPorDni() {
+        obtenerUsuarios();
+        getResultadoBusqueda().clear();
+
+        for (int i = 0; i < getListaUsuarios().size(); i++) {
+            if (getListaUsuarios().get(i).getDniUsuario().equals(getDniBuscado())) {
+                getResultadoBusqueda().add(getListaUsuarios().get(i));
+            }
+        }
+        setDniBuscado(null);
+    }
+
+    /**
+     * buscarUsuariosPorRol permite buscar usuarios segun los caracteres
+     * ingresados coincidentes con el rol
+     */
+    public void buscarUsuariosPorRol() {
+        obtenerUsuarios();
+        getResultadoBusqueda().clear();
+
+        for (int i = 0; i < getListaUsuarios().size(); i++) {
+            if (getListaUsuarios().get(i).getTipoCuenta().getTipoRol().toLowerCase().startsWith(getRolBuscado().toLowerCase())) {
+                getResultadoBusqueda().add(getListaUsuarios().get(i));
+            }
+        }
+        setEmailBuscado("");
     }
 
     /**
@@ -110,7 +151,7 @@ public class ABMUsuarioFormBean implements Serializable {
      * obtenerUsuarios permite obtener una lista de usuarios registrados
      */
     public void obtenerUsuarios() {
-        listaUsuarios = getUsuarioBean().obtenerUsuarios();
+        setListaUsuarios(getUsuarioBean().obtenerUsuarios());
     }
 
     //Mensajes
@@ -137,6 +178,14 @@ public class ABMUsuarioFormBean implements Serializable {
     }
 
     //METODOS GETTERS Y SETTERS
+
+    /**
+     * @return the dniBuscado
+     */
+    public Integer getDniBuscado() {
+        return dniBuscado;
+    }
+
     /**
      * @return the emailBuscado
      */
@@ -159,6 +208,13 @@ public class ABMUsuarioFormBean implements Serializable {
     }
 
     /**
+     * @return the rolBuscado
+     */
+    public String getRolBuscado() {
+        return rolBuscado;
+    }
+
+    /**
      * @return the usuario
      */
     public Usuario getUsuario() {
@@ -170,6 +226,13 @@ public class ABMUsuarioFormBean implements Serializable {
      */
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;
+    }
+
+    /**
+     * @param dniBuscado the dniBuscado to set
+     */
+    public void setDniBuscado(Integer dniBuscado) {
+        this.dniBuscado = dniBuscado;
     }
 
     /**
@@ -194,6 +257,13 @@ public class ABMUsuarioFormBean implements Serializable {
     }
 
     /**
+     * @param rolBuscado the rolBuscado to set
+     */
+    public void setRolBuscado(String rolBuscado) {
+        this.rolBuscado = rolBuscado;
+    }
+
+    /**
      * @param usuario the usuario to set
      */
     public void setUsuario(Usuario usuario) {
@@ -206,4 +276,5 @@ public class ABMUsuarioFormBean implements Serializable {
     public void setUsuarioBean(UsuarioBean usuarioBean) {
         this.usuarioBean = usuarioBean;
     }
+    
 }
