@@ -2,8 +2,6 @@ package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Representa la orden de un carrito que puede llegar a comprar o no un cliente.
