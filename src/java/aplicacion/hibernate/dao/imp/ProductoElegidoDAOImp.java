@@ -1,53 +1,52 @@
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.hibernate.configuracion.HibernateUtil;
-import aplicacion.modelo.dominio.Carrito;
+import aplicacion.modelo.dominio.ProductoElegido;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import aplicacion.hibernate.dao.ICarritoDAO;
+import aplicacion.hibernate.dao.IProductoElegidoDAO;
 
 /**
  *
- * @author Elias Acosta
+ * @author Windows
  */
-public class CarritoDAOImp implements Serializable, ICarritoDAO{
+public class ProductoElegidoDAOImp implements Serializable, IProductoElegidoDAO{
 
     @Override
-    public void agregarCarrito(Carrito carrito) {
+    public void agregarProductoElegido(ProductoElegido productoElegido) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(carrito);
+        session.save(productoElegido);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void modificarCarrito(Carrito carrito) {
+    public void eliminarProductoElegido(ProductoElegido productoElegido) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(carrito);
+        session.delete(productoElegido);
         session.getTransaction().commit();
         session.close();
-    }
-
-    @Override
-    public void eliminarCarrito(Carrito carrito) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.delete(carrito);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Override
-    public List<Carrito> obtenerCarritos() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Carrito.class);
-        List<Carrito> carritos = criteria.list();
-        session.close();
-        return carritos;
     }
     
+    @Override
+    public void modificarProductoElegido(ProductoElegido productoElegido) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(productoElegido);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    @Override
+    public List<ProductoElegido> obtenerProductosElegidos() {
+       Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(ProductoElegido.class);
+        List<ProductoElegido> allProductos = criteria.list();
+        session.close();
+        return allProductos;
+    }
 }

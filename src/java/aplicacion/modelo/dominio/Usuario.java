@@ -90,14 +90,14 @@ public class Usuario implements Serializable {
         this.tipoCuenta = tipoCuenta;
     }
 
-    public Usuario(String nombreUsuario, String apellidoUsuario, Integer dniUsuario, Byte edadUsuario, String emailUsuario, String passUsuario) {
-        this.nombreUsuario = nombreUsuario;
-        this.apellidoUsuario = apellidoUsuario;
-        this.dniUsuario = dniUsuario;
-        this.edadUsuario = edadUsuario;
-        this.emailUsuario = emailUsuario;
-        this.passUsuario = passUsuario;
-    }
+//    public Usuario(String nombreUsuario, String apellidoUsuario, Integer dniUsuario, Byte edadUsuario, String emailUsuario, String passUsuario) {
+//        this.nombreUsuario = nombreUsuario;
+//        this.apellidoUsuario = apellidoUsuario;
+//        this.dniUsuario = dniUsuario;
+//        this.edadUsuario = edadUsuario;
+//        this.emailUsuario = emailUsuario;
+//        this.passUsuario = passUsuario;
+//    }
     
     /**
      * METODOS GETTERS & SETTERS

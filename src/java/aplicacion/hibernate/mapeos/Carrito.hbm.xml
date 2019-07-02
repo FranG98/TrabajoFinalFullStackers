@@ -21,5 +21,12 @@
         <property name="estadoCarrito" type="string">
             <column name="car_estado_carrito" length="20" not-null="true"/>
         </property>
+        
+        <set name="listaProductosElegidos" table="productos_elegidos" fetch="select">
+            <key>
+                <column name="car_codigo" not-null="true"/>
+            </key>
+            <one-to-many class="aplicacion.modelo.dominio.ProductoElegido"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -1,12 +1,12 @@
 package aplicacion.controlador.beans;
 
-import aplicacion.hibernate.dao.ICarrito;
 import aplicacion.hibernate.dao.imp.CarritoDAOImp;
 import aplicacion.modelo.dominio.Carrito;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import aplicacion.hibernate.dao.ICarritoDAO;
 
 /**
  *
@@ -15,7 +15,7 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class CarritoBean implements Serializable{
-    private ICarrito carritoDAO;
+    private ICarritoDAO carritoDAO;
     
     public CarritoBean() {
         carritoDAO = new CarritoDAOImp();
@@ -39,11 +39,11 @@ public class CarritoBean implements Serializable{
     }
     
     //Getters y Setters
-    public ICarrito getCarritoDAO() {
+    public ICarritoDAO getCarritoDAO() {
         return carritoDAO;
     }
 
-    public void setCarritoDAO(ICarrito carritoDAO) {
+    public void setCarritoDAO(ICarritoDAO carritoDAO) {
         this.carritoDAO = carritoDAO;
     }
     
