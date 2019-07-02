@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="msjIngreso" showDetail="true"/>
+                    <p:outputLabel value="Ingrese el codigo de su factura que recibio por Email: "/>
+                    <p:inputNumber value="#{carritoFormBean.codigoIngresado}" minValue="0" converter="javax.faces.Integer" style="margin-right:20px;" decimalPlaces="0"/>
+                    <p:commandButton id="btnCodigo" value="Confirmar ingreso" style="margin-right:20px;" update="pnlFactura, msjIngreso" 
+                                     actionListener="#{carritoFormBean.verificarCarrito()}" onclick="PF('msjIngreso').show();"/>
+                    <p:panelGrid id="pnlFactura" columns="2">
+                        
+                        <p:outputLabel value="Usuario comprador: "/>
+                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.usuarioCliente.nombreUsuario}"/>
+                        
+                        <p:outputLabel value="Estado de la compra: "/>
+                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.estadoCarrito}"/>
+                        
+                        <p:outputLabel value="FECHA DE LA COMPRA: "/>
+                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.fechaCarrito}"/>
+                    </p:panelGrid>
+                    <p:commandButton id="btnImprimir" value="Imprimir Factura" icon="ui-icon-print">
+                        <p:printer target="pnlFactura"/>
+                    </p:commandButton>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

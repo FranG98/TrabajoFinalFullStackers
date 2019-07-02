@@ -22,7 +22,7 @@ public class ProductoElegidoBean implements Serializable{
         productoElegidoDAO =  new ProductoElegidoDAOImp();
     }
     
-    public void agregarProdcutoElegido(ProductoElegido productoElegido){
+    public void agregarProductoElegido(ProductoElegido productoElegido){
         productoElegidoDAO.agregarProductoElegido(productoElegido);
     }
     

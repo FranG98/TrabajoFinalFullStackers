@@ -6,9 +6,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 /**
  *
  * @author Elias Acosta
@@ -20,7 +22,9 @@ public class CarritoFormBean implements Serializable{
     @ManagedProperty(value="#{carritoBean}")
     private CarritoBean carritoBean;
     private List<Carrito> carritos;
-   
+    private Integer codigoIngresado;
+    private Carrito carritoBuscado;
+    
     public CarritoFormBean() {
         carritos = new ArrayList<>();
     }
@@ -28,21 +32,12 @@ public class CarritoFormBean implements Serializable{
     @PostConstruct
     public void init(){
         unCarrito = new Carrito();
+        setCarritoBuscado(new Carrito());
     }
     
     //Metodos CRUD de Carrito.
     public void agregarCarrito(){
         carritoBean.agregarCarrito(unCarrito);
-//         usuarioLogueado = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
-//        System.out.println(getUsuarioLogueado());
-//        unCarrito.setUsuarioCliente(usuarioLogueado);
-//        for (int i=0; i < getDetalleCarritoBean().obtenerDetalleCarrito().size(); i++){
-//            if (usuarioLogueado.getEmailUsuario().equals(getDetalleCarritoBean().obtenerDetalleCarrito().get(i).getUsuarioComprador().getEmailUsuario())){
-//                detalles.add(getDetalleCarritoBean().obtenerDetalleCarrito().get(i));
-//            }
-//        }
-//        getMailBean().enviarMail(unCarrito.getCodigoCarrito());
-//        getCarritoBean().agregarCarrito(unCarrito);
     }
     
     public void eliminarCarrito(){
@@ -57,6 +52,21 @@ public class CarritoFormBean implements Serializable{
         return getCarritoBean().obtenerCarrito();
     }
 
+     public void verificarCarrito(){
+        Boolean obtenido = false;
+        FacesContext context = FacesContext.getCurrentInstance();
+        for(int i = 0; i < obtenerCarrito().size() && obtenido != true; i++){
+            if (obtenerCarrito().get(i).getCodigoCarrito().equals(getCodigoIngresado())) {
+                setCarritoBuscado(obtenerCarrito().get(i));
+                obtenido = true;
+            }   
+            }
+            if (obtenido == false){
+                context.addMessage(null,
+                  new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR",
+                       "No existe una compra con el codigo especificado"));        
+            }
+    }   
     public Carrito getUnCarrito() {
         return unCarrito;
     }
@@ -79,6 +89,34 @@ public class CarritoFormBean implements Serializable{
 
     public void setCarritos(List<Carrito> carritos) {
         this.carritos = carritos;
+    }
+
+    /**
+     * @return the codigoIngresado
+     */
+    public Integer getCodigoIngresado() {
+        return codigoIngresado;
+    }
+
+    /**
+     * @param codigoIngresado the codigoIngresado to set
+     */
+    public void setCodigoIngresado(Integer codigoIngresado) {
+        this.codigoIngresado = codigoIngresado;
+    }
+
+    /**
+     * @return the carritoBuscado
+     */
+    public Carrito getCarritoBuscado() {
+        return carritoBuscado;
+    }
+
+    /**
+     * @param carritoBuscado the carritoBuscado to set
+     */
+    public void setCarritoBuscado(Carrito carritoBuscado) {
+        this.carritoBuscado = carritoBuscado;
     }
         
 }

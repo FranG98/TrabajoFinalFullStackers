@@ -12,6 +12,7 @@
 
             <ui:define name="content">
                 <h:form id="frmCatalogo">
+                    <p:growl id="msjConfirmar" showDetail="true"/>
                     <div id="filtrarSector">
                         <p:outputLabel value="Seleccionar sector de productos a mostrar: "/>
                         <p:selectOneMenu id="selectSector" value="#{aBMProductoFormBean.sector}" style="margin-right: 10px;">
@@ -37,16 +38,17 @@
                                 <h:outputText value="Stock"/>
                                 <h:outputText value="#{prod.stock}"/>
                             </p:panelGrid>
-                            <p:commandButton update="GridCatalogo" icon="ui-icon-cart" oncomplete="PF('dlgReservar').show()" title="View Detail" style="width: 50%">
+                            <p:commandButton update="GridCatalogo" icon="ui-icon-cart" oncomplete="PF('dlgReservar').show()" title="View Detail" style="width: 50%" onclick="#{productoElegidoFormBean.setProductoPedido(prod)}">
                                 <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
                             </p:commandButton>
                         </p:panel>
 
                     </p:dataGrid>
 
-                    <p:dialog header="Nueva reserva" minWidth="100" widgetVar="dlgReservar" draggable="false" modal="true" hideEffect="explode">
+                    <p:dialog header="Nueva orden de compra" minWidth="100" widgetVar="dlgReservar" draggable="false" modal="true" hideEffect="explode">
                         <p:outputLabel value="Ingrese Cantidad: " id="txtCom"/>
-                        <p:inputText value="#{detalleCarritoFormBean.cantidad}" />
+                        <p:inputText value="#{productoElegidoFormBean.cantidad}" style="margin-right:20px;"/>
+                        <p:commandButton id="btnConfirmar" value="Confirmar compra" actionListener="#{productoElegidoFormBean.agregarProductoElegido()}" update="msjConfirmar" onclick="PF('dlgReservar').hide" style="margin-right:20px;"/>
                     </p:dialog>
 
                 </h:form>

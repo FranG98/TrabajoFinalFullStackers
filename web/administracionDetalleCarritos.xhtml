@@ -8,10 +8,10 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/templates/TemplateUsuarioConsumidor.xhtml">
+        <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="top">
-                <h:form style="height: 15px ;margin-left: 75% " >
+                <h:form style="height: 100px ;margin-left: 75% " >
                     <p:outputLabel value="Usuario #{loginFormBean.usuario.emailUsuario}"/>
                     <p:separator/>
                     <h:commandLink value="Logout" action="#{loginFormBean.logout()}"/>
