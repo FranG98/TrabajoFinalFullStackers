@@ -39,7 +39,6 @@ public class ProductoElegidoFormBean implements Serializable {
     private Integer cantidad;
     private List<ProductoElegido> productosElegidos;
     private Producto productoPedido;
-
     /**
      * Creates a new instance of DetalleProductoFormBean
      */
@@ -48,9 +47,11 @@ public class ProductoElegidoFormBean implements Serializable {
         carritoCreado = new Carrito();
         productosElegidos = new ArrayList<>();
         productoPedido = new Producto();
+        
     }
     @PostConstruct
     public void init(){
+        
         
     }
 
@@ -73,15 +74,19 @@ public class ProductoElegidoFormBean implements Serializable {
             productosElegidos.add(unProductoElegido);
             productoElegidoBean.agregarProductoElegido(unProductoElegido);
             unProductoElegido = new ProductoElegido();
+            
+            
+            
         }
     }
 
-    public void eliminarProductoElegido() {
-        productoElegidoBean.eliminarProductoElegido(unProductoElegido);
+    public void eliminarProductoElegido(ProductoElegido productoElegido) {
+        productosElegidos.remove(productoElegido);
     }
 
     public void finalizarCarrito() {
         carritoCreado.setListaProductosElegidos(new HashSet(productosElegidos));
+        System.out.println(carritoCreado);
         getCarritoBean().agregarCarrito(carritoCreado);
         getMailBean().enviarMail(carritoCreado.getCodigoCarrito());
         carritoCreado = new Carrito();
