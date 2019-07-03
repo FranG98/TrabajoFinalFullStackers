@@ -53,9 +53,22 @@ public class ABMProductoFormBean implements Serializable {
         for (int i = 0; i < listaProductos.size(); i++) {
             getProductos().add(listaProductos.get(i).getNombreProducto());
         }
+        Boolean existe = false;
         for (int j = 0; j < listaProductos.size(); j++){
-            getSectores().add(listaProductos.get(j).getSector());
-        }
+            existe = false;
+            if (sectores.size() > 0){
+                for (int k = 0; k < sectores.size(); k++){
+                     if (getSectores().get(k).equals(listaProductos.get(j).getSector())){
+                         existe = true;
+                     }
+                }
+                if (existe != true){
+                    getSectores().add(listaProductos.get(j).getSector());
+                }    
+            }else{
+                getSectores().add(listaProductos.get(j).getSector());
+            }
+        }    
     }
 
     public void agregarProducto() {
@@ -77,6 +90,7 @@ public class ABMProductoFormBean implements Serializable {
         for (int i = 0; i < listaProductos.size(); i++) {
             if(!listaProductos.get(i).getSector().equals(sector)){
                 listaProductos.remove(i);
+                i--;
             }
         }
     }

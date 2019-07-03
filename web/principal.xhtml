@@ -38,12 +38,12 @@
                                 <h:outputText value="$#{prod.precio}"/>
                                 <h:outputText value="Stock"/>
                                 <h:outputText value="#{prod.stock} unidades"/>
-                                <p:commandButton action="#{productoElegidoFormBean.setProductoPedido(prod)}" 
-                                                 value="Agregar al Carrito" immediate="true" oncomplete="PF('dlgReservar').show()" title="View Detail"
-                                                 update="GridCatalogo" icon="ui-icon-cart" style="width: 50%">
-                                </p:commandButton>
+                                
                             </p:panelGrid>
-                           
+                            <p:commandButton action="#{productoElegidoFormBean.setProductoPedido(prod)}" 
+                                                 value="Agregar al Carrito" immediate="true" oncomplete="PF('dlgReservar').show()" title="View Detail"
+                                                 update="GridCatalogo" icon="ui-icon-cart" style="width: 75%">
+                            </p:commandButton>
                         </p:panel>
                     </p:dataGrid>
 
@@ -75,8 +75,16 @@
 
                         </p:dataGrid>
                         <p:spacer/>
-                        <p:commandButton value="Finalizar compra" update="GridCarrito" icon="ui-icon-cart" actionListener="#{productoElegidoFormBean.finalizarCarrito()}"/>
-
+                        <p:commandButton value="Finalizar compra" update="GridCarrito" icon="ui-icon-cart" actionListener="#{productoElegidoFormBean.finalizarCarrito()}" action="#{loginFormBean.obtenerUsuarioLogueado()}">
+                            <p:confirm header="Confirmacion de compra" message="Estas seguro de confirmar la compra?"  icon="pi pi-exclamation-triangle" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="PF('dlgMensaje').show()"/>
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog> 
+                        <p:dialog id="dlgMensaje" header="Gracias por su compra" widgetVar="dlgMensaje" resizable="false" modal="true">
+                            <p:outputLabel value="Para completar su compra, debe ingresar el codigo que recibio en su mail (#{loginFormBean.emailLogin}) en la ventana 'Ver Factura de Compra'"/>
+                        </p:dialog>
                     </p:panel>
                 </h:form>
             </ui:define>

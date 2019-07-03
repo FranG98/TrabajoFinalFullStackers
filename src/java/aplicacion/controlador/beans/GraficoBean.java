@@ -6,6 +6,7 @@
 package aplicacion.controlador.beans;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,11 +23,30 @@ import org.primefaces.model.chart.ChartSeries;
 @ViewScoped
 public class GraficoBean implements Serializable{
 
+    @ManagedProperty(value="#{}")
+    
+private List<String> sectores;
 private BarChartModel animatedModel2;
 
 @PostConstruct
     public void init() {
         createAnimatedModels();
+        Boolean existe = false;
+        for (int j = 0; j < listaProductos.size(); j++){
+            existe = false;
+            if (getSectores().size() > 0){
+                for (int k = 0; k < getSectores().size(); k++){
+                     if (getSectores().get(k).equals(listaProductos.get(j).getSector())){
+                         existe = true;
+                     }
+                }
+                if (existe != true){
+                    getSectores().add(listaProductos.get(j).getSector());
+                }    
+            }else{
+                getSectores().add(listaProductos.get(j).getSector());
+            }
+        } 
     }
    
     public BarChartModel getAnimatedModel2() {
@@ -61,12 +81,26 @@ private BarChartModel animatedModel2;
     private void createAnimatedModels() {
  
         animatedModel2 = initBarModel();
-        animatedModel2.setTitle("Bar Charts");
+        animatedModel2.setTitle("Ventas entre las fechas especificadas");
         animatedModel2.setAnimate(true);
         animatedModel2.setLegendPosition("ne");
     Axis yAxis = animatedModel2.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(200);
+    }
+
+    /**
+     * @return the sectores
+     */
+    public List<String> getSectores() {
+        return sectores;
+    }
+
+    /**
+     * @param sectores the sectores to set
+     */
+    public void setSectores(List<String> sectores) {
+        this.sectores = sectores;
     }
 
     

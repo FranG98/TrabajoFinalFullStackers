@@ -3,29 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./WEB-INF/templates/TemplateGeneral.xhtml">
 
             <ui:define name="content">
-                <h:form>
+                <h:form style="align-items: center; margin-left: 30%">
                     <p:growl id="msjIngreso" showDetail="true"/>
                     <p:outputLabel value="Ingrese el codigo de su factura que recibio por Email: "/>
                     <p:inputNumber value="#{carritoFormBean.codigoIngresado}" minValue="0" converter="javax.faces.Integer" style="margin-right:20px;" decimalPlaces="0"/>
                     <p:commandButton id="btnCodigo" value="Confirmar ingreso" style="margin-right:20px;" update="pnlFactura, msjIngreso" 
                                      actionListener="#{carritoFormBean.verificarCarrito()}" onclick="PF('msjIngreso').show();"/>
                     <p:panelGrid id="pnlFactura" columns="2">
-                        
+                        <f:facet name="header">
+                        <p:row>
+                             <p:column>Factura</p:column>
+                         </p:row>
+                        </f:facet>
                         <p:outputLabel value="Usuario comprador: "/>
                         <p:outputLabel value="#{carritoFormBean.carritoBuscado.usuarioCliente.nombreUsuario}"/>
                         
-                        <p:outputLabel value="Estado de la compra: "/>
-                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.estadoCarrito}"/>
+                        <p:outputLabel value="Productos a comprar: "/>
+                        <p:dataTable var="prodElegido" value="#{carritoFormBean.productosElegidos}">
+                            <p:column headerText="Nombre de Producto">
+                                <h:outputText value="#{prodElegido.productoElegido.nombreProducto}" />
+                            </p:column>
+ 
+                            <p:column headerText="Cantidad reservada">
+                                <h:outputText value="#{prodElegido.cantidadReservada}" />
+                            </p:column>
+ 
+                            <p:column headerText="Sector">
+                                <h:outputText value="#{prodElegido.productoElegido.sector}" />
+                            </p:column>
+ 
+                            <p:column headerText="Subtotal">
+                                <h:outputText value="$#{prodElegido.precioTotal}" />
+                            </p:column>
+                        </p:dataTable>
                         
-                        <p:outputLabel value="FECHA DE LA COMPRA: "/>
-                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.fechaCarrito}"/>
+                        <p:outputLabel value="FECHA DE VENCIMIENTO: "/>
+                        <p:outputLabel value="#{carritoFormBean.fechaVencimiento}"/>
                     </p:panelGrid>
                     <p:commandButton id="btnImprimir" value="Imprimir Factura" icon="ui-icon-print">
                         <p:printer target="pnlFactura"/>

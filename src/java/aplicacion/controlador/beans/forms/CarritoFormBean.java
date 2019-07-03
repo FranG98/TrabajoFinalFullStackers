@@ -2,9 +2,16 @@ package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.CarritoBean;
 import aplicacion.modelo.dominio.Carrito;
+import aplicacion.modelo.dominio.ProductoElegido;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,9 +31,12 @@ public class CarritoFormBean implements Serializable{
     private List<Carrito> carritos;
     private Integer codigoIngresado;
     private Carrito carritoBuscado;
+    private String fechaVencimiento;
+    private List<ProductoElegido> productosElegidos;
     
     public CarritoFormBean() {
         carritos = new ArrayList<>();
+        productosElegidos = new ArrayList<>();
     }
     
     @PostConstruct
@@ -53,11 +63,16 @@ public class CarritoFormBean implements Serializable{
     }
 
      public void verificarCarrito(){
+         SimpleDateFormat d = new SimpleDateFormat("dd-MM-yy");
+        Date fecha = new Date();
         Boolean obtenido = false;
         FacesContext context = FacesContext.getCurrentInstance();
         for(int i = 0; i < obtenerCarrito().size() && obtenido != true; i++){
             if (obtenerCarrito().get(i).getCodigoCarrito().equals(getCodigoIngresado())) {
                 setCarritoBuscado(obtenerCarrito().get(i));
+                fecha.setHours(fecha.getHours()+24);
+                fechaVencimiento = DateFormat.getDateInstance().format(fecha);
+ //                   productosElegidos=new ArrayList<>(carritoBuscado.getListaProductosElegidos());
                 obtenido = true;
             }   
             }
@@ -118,5 +133,33 @@ public class CarritoFormBean implements Serializable{
     public void setCarritoBuscado(Carrito carritoBuscado) {
         this.carritoBuscado = carritoBuscado;
     }
-        
+
+    /**
+     * @return the fechaVencimiento
+     */
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    /**
+     * @param fechaVencimiento the fechaVencimiento to set
+     */
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    /**
+     * @return the productosElegidos
+     */
+    public List<ProductoElegido> getProductosElegidos() {
+        return productosElegidos;
+    }
+
+    /**
+     * @param productosElegidos the productosElegidos to set
+     */
+    public void setProductosElegidos(List<ProductoElegido> productosElegidos) {
+        this.productosElegidos = productosElegidos;
+    }
+    
 }
