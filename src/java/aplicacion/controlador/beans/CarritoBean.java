@@ -34,7 +34,7 @@ public class CarritoBean implements Serializable{
         carritoDAO.modificarCarrito(carrito);
     }
     
-    public List<Carrito> obtenerCarrito(){
+    public List<Carrito> obtenerCarritos(){
         return carritoDAO.obtenerCarritos();
     }
     

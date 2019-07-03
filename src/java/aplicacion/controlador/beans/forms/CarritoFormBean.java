@@ -5,13 +5,10 @@ import aplicacion.modelo.dominio.Carrito;
 import aplicacion.modelo.dominio.ProductoElegido;
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -43,6 +40,7 @@ public class CarritoFormBean implements Serializable{
     public void init(){
         unCarrito = new Carrito();
         setCarritoBuscado(new Carrito());
+        obtenerCarritos();
     }
     
     //Metodos CRUD de Carrito.
@@ -54,12 +52,12 @@ public class CarritoFormBean implements Serializable{
         getCarritoBean().eliminarCarrito(unCarrito);
     }
     
-    public void modificarCarrito(){
-        getCarritoBean().modificarCarrito(unCarrito);
+    public void modificarCarrito(Carrito carrito){
+        getCarritoBean().modificarCarrito(carrito);
     }
     
-    public List<Carrito> obtenerCarrito(){
-        return getCarritoBean().obtenerCarrito();
+    public void obtenerCarritos(){
+        carritos=getCarritoBean().obtenerCarritos();
     }
 
      public void verificarCarrito(){
@@ -67,9 +65,9 @@ public class CarritoFormBean implements Serializable{
         Date fecha = new Date();
         Boolean obtenido = false;
         FacesContext context = FacesContext.getCurrentInstance();
-        for(int i = 0; i < obtenerCarrito().size() && obtenido != true; i++){
-            if (obtenerCarrito().get(i).getCodigoCarrito().equals(getCodigoIngresado())) {
-                setCarritoBuscado(obtenerCarrito().get(i));
+        for(int i = 0; i < carritos.size() && obtenido != true; i++){
+            if (carritos.get(i).getCodigoCarrito().equals(getCodigoIngresado())) {
+                setCarritoBuscado(carritos.get(i));
                 fecha.setHours(fecha.getHours()+24);
                 fechaVencimiento = DateFormat.getDateInstance().format(fecha);
  //                   productosElegidos=new ArrayList<>(carritoBuscado.getListaProductosElegidos());
