@@ -27,7 +27,7 @@ public class testRolyUsuario {
         rolDAO.agregarRol(rolAdministrativo);
         rolDAO.agregarRol(rolConsumidor);
         
-        Usuario usuario = new Usuario("admin", "fullstackers", Byte.parseByte("23"), 12123123, "fullstackers@gmail.com", "Full123", "Habilitada", rolAdmin);
+        Usuario usuario = new Usuario("Elias", "Acosta", Byte.parseByte("87"), 33333333, "elias@elias.com", "Elias615", "Habilitada", rolAdmin);
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         usuarioDAO.crearUsuario(usuario);
 

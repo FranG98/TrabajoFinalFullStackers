@@ -14,7 +14,7 @@
                 <h:form id="frmCatalogo">
                     <p:growl id="msjConfirmar" showDetail="true"/>
                     <div id="filtrarSector">
-                        <p:outputLabel value="Seleccionar sector de productos a mostrar: "/>
+                        <p:outputLabel value="Seleccionar sector de productos a mostrar: " style="color: white;"/>
                         <p:selectOneMenu id="selectSector" value="#{aBMProductoFormBean.sector}" style="margin-right: 10px;">
                             <f:selectItem itemLabel="Seleccione uno" itemValue=""/>
                             <f:selectItems value="#{aBMProductoFormBean.sectores}"/>
@@ -26,7 +26,7 @@
                     <p:dataGrid id="GridCatalogo" var="prod" value="#{aBMProductoFormBean.listaProductos}" columns="5" layout="grid"
                                 rows="10" paginator="true"
                                 paginatorTemplate="{CurrentPageReport} {PageLinks}"
-                                rowsPerPageTemplate="10">
+                                rowsPerPageTemplate="10" style="margin-bottom: 10px;">
 
                         <p:panel header="#{prod.nombreProducto}" style="text-align:center">
 
@@ -41,8 +41,8 @@
 
                             </p:panelGrid>
                             <p:commandButton action="#{productoElegidoFormBean.setProductoPedido(prod)}" 
-                                             value="Agregar al Carrito" immediate="true" oncomplete="PF('dlgReservar').show()" title="View Detail"
-                                             update="GridCatalogo" icon="ui-icon-cart" style="width: 75%">
+                                             value="Al Carrito" immediate="true" oncomplete="PF('dlgReservar').show()" title="View Detail"
+                                             update="GridCatalogo" icon="ui-icon-cart" style="width: 75%" rendered="#{controlDeSesionFormBean.verificarSesionUserConsumidor()}">
                             </p:commandButton>
                         </p:panel>
                     </p:dataGrid>
@@ -54,7 +54,7 @@
                     </p:dialog>
 
                     <!--Productos en carrito-->
-                    <p:panel id="pnlCarrito" header="Su carrito actual">
+                    <p:panel id="pnlCarrito" header="Su carrito actual" style="width: 86%;">
                         <p:dataGrid id="GridCarrito" var="prodEleg" value="#{productoElegidoFormBean.productosElegidos}" columns="5" layout="grid"
                                     rows="10" paginator="true"
                                     paginatorTemplate="{CurrentPageReport} {PageLinks}"
@@ -71,14 +71,17 @@
                                     <h:outputText value="#{prodEleg.cantidadReservada} unidades"/>
                                 </p:panelGrid>
                                 <p:commandButton value="Eliminar Producto" immediate="true" actionListener="#{productoElegidoFormBean.eliminarProductoElegido(prodEleg)}"
-                                                 update="GridCarrito">                                                 
-                                </p:commandButton>
+                                                 update="GridCarrito"/>                                                 
                             </p:panel>
                         </p:dataGrid>
                         <p:spacer/>
-                        <p:commandButton value="Finalizar compra" update="GridCarrito" icon="ui-icon-cart" actionListener="#{productoElegidoFormBean.finalizarCarrito()}" action="#{loginFormBean.obtenerUsuarioLogueado()}">
+                        
+                        <div style="text-align: center;">
+                            <p:commandButton value="Finalizar compra" update="GridCarrito" icon="ui-icon-cart" actionListener="#{productoElegidoFormBean.finalizarCarrito()}" action="#{loginFormBean.obtenerUsuarioLogueado()}">
                             <p:confirm header="Confirmacion de compra" message="Estas seguro de confirmar la compra?"  icon="pi pi-exclamation-triangle" />
                         </p:commandButton>
+                        </div>
+                        
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="PF('dlgMensaje').show()"/>
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />

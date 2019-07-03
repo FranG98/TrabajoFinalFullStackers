@@ -22,18 +22,20 @@ import java.util.Date;
 public class testCarrito {
 
     public static void main(String[] args) {
-        Rol rolAdmin = new Rol("ADMIN", "Acceso total");
+        Rol rolAdministrador = new Rol("Administrador", "Administra los productos");
+        Rol rolConsumidor = new Rol("Consumidor", "Puede comprar productos");
         IRolDAO rolDAO = new RolDAOImp();
-        rolDAO.agregarRol(rolAdmin);
-        Usuario usuario1 = new Usuario("nati", "Zerpa", (byte)12, 34, "nati@nati.com", "nati123", "activa", rolAdmin);
-        Usuario usuario2 = new Usuario("Ramon", "Alvarez", (byte)32, 54, "ramon@ramon.com", "ramon123", "activa", rolAdmin);
+        rolDAO.agregarRol(rolAdministrador);
+        rolDAO.agregarRol(rolConsumidor);
+        Usuario usuario1 = new Usuario("Natalia", "Zerpa", (byte)12, 34, "nati@nati.com", "Nati615", "activa", rolAdministrador);
+        Usuario usuario2 = new Usuario("Ramon", "Alvarez", (byte)32, 54, "ramon@ramon.com", "Ramon615", "activa", rolConsumidor);
         
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         usuarioDAO.crearUsuario(usuario1);
         usuarioDAO.crearUsuario(usuario2);
         
-         Producto producto1 = new Producto("test", "test", Float.parseFloat("123"), Short.parseShort("26"), "asd", "sd", "asd", Float.parseFloat("121"));
-         Producto producto2 = new Producto("juguete", "muñecos", (float)34.5, (short)45, "toys", "sdf", "sdfffff", (float)65.3);
+         Producto producto1 = new Producto("test", "test", Float.parseFloat("123"), Short.parseShort("26"), "asd", "sd", "Habilitada", Float.parseFloat("121"));
+         Producto producto2 = new Producto("juguete", "muñecos", (float)34.5, (short)45, "toys", "sdf", "Habilitada", (float)65.3);
          IProductoDAO productoDAO=new ProductoDAOImp();
          productoDAO.agregarProducto(producto1);
          productoDAO.agregarProducto(producto2);

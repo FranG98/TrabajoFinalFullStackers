@@ -30,8 +30,7 @@ a:link, a:visited {
 }
 
 a:link:hover, a:visited:hover  {
-    color: #045491;
-    font-weight : bold;
+    color:  aliceblue;
     text-decoration : underline;
 }
 
@@ -46,6 +45,7 @@ html {
 
 /*Titulo de la pagina*/
 h1{
+    -webkit-text-stroke: 0.5px black;
     margin-left: 15%;
     margin-top: 8%;
     margin-bottom: 8%;
@@ -68,6 +68,7 @@ h1{
 }
 
 #top{
+    text-shadow: 1px 1px 2px black;
     margin-bottom: 15px;
     background-image: url(../images/Top2.jpg);
     background-size: 100% 100%;
