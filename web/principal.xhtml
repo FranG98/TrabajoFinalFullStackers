@@ -29,6 +29,7 @@
                                 rowsPerPageTemplate="10">
 
                         <p:panel header="#{prod.nombreProducto}" style="text-align:center">
+
                             <img src='data:image/png;base64,#{prod.imagen}' height="130" width="130"/>
                             <p:panelGrid columns="2" columnClasses="label,value">
                                 <h:outputText value="Marca"/>                                
@@ -37,42 +38,45 @@
                                 <h:outputText value="$#{prod.precio}"/>
                                 <h:outputText value="Stock"/>
                                 <h:outputText value="#{prod.stock} unidades"/>
+                                <p:commandButton action="#{productoElegidoFormBean.setProductoPedido(prod)}" 
+                                                 value="Agregar al Carrito" immediate="true" oncomplete="PF('dlgReservar').show()" title="View Detail"
+                                                 update="GridCatalogo" icon="ui-icon-cart" style="width: 50%">
+                                </p:commandButton>
                             </p:panelGrid>
-                            <p:commandButton update="GridCatalogo" icon="ui-icon-cart" oncomplete="PF('dlgReservar').show()" title="View Detail" style="width: 50%" onclick="#{productoElegidoFormBean.setProductoPedido(prod)}">
-                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
-                            </p:commandButton>
+                           
                         </p:panel>
-
                     </p:dataGrid>
 
-                    <p:dialog header="Nueva orden de compra" minWidth="100" widgetVar="dlgReservar" draggable="false" modal="true" hideEffect="explode">
+                    <p:dialog header="Productos en carrito" minWidth="100" widgetVar="dlgReservar" draggable="false" modal="true" hideEffect="explode">
                         <p:outputLabel value="Ingrese Cantidad: " id="txtCom"/>
                         <p:inputText value="#{productoElegidoFormBean.cantidad}" style="margin-right:20px;"/>
                         <p:commandButton id="btnConfirmar" value="Confirmar compra" actionListener="#{productoElegidoFormBean.agregarProductoElegido()}" update="msjConfirmar, pnlCarrito" onclick="PF('dlgReservar').hide" style="margin-right:20px;"/>
                     </p:dialog>
+
+                    <!--Productos en carrito-->
                     <p:panel id="pnlCarrito" header="Su carrito actual">
-                        <p:dataGrid id="GridCarrito" var="producto" value="#{productoElegidoFormBean.productosElegidos}" columns="5" layout="grid"
-                                rows="10" paginator="true"
-                                paginatorTemplate="{CurrentPageReport} {PageLinks}"
-                                rowsPerPageTemplate="10">
+                        <p:dataGrid id="GridCarrito" var="prodEleg" value="#{productoElegidoFormBean.productosElegidos}" columns="5" layout="grid"
+                                    rows="10" paginator="true"
+                                    paginatorTemplate="{CurrentPageReport} {PageLinks}"
+                                    rowsPerPageTemplate="10">
 
-                            <p:panel header="#{prod.productoElegido.nombreProducto}" style="text-align:center">
-                                <img src='data:image/png;base64,#{prod.productoElegido.imagen}' height="130" width="130"/>
-                            <p:panelGrid columns="2" columnClasses="label,value">
-                                <h:outputText value="Marca"/>                                
-                                <h:outputText value="#{producto.productoElegido.marca}"/>
-                                <h:outputText value="Precio Total"/>
-                                <h:outputText value="$#{producto.precioTotal}"/>
-                                <h:outputText value="Cantidad pedida"/>
-                                <h:outputText value="#{producto.cantidadReservada} unidades"/>
-                            </p:panelGrid>
-                            
-                        </p:panel>
+                            <p:panel header="#{prodEleg.productoElegido.nombreProducto}" style="text-align:center">
+                                <img src='data:image/png;base64,#{prodEleg.productoElegido.imagen}' height="130" width="130"/>
+                                <p:panelGrid columns="2" columnClasses="label,value">
+                                    <h:outputText value="Marca"/>                                
+                                    <h:outputText value="#{prodEleg.productoElegido.marca}"/>
+                                    <h:outputText value="Precio Total"/>
+                                    <h:outputText value="$#{prodEleg.precioTotal}"/>
+                                    <h:outputText value="Cantidad pedida"/>
+                                    <h:outputText value="#{prodEleg.cantidadReservada} unidades"/>
+                                </p:panelGrid>
 
-                    </p:dataGrid>
+                            </p:panel>
+
+                        </p:dataGrid>
                         <p:spacer/>
                         <p:commandButton value="Finalizar compra" update="GridCarrito" icon="ui-icon-cart" actionListener="#{productoElegidoFormBean.finalizarCarrito()}"/>
-          
+
                     </p:panel>
                 </h:form>
             </ui:define>

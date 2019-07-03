@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -24,20 +25,21 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class ProductoElegidoFormBean implements Serializable{
+public class ProductoElegidoFormBean implements Serializable {
+
     private ProductoElegido unProductoElegido;
-    @ManagedProperty(value="#{productoElegidoBean}")
+    @ManagedProperty(value = "#{productoElegidoBean}")
     private ProductoElegidoBean productoElegidoBean;
-    @ManagedProperty(value="#{carritoBean}")
+    @ManagedProperty(value = "#{carritoBean}")
     private CarritoBean carritoBean;
-    @ManagedProperty(value="#{mailBean}")
+    @ManagedProperty(value = "#{mailBean}")
     private MailBean mailBean;
     private List<ProductoElegido> listaProductoElegido;
     private Carrito carritoCreado;
     private Integer cantidad;
     private List<ProductoElegido> productosElegidos;
     private Producto productoPedido;
-    
+
     /**
      * Creates a new instance of DetalleProductoFormBean
      */
@@ -47,51 +49,53 @@ public class ProductoElegidoFormBean implements Serializable{
         productosElegidos = new ArrayList<>();
         productoPedido = new Producto();
     }
-    
-    public void agregarProductoElegido(){
-        Usuario usuarioLogueado = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
-        if (productoPedido.getStock() < cantidad){
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage
-        (FacesMessage.SEVERITY_ERROR,"ERROR","Debe especificar una cantidad menor o igual al stock disponible de este producto"));
-        } else{
-        carritoCreado.setUsuarioCliente(usuarioLogueado);
-        carritoCreado.setFechaCarrito(new Date());
-        carritoCreado.setEstadoCarrito("Pendiente");
+    @PostConstruct
+    public void init(){
         
-        unProductoElegido.setCantidadReservada(cantidad);
-        unProductoElegido.setCarrito(carritoCreado);
-        unProductoElegido.setProductoElegido(productoPedido);
-        unProductoElegido.setPrecioTotal((double)productoPedido.getPrecio()*cantidad);
-        unProductoElegido.setSubtotal((double)productoPedido.getPrecio()*cantidad);
-        productosElegidos.add(unProductoElegido);
-        productoElegidoBean.agregarProductoElegido(unProductoElegido);
-        unProductoElegido = new ProductoElegido();
+    }
+
+    public void agregarProductoElegido() {
+        Usuario usuarioLogueado = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogueado");
+        if (productoPedido.getStock() < cantidad) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Debe especificar una cantidad menor o igual al stock disponible de este producto"));
+        } else {
+            carritoCreado.setUsuarioCliente(usuarioLogueado);
+            carritoCreado.setFechaCarrito(new Date());
+            carritoCreado.setEstadoCarrito("Pendiente");
+            
+            
+            unProductoElegido.setCantidadReservada(cantidad);
+            unProductoElegido.setCarrito(carritoCreado);
+            unProductoElegido.setProductoElegido(productoPedido);
+            unProductoElegido.setPrecioTotal((double) productoPedido.getPrecio() * cantidad);
+            unProductoElegido.setSubtotal((double) productoPedido.getPrecio() * cantidad);
+            productosElegidos.add(unProductoElegido);
+            productoElegidoBean.agregarProductoElegido(unProductoElegido);
+            unProductoElegido = new ProductoElegido();
         }
     }
-    
-    public void eliminarProductoElegido(){
+
+    public void eliminarProductoElegido() {
         productoElegidoBean.eliminarProductoElegido(unProductoElegido);
     }
-    
-    public void finalizarCarrito(){
+
+    public void finalizarCarrito() {
         carritoCreado.setListaProductosElegidos(new HashSet(productosElegidos));
         getCarritoBean().agregarCarrito(carritoCreado);
         getMailBean().enviarMail(carritoCreado.getCodigoCarrito());
         carritoCreado = new Carrito();
         productosElegidos.clear();
     }
-            
-    public void modificarProductoElegido(){
+
+    public void modificarProductoElegido() {
         productoElegidoBean.modificarProductoElegido(unProductoElegido);
     }
-    
-    public List<ProductoElegido> obtenerProductosElegidos(){
+
+    public List<ProductoElegido> obtenerProductosElegidos() {
         listaProductoElegido = productoElegidoBean.obtenerProductoElegido();
         return listaProductoElegido;
     }
-
-
 
     /**
      * @return the cantidad
@@ -119,6 +123,7 @@ public class ProductoElegidoFormBean implements Serializable{
      */
     public void setUnProductoElegido(ProductoElegido unProductoElegido) {
         this.unProductoElegido = unProductoElegido;
+        System.out.println(unProductoElegido);
     }
 
     /**
@@ -189,6 +194,7 @@ public class ProductoElegidoFormBean implements Serializable{
      */
     public void setProductoPedido(Producto productoPedido) {
         this.productoPedido = productoPedido;
+//        System.out.println(productoPedido);
     }
 
     /**
@@ -218,6 +224,5 @@ public class ProductoElegidoFormBean implements Serializable{
     public void setMailBean(MailBean mailBean) {
         this.mailBean = mailBean;
     }
-    
-    
+
 }
