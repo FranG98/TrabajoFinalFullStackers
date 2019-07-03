@@ -35,7 +35,7 @@ public class TestProducto {
         nuevo1.setMarca("toys");
         nuevo1.setSector("5-10");
         nuevo1.setPrecio(Float.parseFloat("344"));
-        nuevo1.setStock(Short.parseShort("344"));
+        nuevo1.setStock(12);
         nuevo1.setPrecioOferta(Float.parseFloat("45"));
         nuevo2.setDimension("25x35");
         nuevo2.setImagen("test");
@@ -43,7 +43,7 @@ public class TestProducto {
         nuevo2.setNombreProducto("muñeco");
         nuevo2.setSector("5-10");
         nuevo2.setPrecio(Float.parseFloat("344"));
-        nuevo2.setStock(Short.parseShort("344"));
+        nuevo2.setStock(15);
         nuevo2.setPrecioOferta(Float.parseFloat("45"));
         productoDAO.agregarProducto(nuevo1);
         productoDAO.agregarProducto(nuevo2);

@@ -75,6 +75,7 @@ public class CarritoFormBean implements Serializable{
                 setCarritoBuscado(carritos.get(i));
                 fecha.setHours(fecha.getHours()+24);
                 fechaVencimiento = DateFormat.getDateInstance().format(fecha);
+                productosElegidos.clear();
                 for (int j = 0; j < getProductoElegidoBean().obtenerProductoElegido().size(); j++){
                     if (getProductoElegidoBean().obtenerProductoElegido().get(j).getCarrito().getCodigoCarrito() == codigoIngresado){  
                     productosElegidos.add(getProductoElegidoBean().obtenerProductoElegido().get(j));

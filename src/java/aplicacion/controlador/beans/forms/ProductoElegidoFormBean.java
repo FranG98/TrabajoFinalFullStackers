@@ -2,6 +2,7 @@ package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.CarritoBean;
 import aplicacion.controlador.beans.MailBean;
+import aplicacion.controlador.beans.ProductoBean;
 import aplicacion.controlador.beans.ProductoElegidoBean;
 import aplicacion.hibernate.dao.IProductoDAO;
 import aplicacion.hibernate.dao.IProductoElegidoDAO;
@@ -31,13 +32,17 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class ProductoElegidoFormBean implements Serializable {
 
-    private ProductoElegido unProductoElegido;
+    @ManagedProperty(value = "#{productoBean}")
+    private ProductoBean productoBean;
+    
+    
     @ManagedProperty(value = "#{productoElegidoBean}")
     private ProductoElegidoBean productoElegidoBean;
     @ManagedProperty(value = "#{carritoBean}")
     private CarritoBean carritoBean;
     @ManagedProperty(value = "#{mailBean}")
     private MailBean mailBean;
+    private ProductoElegido unProductoElegido;
     private List<ProductoElegido> listaProductoElegido;
     private Carrito carritoCreado;
     private Integer cantidad;
@@ -87,20 +92,23 @@ public class ProductoElegidoFormBean implements Serializable {
     }
 
     public void finalizarCarrito() {
-        IProductoElegidoDAO productoElegidoDAO = new ProductoElegidoDAOImp();
-        List<ProductoElegido> productosEleg = productoElegidoDAO.obtenerProductosElegidos();
-        IProductoDAO productoDAO = new ProductoDAOImp();
-        List<Producto> productos = productoDAO.obtenerProductos();
-        Integer codigoProducto;
-        for (int i = 0; i < productosEleg.size(); i++) {
+        Producto producto = new Producto();
+        for (int i = 0; i < productoBean.obtenerProductos().size(); i++) {
             for (int j = 0; j < productosElegidos.size(); j++) {
-                if (productosEleg.get(i).getCodigoProductoElegido().equals(productosElegidos.get(j).getCodigoProductoElegido())) {
-                    codigoProducto = productosEleg.get(i).getProductoElegido().getCodigo();
-                    System.out.println("codigo"+codigoProducto);
+                if (productoBean.obtenerProductos().get(i).getCodigo() == productosElegidos.get(j).getProductoElegido().getCodigo()) {
+                    System.out.println(productoBean.obtenerProductos().get(i).getCodigo());
+                    System.out.println(productosElegidos.get(j).getProductoElegido().getCodigo());
+                    Integer resultado=productoBean.obtenerProductos().get(i).getStock() - productosElegidos.get(j).getCantidadReservada();
+                    System.out.println(resultado);
+                    producto=productoBean.obtenerProductos().get(i);
+                    producto.setStock(resultado);
+                    productoBean.modificarProducto(producto);
+                    System.out.println(producto);
+                    System.out.println("Stock "+productoBean.obtenerProductos().get(i).getStock());
+                    
                 }
             }
         }
-
         carritoCreado.setListaProductosElegidos(new HashSet(productosElegidos));
         System.out.println(carritoCreado);
         getCarritoBean().agregarCarrito(carritoCreado);
@@ -245,5 +253,21 @@ public class ProductoElegidoFormBean implements Serializable {
     public void setMailBean(MailBean mailBean) {
         this.mailBean = mailBean;
     }
+
+    /**
+     * @return the productoBean
+     */
+    public ProductoBean getProductoBean() {
+        return productoBean;
+    }
+
+    /**
+     * @param productoBean the productoBean to set
+     */
+    public void setProductoBean(ProductoBean productoBean) {
+        this.productoBean = productoBean;
+    }
+
+   
 
 }

@@ -21,7 +21,7 @@
             <column name="prod_precio" not-null="true"/>
         </property>
             
-        <property name="stock" type="short">
+        <property name="stock" type="integer">
             <column name="prod_stock" not-null="true"/>
         </property>
         

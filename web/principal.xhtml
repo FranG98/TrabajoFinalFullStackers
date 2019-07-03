@@ -54,7 +54,7 @@
                     </p:dialog>
 
                     <!--Productos en carrito-->
-                    <p:panel id="pnlCarrito" header="Su carrito actual" style="width: 86%;">
+                    <p:panel id="pnlCarrito" header="Su carrito actual" style="width: 86%;" rendered="#{controlDeSesionFormBean.verificarSesionUserConsumidor()}">
                         <p:dataGrid id="GridCarrito" var="prodEleg" value="#{productoElegidoFormBean.productosElegidos}" columns="5" layout="grid"
                                     rows="10" paginator="true"
                                     paginatorTemplate="{CurrentPageReport} {PageLinks}"
@@ -83,7 +83,7 @@
                         </div>
                         
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="PF('dlgMensaje').show()"/>
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="PF('dlgMensaje').show()" update="frmCatalogo"/>
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog> 
                         <p:dialog id="dlgMensaje" header="Gracias por su compra" widgetVar="dlgMensaje" resizable="false" modal="true">

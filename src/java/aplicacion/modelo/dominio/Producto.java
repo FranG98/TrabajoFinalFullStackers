@@ -16,7 +16,7 @@ public class Producto implements Serializable{
     //sector: nombre que representa un conjunto de productos que comparten las mismas caracteristicas
     private Float precio;
     //precio: representa el precio de venta del producto al publico
-    private Short stock;
+    private Integer stock;
     //stock: representa la cantidad dispronible del producto 
     private String marca;
     //marca: representa la marca del producto
@@ -47,8 +47,7 @@ public class Producto implements Serializable{
      * @param imagen
      * @param precioOferta 
      */
-    public Producto(Integer codigo, String nombreProducto, String sector, Float precio, Short stock, String marca, String dimension, String imagen, Float precioOferta) {
-        this.codigo = codigo;
+    public Producto(String nombreProducto, String sector, Float precio, Integer stock, String marca, String dimension, String imagen, Float precioOferta) {   
         this.nombreProducto = nombreProducto;
         this.sector = sector;
         this.precio = precio;
@@ -58,18 +57,11 @@ public class Producto implements Serializable{
         this.imagen = imagen;
         this.precioOferta = precioOferta;
     }
+
     
-    public Producto(String nombreProducto, String sector, Float precio, Short stock, String marca, String dimension, String imagen, Float precioOferta) {
-        this.nombreProducto = nombreProducto;
-        this.sector = sector;
-        this.precio = precio;
-        this.stock = stock;
-        this.marca = marca;
-        this.dimension = dimension;
-        this.imagen = imagen;
-        this.precioOferta = precioOferta;
-    }
-    
+
+   
+
     /**
      * @return the codigo
      */
@@ -136,7 +128,7 @@ public class Producto implements Serializable{
     /**
      * @return the stock
      */
-    public Short getStock() {
+    public Integer getStock() {
         return stock;
     }
 
@@ -206,11 +198,10 @@ public class Producto implements Serializable{
     /**
      * @param stock the stock to set
      */
-    public void setStock(Short stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
-
-    @Override
+     @Override
     public String toString() {
         return "Codigo del Producto: "+getCodigo()+"Nombre del producto: "+getNombreProducto()+"Precio del Producto: "+getPrecio()+
                 "Stock del Producto: "+getStock()+"Sector del Producto: "+getSector()+"Dimension del Producto: "+getDimension()+"Marca del Producto: "+getMarca()+

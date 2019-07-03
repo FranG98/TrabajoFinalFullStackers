@@ -34,8 +34,8 @@ public class testCarrito {
         usuarioDAO.crearUsuario(usuario1);
         usuarioDAO.crearUsuario(usuario2);
         
-         Producto producto1 = new Producto("test", "test", Float.parseFloat("123"), Short.parseShort("26"), "asd", "sd", "Habilitada", Float.parseFloat("121"));
-         Producto producto2 = new Producto("juguete", "muñecos", (float)34.5, (short)45, "toys", "sdf", "Habilitada", (float)65.3);
+         Producto producto1 = new Producto("test", "test", Float.parseFloat("123"), 12, "asd", "sd", "Habilitada", Float.parseFloat("121"));
+         Producto producto2 = new Producto("juguete", "muñecos", (float)34.5, 15, "toys", "sdf", "Habilitada", (float)65.3);
          IProductoDAO productoDAO=new ProductoDAOImp();
          productoDAO.agregarProducto(producto1);
          productoDAO.agregarProducto(producto2);
