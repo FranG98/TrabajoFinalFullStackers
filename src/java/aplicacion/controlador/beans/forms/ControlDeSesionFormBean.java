@@ -6,6 +6,7 @@
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.modelo.dominio.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +30,19 @@ public class ControlDeSesionFormBean implements Serializable {
      */
     public ControlDeSesionFormBean() {
 
+    }
+
+    public void verificarSesion() {
+        try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
+            if (user == null) {
+                fc.getExternalContext().redirect("principal.xhtml");
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -69,8 +83,8 @@ public class ControlDeSesionFormBean implements Serializable {
 
         return user != null && user.getTipoCuenta().getTipoRol().equals("ADMIN");
     }
-    
-     public boolean verificarSesionUserNull() {
+
+    public boolean verificarSesionUserNull() {
         FacesContext fc = FacesContext.getCurrentInstance();
 
         Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");

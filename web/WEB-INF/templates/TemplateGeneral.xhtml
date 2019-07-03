@@ -11,6 +11,7 @@
         <f:facet name="last">
             <h:outputStylesheet name="./css/EstiloGeneral.css"/>
         </f:facet>
+        <f:event type="preRenderView" listener="#{controlDeSesionFormBean.verificarSesion()}"/>
 
         <title>Jugueteria</title>
     </h:head>
