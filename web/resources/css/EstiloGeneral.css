@@ -20,7 +20,7 @@ body {
 .ui-menu, .ui-menu .ui-menu-child{
     background: none;
     background-color: rgba(0,0,0,0.60);
-    
+
 }
 
 a:link, a:visited {
@@ -95,7 +95,14 @@ h1{
 }
 
 .ui-datagrid{
-    width: 86.21%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+/*el tamaño decada pruducto delcatalogo*/
+.ui-datagrid-column{
+    width: 150px;
     margin: 0 auto;
 }
 
@@ -120,3 +127,4 @@ h1{
 #userLogueado{
     background-color: rgba(126,8,200,0.30);
 }
+
