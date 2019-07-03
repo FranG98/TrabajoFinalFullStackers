@@ -85,5 +85,10 @@ public class ProductoElegido implements Serializable{
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;
     }
+
+    @Override
+    public String toString() {
+        return "ProductoElegido{" + "productoElegido=" + productoElegido + ", cantidadReservada=" + cantidadReservada + ", precioTotal=" + precioTotal + ", subtotal=" + subtotal + '}';
+    }
     
 }
