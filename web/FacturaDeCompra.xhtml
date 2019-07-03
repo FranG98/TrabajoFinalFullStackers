@@ -22,35 +22,39 @@
 
                     <p:panelGrid id="pnlFactura" columns="2" style="margin: 0 auto; width: 80%;">
                         <f:facet name="header">
-                            <p:row>
-                                <p:column>Factura</p:column>
-                            </p:row>
+                        <p:row>
+                             <p:column>Factura de Compra</p:column>
+                         </p:row>
                         </f:facet>
                         <p:outputLabel value="Usuario comprador: "/>
-                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.usuarioCliente.nombreUsuario}"/>
-
+                        <p:outputLabel value="#{carritoFormBean.carritoBuscado.usuarioCliente.apellidoUsuario}, #{carritoFormBean.carritoBuscado.usuarioCliente.nombreUsuario}"/>
+                        
                         <p:outputLabel value="Productos a comprar: "/>
                         <p:dataTable var="prodElegido" value="#{carritoFormBean.productosElegidos}">
                             <p:column headerText="Nombre de Producto">
                                 <h:outputText value="#{prodElegido.productoElegido.nombreProducto}" />
                             </p:column>
-
+ 
                             <p:column headerText="Cantidad reservada">
-                                <h:outputText value="#{prodElegido.cantidadReservada}" />
+                                <h:outputText value="#{prodElegido.cantidadReservada} unidades" />
                             </p:column>
-
+ 
                             <p:column headerText="Sector">
                                 <h:outputText value="#{prodElegido.productoElegido.sector}" />
                             </p:column>
-
+ 
                             <p:column headerText="Subtotal">
                                 <h:outputText value="$#{prodElegido.precioTotal}" />
                             </p:column>
                         </p:dataTable>
-
+                        
                         <p:outputLabel value="FECHA DE VENCIMIENTO: "/>
                         <p:outputLabel value="#{carritoFormBean.fechaVencimiento}"/>
+                        
+                        <p:outputLabel value="Precio Total de su compra: "/>
+                        <p:outputLabel value="$#{carritoFormBean.precioFinal}"/>
                     </p:panelGrid>
+
                     <div style="text-align: center;">
                         <p:commandButton id="btnImprimir" value="Imprimir Factura" icon="ui-icon-print" style="margin-top: 10px;">
                             <p:printer target="pnlFactura"/>

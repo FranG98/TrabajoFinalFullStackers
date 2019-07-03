@@ -1,6 +1,7 @@
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.CarritoBean;
+import aplicacion.controlador.beans.ProductoElegidoBean;
 import aplicacion.modelo.dominio.Carrito;
 import aplicacion.modelo.dominio.ProductoElegido;
 import java.io.Serializable;
@@ -25,11 +26,14 @@ public class CarritoFormBean implements Serializable{
     private Carrito unCarrito;
     @ManagedProperty(value="#{carritoBean}")
     private CarritoBean carritoBean;
+    @ManagedProperty(value="#{productoElegidoBean}")
+    private ProductoElegidoBean productoElegidoBean;
     private List<Carrito> carritos;
     private Integer codigoIngresado;
     private Carrito carritoBuscado;
     private String fechaVencimiento;
     private List<ProductoElegido> productosElegidos;
+    private Double precioFinal;
     
     public CarritoFormBean() {
         carritos = new ArrayList<>();
@@ -61,6 +65,7 @@ public class CarritoFormBean implements Serializable{
     }
 
      public void verificarCarrito(){
+         setPrecioFinal(0.00);
          SimpleDateFormat d = new SimpleDateFormat("dd-MM-yy");
         Date fecha = new Date();
         Boolean obtenido = false;
@@ -70,7 +75,14 @@ public class CarritoFormBean implements Serializable{
                 setCarritoBuscado(carritos.get(i));
                 fecha.setHours(fecha.getHours()+24);
                 fechaVencimiento = DateFormat.getDateInstance().format(fecha);
- //                   productosElegidos=new ArrayList<>(carritoBuscado.getListaProductosElegidos());
+                for (int j = 0; j < getProductoElegidoBean().obtenerProductoElegido().size(); j++){
+                    if (getProductoElegidoBean().obtenerProductoElegido().get(j).getCarrito().getCodigoCarrito() == codigoIngresado){  
+                    productosElegidos.add(getProductoElegidoBean().obtenerProductoElegido().get(j));
+                    }
+                }
+              for (int k = 0; k < productosElegidos.size(); k++){
+                    precioFinal = precioFinal + productosElegidos.get(k).getPrecioTotal();
+              }
                 obtenido = true;
             }   
             }
@@ -158,6 +170,34 @@ public class CarritoFormBean implements Serializable{
      */
     public void setProductosElegidos(List<ProductoElegido> productosElegidos) {
         this.productosElegidos = productosElegidos;
+    }
+
+    /**
+     * @return the productoElegidoBean
+     */
+    public ProductoElegidoBean getProductoElegidoBean() {
+        return productoElegidoBean;
+    }
+
+    /**
+     * @param productoElegidoBean the productoElegidoBean to set
+     */
+    public void setProductoElegidoBean(ProductoElegidoBean productoElegidoBean) {
+        this.productoElegidoBean = productoElegidoBean;
+    }
+
+    /**
+     * @return the precioFinal
+     */
+    public Double getPrecioFinal() {
+        return precioFinal;
+    }
+
+    /**
+     * @param precioFinal the precioFinal to set
+     */
+    public void setPrecioFinal(Double precioFinal) {
+        this.precioFinal = precioFinal;
     }
     
 }
