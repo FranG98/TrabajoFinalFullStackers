@@ -3,6 +3,10 @@ package aplicacion.controlador.beans.forms;
 import aplicacion.controlador.beans.CarritoBean;
 import aplicacion.controlador.beans.MailBean;
 import aplicacion.controlador.beans.ProductoElegidoBean;
+import aplicacion.hibernate.dao.IProductoDAO;
+import aplicacion.hibernate.dao.IProductoElegidoDAO;
+import aplicacion.hibernate.dao.imp.ProductoDAOImp;
+import aplicacion.hibernate.dao.imp.ProductoElegidoDAOImp;
 import aplicacion.modelo.dominio.Carrito;
 import aplicacion.modelo.dominio.Producto;
 import aplicacion.modelo.dominio.ProductoElegido;
@@ -39,6 +43,7 @@ public class ProductoElegidoFormBean implements Serializable {
     private Integer cantidad;
     private List<ProductoElegido> productosElegidos;
     private Producto productoPedido;
+
     /**
      * Creates a new instance of DetalleProductoFormBean
      */
@@ -47,12 +52,12 @@ public class ProductoElegidoFormBean implements Serializable {
         carritoCreado = new Carrito();
         productosElegidos = new ArrayList<>();
         productoPedido = new Producto();
-        
+
     }
+
     @PostConstruct
-    public void init(){
-        
-        
+    public void init() {
+
     }
 
     public void agregarProductoElegido() {
@@ -64,8 +69,7 @@ public class ProductoElegidoFormBean implements Serializable {
             carritoCreado.setUsuarioCliente(usuarioLogueado);
             carritoCreado.setFechaCarrito(new Date());
             carritoCreado.setEstadoCarrito("Pendiente");
-            
-            
+
             unProductoElegido.setCantidadReservada(cantidad);
             unProductoElegido.setCarrito(carritoCreado);
             unProductoElegido.setProductoElegido(productoPedido);
@@ -74,9 +78,7 @@ public class ProductoElegidoFormBean implements Serializable {
             productosElegidos.add(unProductoElegido);
             productoElegidoBean.agregarProductoElegido(unProductoElegido);
             unProductoElegido = new ProductoElegido();
-            
-            
-            
+
         }
     }
 
@@ -85,6 +87,20 @@ public class ProductoElegidoFormBean implements Serializable {
     }
 
     public void finalizarCarrito() {
+        IProductoElegidoDAO productoElegidoDAO = new ProductoElegidoDAOImp();
+        List<ProductoElegido> productosEleg = productoElegidoDAO.obtenerProductosElegidos();
+        IProductoDAO productoDAO = new ProductoDAOImp();
+        List<Producto> productos = productoDAO.obtenerProductos();
+        Integer codigoProducto;
+        for (int i = 0; i < productosEleg.size(); i++) {
+            for (int j = 0; j < productosElegidos.size(); j++) {
+                if (productosEleg.get(i).getCodigoProductoElegido().equals(productosElegidos.get(j).getCodigoProductoElegido())) {
+                    codigoProducto = productosEleg.get(i).getProductoElegido().getCodigo();
+                    System.out.println("codigo"+codigoProducto);
+                }
+            }
+        }
+
         carritoCreado.setListaProductosElegidos(new HashSet(productosElegidos));
         System.out.println(carritoCreado);
         getCarritoBean().agregarCarrito(carritoCreado);
