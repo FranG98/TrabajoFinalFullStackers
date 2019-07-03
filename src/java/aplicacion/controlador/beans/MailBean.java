@@ -6,6 +6,7 @@
 package aplicacion.controlador.beans;
 
 import aplicacion.modelo.dominio.Usuario;
+import java.io.Serializable;
 import java.util.Properties;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,7 +23,7 @@ import javax.mail.internet.MimeMessage;
  */
 @ManagedBean
 @ViewScoped
-public class MailBean {
+public class MailBean implements Serializable{
     
 //    private Usuario usuarioLogueado;
     
@@ -48,13 +49,12 @@ public class MailBean {
             message.setFrom(new InternetAddress("fullstackerspv2019@gmail.com"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuarioLogueado.getEmailUsuario()));
             message.setSubject("Mail de prueba");
-            message.setText("Ha realizado su compra!!! Acercarse a sucursal con su factura para realizar el pago y retiro de su compra. Su factura la puede ver ingresando el siguiente numero en la pagina: "+codigo);
+            message.setText("Ha realizado su compra! Debe acercarse a la sucursal central con su factura para realizar el pago y retiro de su compra. Su factura la puede ver ingresando el siguiente numero en la pagina: "+codigo);
             
             Transport t = session.getTransport("smtp");
             t.connect("fullstackerspv2019", "PV2019XD");
             t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
             t.close();
-            JOptionPane.showMessageDialog(null, "Mensaje enviado.");
             
         }catch(AddressException ex){
             

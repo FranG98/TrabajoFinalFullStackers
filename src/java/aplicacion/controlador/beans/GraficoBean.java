@@ -5,6 +5,7 @@
  */
 package aplicacion.controlador.beans;
 
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -19,7 +20,7 @@ import org.primefaces.model.chart.ChartSeries;
  */
 @ManagedBean
 @ViewScoped
-public class GraficoBean {
+public class GraficoBean implements Serializable{
 
 private BarChartModel animatedModel2;
 

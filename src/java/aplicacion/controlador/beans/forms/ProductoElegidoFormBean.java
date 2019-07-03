@@ -1,5 +1,7 @@
 package aplicacion.controlador.beans.forms;
 
+import aplicacion.controlador.beans.CarritoBean;
+import aplicacion.controlador.beans.MailBean;
 import aplicacion.controlador.beans.ProductoElegidoBean;
 import aplicacion.modelo.dominio.Carrito;
 import aplicacion.modelo.dominio.Producto;
@@ -8,6 +10,7 @@ import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -25,6 +28,10 @@ public class ProductoElegidoFormBean implements Serializable{
     private ProductoElegido unProductoElegido;
     @ManagedProperty(value="#{productoElegidoBean}")
     private ProductoElegidoBean productoElegidoBean;
+    @ManagedProperty(value="#{carritoBean}")
+    private CarritoBean carritoBean;
+    @ManagedProperty(value="#{mailBean}")
+    private MailBean mailBean;
     private List<ProductoElegido> listaProductoElegido;
     private Carrito carritoCreado;
     private Integer cantidad;
@@ -57,9 +64,9 @@ public class ProductoElegidoFormBean implements Serializable{
         unProductoElegido.setProductoElegido(productoPedido);
         unProductoElegido.setPrecioTotal((double)productoPedido.getPrecio()*cantidad);
         unProductoElegido.setSubtotal((double)productoPedido.getPrecio()*cantidad);
-        
         productosElegidos.add(unProductoElegido);
         productoElegidoBean.agregarProductoElegido(unProductoElegido);
+        unProductoElegido = new ProductoElegido();
         }
     }
     
@@ -67,6 +74,14 @@ public class ProductoElegidoFormBean implements Serializable{
         productoElegidoBean.eliminarProductoElegido(unProductoElegido);
     }
     
+    public void finalizarCarrito(){
+        carritoCreado.setListaProductosElegidos(new HashSet(productosElegidos));
+        getCarritoBean().agregarCarrito(carritoCreado);
+        getMailBean().enviarMail(carritoCreado.getCodigoCarrito());
+        carritoCreado = new Carrito();
+        productosElegidos.clear();
+    }
+            
     public void modificarProductoElegido(){
         productoElegidoBean.modificarProductoElegido(unProductoElegido);
     }
@@ -174,6 +189,34 @@ public class ProductoElegidoFormBean implements Serializable{
      */
     public void setProductoPedido(Producto productoPedido) {
         this.productoPedido = productoPedido;
+    }
+
+    /**
+     * @return the carritoBean
+     */
+    public CarritoBean getCarritoBean() {
+        return carritoBean;
+    }
+
+    /**
+     * @param carritoBean the carritoBean to set
+     */
+    public void setCarritoBean(CarritoBean carritoBean) {
+        this.carritoBean = carritoBean;
+    }
+
+    /**
+     * @return the mailBean
+     */
+    public MailBean getMailBean() {
+        return mailBean;
+    }
+
+    /**
+     * @param mailBean the mailBean to set
+     */
+    public void setMailBean(MailBean mailBean) {
+        this.mailBean = mailBean;
     }
     
     
