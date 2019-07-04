@@ -36,7 +36,7 @@ public class ControlDeSesionFormBean implements Serializable {
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
             Usuario user = (Usuario) fc.getExternalContext().getSessionMap().get("usuarioLogueado");
-            if (user == null) {
+            if (user == null || user.getTipoCuenta().getTipoRol().equals("Consumidor")) {
                 fc.getExternalContext().redirect("principal.xhtml");
             }
 

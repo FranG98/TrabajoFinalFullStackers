@@ -63,20 +63,31 @@
                     </h:form>
 
                     <h:form rendered="#{controlDeSesionFormBean.verificarSesionUserAdministrativo()}">
-                        <div id="prueba" class="ui-grid-col-2" align="right">
-                            <p:outputLabel value="#{loginFormBean.usuario.tipoCuenta.tipoRol}"/>
-                            <p:outputLabel value="#{loginFormBean.usuario.emailUsuario}"/>
-                            <h:commandLink value="Salir" action="#{loginFormBean.logout()}"/>
+                        <div id="userLogueado" class="ui-grid-col-3" align="right">
+                            <div style="margin-top: 10px; margin-bottom: 10px; margin-right: 10px;">
+                                <p:outputLabel value="#{loginFormBean.usuario.tipoCuenta.tipoRol}"/>
+                            </div>
+                            
+                            <div style="margin-bottom: 10px; margin-right: 10px;">
+                                <p:outputLabel value="#{loginFormBean.usuario.emailUsuario}"/>
+                            </div>
+                            <div style="margin-right: 10px;">
+                                <h:commandLink value="Salir" action="#{loginFormBean.logout()}"/>
+                            </div>
                         </div>
                     </h:form>
 
                     <h:form rendered="#{controlDeSesionFormBean.verificarSesionUserConsumidor()}">
-                        <div class="ui-grid-col-2" align="right">
-                            <p:panelGrid columns="1" styleClass="ui-noborder">
-                                <p:outputLabel value="#{loginFormBean.usuario.tipoCuenta.tipoRol}"/>
+                        <div id="userLogueado" class="ui-grid-col-3" align="right">
+                            <div style="margin-bottom: 10px; margin-right: 10px;">
+                                <p:outputLabel value="Usuario"/>
+                            </div>
+                            <div style="margin-bottom: 10px; margin-right: 10px;">
                                 <p:outputLabel value="#{loginFormBean.usuario.emailUsuario}"/>
+                            </div>
+                            <div style="margin-right: 10px;">
                                 <h:commandLink value="Salir" action="#{loginFormBean.logout()}"/>
-                            </p:panelGrid>
+                            </div>
                         </div>
                     </h:form>
                 </div>
@@ -91,8 +102,8 @@
                             <p:menuitem value="Administracion de roles" url="./gestionRol.xhtml"/>
                         </p:submenu>
                         <p:menuitem value="Crear Cuenta" url="./crearCuentaNormal.xhtml" rendered="#{!controlDeSesionFormBean.verificarSesionUserNull()}"/>
-                        <p:menuitem value="Gestiona Productos" url="./administracionProductos.xhtml" rendered="#{controlDeSesionFormBean.verificarSesionUserAdmin() || controlDeSesionFormBean.verificarSesionUserAdministrativo()}"/>
-                        <p:menuitem value="Factura Compra" url="./FacturaDeCompra.xhtml"/>
+                        <p:menuitem value="Administracion Productos" url="./administracionProductos.xhtml" rendered="#{controlDeSesionFormBean.verificarSesionUserAdmin() || controlDeSesionFormBean.verificarSesionUserAdministrativo()}"/>
+                        <p:menuitem value="Factura de Compra" url="./FacturaDeCompra.xhtml" rendered="#{controlDeSesionFormBean.verificarSesionUserNull()}"/>
                     </p:menubar>
                 </h:form>
 
